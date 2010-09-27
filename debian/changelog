@@ -7,5 +7,7 @@ bikeshed (1.0) UNRELEASED; urgency=low
     for remote retrieval of manpages
   * debian/install, debian/manpages, wifi-status, wifi-status.1: add the
     wifi-status utility, for monitoring a wifi connection
+  * bzrdiff, bzrdiff.1, bzrlog, bzrlog.1, debian/install, debian/manpages:
+    add a couple of useful bzr hacks, that pipe output to a sensible pager
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 20 Aug 2010 14:32:11 -0500
