@@ -3,5 +3,7 @@ bikeshed (1.0) UNRELEASED; urgency=low
   * debian/*: initial packaging
   * errno, errno.1: initial checkin of a utility that searches errnos
   * 1, debian/install, debian/links: add the 1..9 awk hacks
+  * debian/install, debian/manpages, dman, dman.1: add the dman utility,
+    for remote retrieval of manpages
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 20 Aug 2010 14:32:11 -0500
