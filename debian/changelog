@@ -9,5 +9,7 @@ bikeshed (1.0) UNRELEASED; urgency=low
     wifi-status utility, for monitoring a wifi connection
   * bzrdiff, bzrdiff.1, bzrlog, bzrlog.1, debian/install, debian/manpages:
     add a couple of useful bzr hacks, that pipe output to a sensible pager
+  * bikeshed.odp, bikeshed.png, bikeshed_14.png, bikeshed_192.png,
+    bikeshed_64.png: add a simple, colorful icon
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 20 Aug 2010 14:32:11 -0500
