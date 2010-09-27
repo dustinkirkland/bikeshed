@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [-z "$1" ]; then
+	dev=$(iwconfig 2>/dev/null | grep 802.11 | 1) 
+else
+	dev="$1"
+fi
+watch -n1 "iwconfig $dev; ifconfig $dev"

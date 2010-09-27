@@ -5,5 +5,7 @@ bikeshed (1.0) UNRELEASED; urgency=low
   * 1, debian/install, debian/links: add the 1..9 awk hacks
   * debian/install, debian/manpages, dman, dman.1: add the dman utility,
     for remote retrieval of manpages
+  * debian/install, debian/manpages, wifi-status, wifi-status.1: add the
+    wifi-status utility, for monitoring a wifi connection
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 20 Aug 2010 14:32:11 -0500

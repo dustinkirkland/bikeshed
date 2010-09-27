@@ -1,3 +1,4 @@
 1	usr/bin
 dman	usr/bin
 errno	usr/bin
+wifi-status	usr/bin
