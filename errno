@@ -1,0 +1,42 @@
+#!/bin/sh -e
+#
+#    errno - search POSIX error codes by error number, error name,
+#            or error description
+#
+#    Copyright (C) 2010 Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    Authors:
+#        Dustin Kirkland <kirkland@ubuntu.com>
+#        Kees Cook <kees@ubuntu.com>
+#        Scott Moser <smoser@ubuntu.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+if which gcc >/dev/null; then
+	# Header finding trick from Kees Cook <kees@ubuntu.com>
+	headers=$(echo "#include <asm/errno.h>" | gcc -E - | grep "\.h" | awk -F\" '{print $2}' | sort -u)
+else
+	headers="/usr/include/asm-generic/errno*.h"
+fi
+
+code="$1"
+
+for code in "${@}"; do
+	if [ "$code" -le 0 -o "$code" -ge 0 ] 2>/dev/null; then
+		# Input is a number, search for a particular matching code
+		sed -n "s,^#define\s\+\([^[:space:]]\+\s\+${code}\s.*\),\1,p" ${headers}
+	else
+		# Input is not a number, search for any matching strings
+		sed -n "s,^#define\s\+\(.*${code}.*\),\1,Ip" ${headers}
+	fi
+done

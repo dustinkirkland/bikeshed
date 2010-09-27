@@ -1,5 +1,6 @@
 bikeshed (1.0) UNRELEASED; urgency=low
 
-  * initial packaging
+  * debian/*: initial packaging
+  * errno, errno.1: initial checkin of a utility that searches errnos
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 20 Aug 2010 14:32:11 -0500

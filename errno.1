@@ -1,0 +1,22 @@
+.TH errno 1 "10 Aug 2010" ubuntu-dev-tools "ubuntu-dev-tools"
+.SH NAME
+errno \- search POSIX error codes by error number, error name, or error description
+
+.SH DESCRIPTION
+\fBerrno\fP is a simple script that interprets a POSIX error code, or finds error codes related to a search string.
+
+.SH EXAMPLE
+  $ errno 36
+  ENAMETOOLONG    36      /* File name too long */
+
+  $ errno perm
+  EPERM            1      /* Operation not permitted */
+  EACCES          13      /* Permission denied */
+
+.SH SEE ALSO
+\fBerrno\fP(2)\fP, \fBerrno\fP(3), \fI/usr/include/asm/errno.h\fP
+
+.SH AUTHOR
+This manpage and the utility was written by Dustin Kirkland <kirkland@ubuntu.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 published by the Free Software Foundation.
+
+On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.
