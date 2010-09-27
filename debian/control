@@ -1,0 +1,18 @@
+Source: bikeshed
+Section: misc
+Priority: extra
+Maintainer: Dustin Kirkland <kirkland@ubuntu.com>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.9.1
+Homepage: http://launchpad.net/bikeshed
+
+Package: bikeshed
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: random useful tools that do not yet have a permanent home
+ Bikeshed is a collection of random but useful tools and utilities that
+ either don't quite fit anywhere else, or have not yet been accepted
+ by a more appropriate project.
+ .
+ Think of this package as an "orphanage", where tools live until they
+ are adopted by loving, accepting parents.
