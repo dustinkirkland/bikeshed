@@ -12,5 +12,8 @@ bikeshed (1.0) UNRELEASED; urgency=low
     bikeshed_64.png: add a simple, colorful icon
   * debian/control, debian/install, debian/links, pbput, pbput.1: add a
     utility for uploading and downloading arbitrary files to/from a pastebin
+  * bzrdch, bzrdch.1, debian/control, debian/install, debian/manpages: add
+    a utility that conveniently edits debian/changelog in a bzr tree,
+    seeding the entry with the current modified files
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 20 Aug 2010 14:32:11 -0500
