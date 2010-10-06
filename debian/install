@@ -4,4 +4,6 @@ bzrdiff	usr/bin
 bzrlog	usr/bin
 dman	usr/bin
 pbput	usr/bin
+release	usr/bin
+release-build	usr/bin
 wifi-status	usr/bin

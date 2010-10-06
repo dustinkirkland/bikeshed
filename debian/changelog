@@ -15,5 +15,8 @@ bikeshed (1.0) UNRELEASED; urgency=low
   * bzrdch, bzrdch.1, debian/control, debian/install, debian/manpages: add
     a utility that conveniently edits debian/changelog in a bzr tree,
     seeding the entry with the current modified files
+  * debian/control, debian/install, debian/manpages, release, release.1,
+    release-build, release-build.1: add a set of handy scripts for upstream
+    release management within Ubuntu, bzr, and Launchpad
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 20 Aug 2010 14:32:11 -0500

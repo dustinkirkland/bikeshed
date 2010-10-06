@@ -1,0 +1,30 @@
+.TH release 1 "6 Oct 2010" bikeshed "bikeshed"
+.SH NAME
+release - convenient script for "releasing" an upstream project for Ubuntu
+
+.SH SYNOPSIS
+\fBrelease\fP
+
+.SH DESCRIPTION
+Note that you must prepare the current directory by first running \fBrelease-build\fP(1), before running \fBrelease\fP(1).
+
+This script will work on a \fBbzr\fP(1) branch with \fBdebian\fP packaging in the current directory, officially "releasing" it.  It will:
+ * automatically determine the project/package name and version by parsing the \fIdebian/changelog\fP file
+ * update the changelog timestamp
+ * tag the release in bzr
+ * \fBdebcommit\fP(1) with an appropriate release message
+ * \fBgpg\fP(1) sign the original tarball
+ * open the next release for development
+
+After the script performs these actions, the final steps to push the release are printed to the screen, for the user to copy-and-paste.  These steps include:
+ * the 'bzr push' command
+ * the URL to the Launchpad 'addrelease' project action
+ * the \fBdput\P(1) commands for pushing to PPAs and the official Ubuntu archive
+
+.SH SEE ALSO
+\fBrelease-build\fP(1)\fP, \fBbzr\fP(1), \fBdebcommit\fP(1), \fBgpg\fP(1), \fBdput\P(1)
+
+.SH AUTHOR
+This manpage and the utility was written by Dustin Kirkland <kirkland@ubuntu.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 published by the Free Software Foundation.
+
+On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.

@@ -1,0 +1,68 @@
+#!/bin/sh -e
+#
+#    release - convenient script for "releasing" an upstream project for Ubuntu
+#
+#    Copyright (C) 2008-2010 Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    Authors:
+#        Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+PKG=$(head -n1 debian/changelog | awk '{print $1}')
+VER=$(head -n 1 debian/changelog | sed 's/^.*(//' | sed 's/).*//' | sed 's/-.*//')
+MAJOR=$(echo "$VER" | awk -F. '{print $1}')
+MINOR=$(head -n1 debian/changelog | sed "s/^.*($MAJOR.//" | sed "s/-.*$//")
+
+LATEST="natty"
+
+error() {
+	echo "ERROR: $@" >&2
+	exit 1
+}
+
+head -n1 debian/changelog | grep "$LATEST" || error "This version must be ready for release"
+
+# Tag the release in bzr
+dch --release
+bzr tag --delete $MAJOR.$MINOR-0ubuntu1 || true
+debcommit --release --message="releasing $MAJOR.$MINOR"
+
+# Sign the tarball
+gpg --armor --sign --detach-sig ../"$PKG"_*.orig.tar.gz
+
+# Open the next release for development
+nextminor=`expr $MINOR + 1`
+if [ -r "usr/bin/$PKG" ]; then
+	sed -i "s/^VERSION=.*$/VERSION=$MAJOR.$nextminor/" usr/bin/$PKG
+fi
+dch -v "$MAJOR.$nextminor" "UNRELEASED"
+sed -i "s/$MAJOR.$nextminor) .*;/$MAJOR.$nextminor) unreleased;/" debian/changelog
+bzr commit -m "opening $MAJOR.$nextminor"
+
+echo
+echo "# Changes:"
+echo
+grep -A 999999 Changes: ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1_source.changes | grep -B 999999 Checksums-Sha1 | grep -v Chec
+echo
+echo "# To push:"
+echo "  bzr push lp:$PKG"
+echo
+echo "# Publish tarball at:"
+echo "  https://launchpad.net/$PKG/trunk/+addrelease"
+echo
+echo "# To upload packages:"
+echo "  dput ppa:$PKG/ppa ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1*ppa*_source.changes"
+echo "  dput ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1_source.changes"
+echo

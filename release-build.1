@@ -1,0 +1,47 @@
+.TH release-build 1 "6 Oct 2010" bikeshed "bikeshed"
+.SH NAME
+release-build - convenient script for "building" an upstream project, prior to release to Ubuntu
+
+.SH SYNOPSIS
+\fBrelease-build\fP
+
+.SH ASSUMPTIONS
+This script, along with its partner, \fBrelease\fP(1)\fP, require a particular set of project parameters to operate properly.
+ * The project must use \fBbzr\fP(1) and http://launchpad.net
+ * The project name, [FOO], must match its Launchpad project, http://launchpad.net/[FOO]
+ * There must be a corresponding Launchpad team, also matching the same name, http://launchpad.net/~[FOO]
+ * The team must have a PPA activated, named "ppa"
+ * The project must use a MAJOR.MINOR versioning scheme
+
+.SH DESCRIPTION
+This script will work on a \fBbzr\fP(1) branch with \fBdebian\fP packaging in the current directory.  It will:
+ * automatically determine the project/package name and version by parsing the \fIdebian/changelog\fP file
+ * clean out the build-area
+ * create an original tarball
+ * check the original tarball for common mistakes
+ * build a local binary deb
+ * build a set of source packages, for each of a set of supported Ubuntu releases
+
+After the script performs these actions, the next steps are printed to the screen, for the user to copy-and-paste.  These steps include:
+ * the command to install the package locally (for testing)
+ * the \fBrelease\fP command, to move on and make it official
+ * also the command to revert the changes to the \fIdebian/changelog\fP
+
+.SH EXAMPLES
+For sample projects/packages that use the \fBrelease\fP and \fBrelease-build\fP commands for publishing, see:
+ * bikeshed
+ * byobu
+ * ecryptfs
+ * musica
+ * pictor
+ * powernap
+ * screenbin
+ * testdrive
+
+.SH SEE ALSO
+\fBrelease\fP(1)\fP, \fBbzr\fP(1), \fBdpkg\fP(1)
+
+.SH AUTHOR
+This manpage and the utility was written by Dustin Kirkland <kirkland@ubuntu.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 published by the Free Software Foundation.
+
+On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.

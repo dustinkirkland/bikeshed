@@ -1,0 +1,90 @@
+#!/bin/sh -e
+#
+#    release-build - convenient script for "building" an upstream project,
+#                    just prior to release to Ubuntu
+#
+#    Copyright (C) 2008-2010 Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    Authors:
+#        Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+PKG=$(head -n1 debian/changelog | awk '{print $1}')
+VER=$(head -n 1 debian/changelog | sed 's/^.*(//' | sed 's/).*//' | sed 's/-.*//')
+
+error() {
+	echo "ERROR: $@" >&2
+	exit 1
+}
+
+get_orig_source() {
+	# bzr export needs a --exclude option for the following to work:
+	#  $ bzr export ../${PKG}_${VER}.orig.tar.gz
+	# use tar instead
+	tmp=$(mktemp -d)
+	cp -a . $tmp/${PKG}-${VER}
+	cp -f debian/changelog $tmp/${PKG}-${VER}/ChangeLog
+	if [ -r "$tmp/${PKG}-${VER}/configure.ac" ]; then
+		cd $tmp/${PKG}-${VER}
+		aclocal
+		automake --add-missing
+		autoconf
+		for i in INSTALL install-sh missing; do
+			rm -f $i
+			cp -av /usr/share/automake-1.11/$i .
+		done
+		cd -
+	fi
+	tar -C $tmp --exclude .bzr --exclude debian --exclude "*~" -zcvf ../${PKG}_${VER}.orig.tar.gz ${PKG}-${VER}
+	rm -rf $tmp
+	ls -halF ../${PKG}_${VER}.orig.tar.gz
+}
+
+head -n1 debian/changelog | grep -i "unreleased" || error "This version must be 'unreleased'"
+
+rm -rf ../build-area/
+get_orig_source
+
+if tar -tvf ../"$PKG"_*.orig.tar.gz | egrep "\.bzr|debian"; then
+	error "Release tarball has invalid files"
+fi
+if tar -tvf ../"$PKG"_*.orig.tar.gz | egrep "/bin/|/lib/" | grep -v Makefile | grep -v "rwxr-xr-x"; then
+	error "Release tarball has binaries with incorrect permissions"
+fi
+
+bzr bd
+sed -i "s/) unreleased;/-0ubuntu1~ppa1) hardy;/i" debian/changelog
+bzr bd -S
+sed -i "s/ppa1) hardy;/ppa2) karmic;/" debian/changelog
+bzr bd -S
+sed -i "s/ppa2) karmic;/ppa3) lucid;/" debian/changelog
+bzr bd -S
+sed -i "s/ppa3) lucid;/ppa4) maverick;/" debian/changelog
+bzr bd -S
+sed -i "s/~ppa4) maverick;/) natty;/" debian/changelog
+bzr bd -S
+
+echo
+echo
+echo "# Test this build:"
+echo "  sudo dpkg -Oi ../$PKG_*.deb"
+echo
+echo "# If everything looks good, release:"
+echo "  release"
+echo
+echo "# Otherwise:"
+echo "  bzr revert debian/changelog"
+echo
+echo
