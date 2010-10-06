@@ -2,4 +2,5 @@
 bzrdiff	usr/bin
 bzrlog	usr/bin
 dman	usr/bin
+pbput	usr/bin
 wifi-status	usr/bin

@@ -1,0 +1,25 @@
+.TH pbput 1 "6 Oct 2010" bikeshed "bikeshed"
+.SH NAME
+pbput - compress and encode arbitrary files to pastebin.com
+pbget - decode and decompress arbitrary files from pastebin.com
+
+.SH SYNOPSIS
+\fBpbput\fP [FILENAME]
+\fBpbget\fP
+
+.SH DESCRIPTION
+\fBpbput\fP is a script that can be used to upload arbitrary files to a pastebin, such as pastebin.com.  It will \fBlzma\fP(1) compress, and then \fBbase64\fP(1) encode either STDIN, or an optional FILENAME argument, and upload to http://pastebin.com.
+
+
+.SH EXAMPLE
+ pbput /sbin/init
+ cat /sbin/init | pbput
+ pbget http://pastebin.com/DsBvQvbG > /tmp/init
+
+.SH SEE ALSO
+\fBpastebinit\fP(1)\fP, \fBlzma\fP(1), \fBbase64\fP(1)
+
+.SH AUTHOR
+This manpage and the utility was written by Dustin Kirkland <kirkland@ubuntu.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 published by the Free Software Foundation.
+
+On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.

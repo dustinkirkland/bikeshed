@@ -10,5 +10,7 @@ bikeshed (1.0) UNRELEASED; urgency=low
     add a couple of useful bzr hacks, that pipe output to a sensible pager
   * bikeshed.odp, bikeshed.png, bikeshed_14.png, bikeshed_192.png,
     bikeshed_64.png: add a simple, colorful icon
+  * debian/control, debian/install, debian/links, pbput, pbput.1: add a
+    utility for uploading and downloading arbitrary files to/from a pastebin
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 20 Aug 2010 14:32:11 -0500

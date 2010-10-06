@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+#    pbput & pbget - put and get binary files to/from pastebin.com
+#    Copyright (C) 2010 Dustin Kirkland <dustin.kirkland@gmail.com>
+#
+#    Authors: Dustin Kirkland <dustin.kirkland@gmail.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Format of data sent to pastebin:
+# Filename: <filename>
+# SHA512: <sha512>
+# Perms: <octal perms>
+# <empty line>
+# base64 of lzma of arbitrary data
+
+case $(basename $0) in
+	pbget)
+		url=$(echo "$1" | sed -e "s:.com/:.com/download.php?i=:")
+		wget -q -O- "$url" | base64 -d | lzma -d
+	;;
+	pbput)
+		if [ -f "$1" ]; then
+			lzma -9 -f -c "$1" | base64 | pastebinit -b http://pastebin.com
+		else
+			# Read from standard in
+			cat /dev/stdin | lzma -9 -f -c | base64 | pastebinit "$@" -b http://pastebin.com
+		fi
+	;;
+	*)
+		echo "ERROR"
+		exit 1
+	;;
+esac
+
