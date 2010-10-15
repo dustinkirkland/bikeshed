@@ -1,17 +1,15 @@
-.TH bzrdiff 1 "27 Sep 2010" bikeshed "bikeshed"
+.TH bzrp 1 "15 Oct 2010" bikeshed "bikeshed"
 .SH NAME
-bzrdiff - show the bzr diff, in color, but pipe to a pager
+bzrp - just like bzr, except pipe standard out to a sensible pager
 
 .SH SYNOPSIS
-\fBbzrdiff\fP [ARGS]
+\fBbzrp\fP [COMMAND] [ARGS]
 
 .SH DESCRIPTION
-\fBbzrdiff\fP is a program that shows a bzr diff, in color, but pipes it to a pager (sort of like git).
-
-Note that ARGS are simply passed through to 'bzr diff'.
+\fBbzrp\fP is really just an alias for the \fBbzr\fP(1) command, except that its output is piped to \fBsensible-pager\fP(1).
 
 .SH SEE ALSO
-\fBbzr\fP(1)\fP
+\fBbzr\fP(1)\fP, \fBsensible-pager\fP(1)
 
 .SH AUTHOR
 This manpage and the utility was written by Dustin Kirkland <kirkland@ubuntu.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2 published by the Free Software Foundation.
