@@ -17,13 +17,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Format of data sent to pastebin:
-# Filename: <filename>
-# SHA512: <sha512>
-# Perms: <octal perms>
-# <empty line>
-# base64 of lzma of arbitrary data
-
 case $(basename $0) in
 	pbget)
 		url=$(echo "$1" | sed -e "s:.com/:.com/download.php?i=:")
