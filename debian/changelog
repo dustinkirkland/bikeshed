@@ -1,4 +1,4 @@
-bikeshed (1.2) unreleased; urgency=low
+bikeshed (1.2-0ubuntu1) natty; urgency=low
 
   * bzrp: add a more sensible set of paging options for vi-compatible
     pagers; still a to-do to support other pagers
@@ -7,7 +7,7 @@ bikeshed (1.2) unreleased; urgency=low
     more smoothly;  really, this tool is an extension of dch;  reflect
     that in the name
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Oct 2010 21:53:30 -0700
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Oct 2010 23:40:24 -0700
 
 bikeshed (1.1-0ubuntu1) natty; urgency=low
 
