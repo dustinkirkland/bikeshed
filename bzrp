@@ -20,4 +20,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 cmd=$(shift)
-exec bzr $cmd $@ | sensible-pager -R
+
+opts="-F -R -X"
+# NOTE: The $opts are specific to vi-compatible pagers, like 'less'.
+#       It would be nice to have a better way of detecting this.
+#       Currently, these support:
+#       -F to exit if output fits on one screen
+#       -R for color (see 'cdiff')
+#       -X to disable screen clearing
+
+exec bzr $cmd $@ | sensible-pager $opts
