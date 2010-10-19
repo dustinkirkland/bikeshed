@@ -2,6 +2,10 @@ bikeshed (1.2) unreleased; urgency=low
 
   * bzrp: add a more sensible set of paging options for vi-compatible
     pagers; still a to-do to support other pagers
+  * bzrdch.1', =>, 'dchb.1, bzrdch', =>, 'dchb, debian/install: rename
+    bzrdch -> dchb;  the "dchb" string rolls off the fingertips a bit
+    more smoothly;  really, this tool is an extension of dch;  reflect
+    that in the name
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Oct 2010 21:53:30 -0700
 
