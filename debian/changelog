@@ -1,10 +1,10 @@
-bikeshed (1.1) unreleased; urgency=low
+bikeshed (1.1-0ubuntu1) natty; urgency=low
 
   * bzrdiff.1', =>, 'bzrp.1, bzrdiff', =>, 'bzrp, bzrlog, bzrlog.1,
     debian/install, debian/manpages: eliminate the bzrlog, bzrdiff
     utilities, instead, create a simpler, more generic 'bzrp' utility
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 15 Oct 2010 09:33:52 -0700
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Oct 2010 21:53:24 -0700
 
 bikeshed (1.0-0ubuntu1) natty; urgency=low
 
