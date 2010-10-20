@@ -29,4 +29,4 @@ opts="-F -R -X"
 #       -R for color (see 'cdiff')
 #       -X to disable screen clearing
 
-exec bzr $cmd $@ | sensible-pager $opts
+exec bzr $cmd "$@" | sensible-pager $opts
