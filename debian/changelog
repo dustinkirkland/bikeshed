@@ -1,6 +1,8 @@
 bikeshed (1.3) unreleased; urgency=low
 
-  * bzrp: hand args with spaces in them (thanks Marius Gedminas)
+  * bzrp: handle args with spaces in them (thanks Marius Gedminas)
+  * dchb.1 => bch.1, dchb => bch, debian/install:
+    - rename dchb -> bch, update code/docs and install file
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 18 Oct 2010 23:40:30 -0700
 
