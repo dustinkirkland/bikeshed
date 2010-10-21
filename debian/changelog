@@ -1,6 +1,6 @@
 bikeshed (1.4) unreleased; urgency=low
 
-  * UNRELEASED
+  * bzrp: fully qualify bzr, so that you can alias bzr=bzrp if you like
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 21 Oct 2010 11:03:28 -0500
 
