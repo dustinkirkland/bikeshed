@@ -1,3 +1,9 @@
+bikeshed (1.4) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 21 Oct 2010 11:03:28 -0500
+
 bikeshed (1.3-0ubuntu1) natty; urgency=low
 
   * bzrp: handle args with spaces in them (thanks Marius Gedminas)
