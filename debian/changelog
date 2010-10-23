@@ -1,8 +1,10 @@
-bikeshed (1.4) unreleased; urgency=low
+bikeshed (1.4) UNRELEASED; urgency=low
 
-  * UNRELEASED
+  [ Kees Cook ]
+  * debian/links: add "NF" target.
+  * 1: rearrange execution to allow multiple file argments, FS of ", etc.
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 21 Oct 2010 11:03:28 -0500
+ -- Kees Cook <kees@ubuntu.com>  Sat, 23 Oct 2010 10:28:45 -0700
 
 bikeshed (1.3-0ubuntu1) natty; urgency=low
 
