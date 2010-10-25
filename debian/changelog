@@ -1,3 +1,9 @@
+bikeshed (1.5) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 25 Oct 2010 14:42:45 -0400
+
 bikeshed (1.4-0ubuntu1) natty; urgency=low
 
   * bzrp: fully qualify bzr, so that you can alias bzr=bzrp if you like
