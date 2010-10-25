@@ -5,7 +5,14 @@ pbget - decode and decompress arbitrary files from pastebin.com
 
 .SH SYNOPSIS
 \fBpbput\fP [FILENAME]
-\fBpbget\fP
+
+cat foo | \fBpbput\fP
+
+\fBpbputs\fP [FILENAME]
+
+cat foo | \fBpbputs\fP
+
+\fBpbget\fP [URL] > out
 
 .SH DESCRIPTION
 \fBpbput\fP is a script that can be used to upload arbitrary files to a pastebin, such as pastebin.com.  It will \fBlzma\fP(1) compress, and then \fBbase64\fP(1) encode either STDIN, or an optional FILENAME argument, and upload to http://pastebin.com.
