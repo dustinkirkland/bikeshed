@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-#    pbput & pbget - put and get binary files to/from pastebin.com
+#    pbput, pbputs, pbget - put and get binary files to/from pastebin.com
 #    Copyright (C) 2010 Dustin Kirkland <dustin.kirkland@gmail.com>
 #
 #    Authors: Dustin Kirkland <dustin.kirkland@gmail.com>
@@ -17,22 +17,40 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-case $(basename $0) in
+PROG=$(basename $0)
+URL="http://pastebin.com"
+
+# Create a secure tempfile
+u=$(umask)
+umask 177
+TEMP=$(mktemp)
+umask "$u"
+trap "rm -f $TEMP 2>/dev/null || true" EXIT HUP INT QUIT TERM
+
+case "$PROG" in
 	pbget)
 		url=$(echo "$1" | sed -e "s:.com/:.com/download.php?i=:")
-		wget -q -O- "$url" | base64 -d | lzma -d
+		wget -q -O- "$url" | base64 -d | lzma -d > "$TEMP"
+		# Support secure uploads
+		gpg -d "$TEMP" 2>/dev/null || cat "$TEMP"
 	;;
-	pbput)
-		if [ -f "$1" ]; then
-			lzma -9 -f -c "$1" | base64 | pastebinit -b http://pastebin.com
+	pbput|pbputs)
+		if [ -r "$1" ]; then
+			# Read file from argument
+			cat "$1" > "$TEMP"
 		else
 			# Read from standard in
-			cat /dev/stdin | lzma -9 -f -c | base64 | pastebinit "$@" -b http://pastebin.com
+			cat /dev/stdin "$TEMP"
 		fi
+		if [ "$PROG" = "pbputs" ]; then
+			mv -f "$TEMP" "$TEMP".in
+			cat "$TEMP".in | gpg -c > "$TEMP"
+			rm -f "$TEMP".in
+		fi
+		lzma -9 -f -c "$TEMP" | base64 | pastebinit -b "$URL"
 	;;
 	*)
 		echo "ERROR"
 		exit 1
 	;;
 esac
-
