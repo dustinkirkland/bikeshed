@@ -19,5 +19,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-[ -n "$1" ] && ifs="-F\"$1"\" || ifs=
-eval awk $ifs "'{print \$$(basename $0)}'" /dev/stdin
+if [ $# -gt 0 ]; then
+    ifs='-F'"$1"
+    shift || true
+else
+    ifs="-F "
+fi
+awk "$ifs" '{print $'$(basename $0)'}' "$@"
