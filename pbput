@@ -40,7 +40,7 @@ case "$PROG" in
 			cat "$1" > "$TEMP"
 		else
 			# Read from standard in
-			cat /dev/stdin "$TEMP"
+			cat /dev/stdin > "$TEMP"
 		fi
 		if [ "$PROG" = "pbputs" ]; then
 			mv -f "$TEMP" "$TEMP".in
