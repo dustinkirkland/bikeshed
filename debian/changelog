@@ -1,4 +1,4 @@
-bikeshed (1.4-0ubuntu1) natty; urgency=low
+bikeshed (1.4) UNRELEASED; urgency=low
 
   * bzrp: fully qualify bzr, so that you can alias bzr=bzrp if you like
   * pbput, pbputs, debian/links: add support for secure pbputs/pbget
