@@ -1,6 +1,7 @@
 bikeshed (1.5) unreleased; urgency=low
 
   * 1.1, debian/links: add NF documentation in the manpage
+  * pbput: drop umask code, unnecessary
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 25 Oct 2010 14:47:08 -0400
 
