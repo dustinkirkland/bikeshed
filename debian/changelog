@@ -1,6 +1,6 @@
 bikeshed (1.5) unreleased; urgency=low
 
-  * UNRELEASED
+  * 1.1, debian/links: add NF documentation in the manpage
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 25 Oct 2010 14:47:08 -0400
 

@@ -1,12 +1,14 @@
 .TH 1 1 "27 Sep 2010" bikeshed "bikeshed"
 .SH NAME
-1 .. 9 \- awk and print a column (based on the name of the program, 1-9)
+1 .. 9, NF \- awk and print a column (based on the name of the program, 1-9)
 
 .SH SYNOPSIS
 .BI "1 [SEPARATOR]"
 
 .SH DESCRIPTION
 \fB1\fP is a simple script that conveniently splits and prints a given column, where the column to print is the name of the script program you're running (1-9).  2-9 are symlinks to 1; their behavior simply changes based on the name called.
+
+\fBNF\fP can be used to print the last field.
 
 The program takes one optional argument, the input field separator (whitespace, by default).
 
@@ -22,6 +24,9 @@ Instead of:
 
 You can just do:
  cat /etc/passwd | 7 :
+
+Or
+ cat /etc/passwd | NF :
 
 .SH SEE ALSO
 \fBawk\fP(1)\fP
