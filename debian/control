@@ -9,7 +9,15 @@ Homepage: http://launchpad.net/bikeshed
 Package: bikeshed
 Architecture: all
 Depends: ${misc:Depends}
-Recommends: bzr, bzr-builddeb, coreutils, devscripts, dput, gnupg, lzma, pastebinit, sensible-utils
+Recommends: bzr,
+            bzr-builddeb,
+            coreutils,
+            devscripts,
+            dput,
+            gnupg,
+            lzma,
+            pastebinit,
+            sensible-utils
 Description: random useful tools that do not yet have a permanent home
  Bikeshed is a collection of random but useful tools and utilities that
  either don't quite fit anywhere else, or have not yet been accepted
