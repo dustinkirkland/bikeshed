@@ -1,8 +1,9 @@
-bikeshed (1.5) unreleased; urgency=low
+bikeshed (1.5-0ubuntu1) UNRELEASED; urgency=low
 
-  * UNRELEASED
+  [ Benjamin Drung ]
+  * Add a Makefile and simplify the packaging.
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 25 Oct 2010 14:47:08 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 29 Oct 2010 18:35:44 +0200
 
 bikeshed (1.4-0ubuntu1) natty; urgency=low
 
