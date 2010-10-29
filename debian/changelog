@@ -6,6 +6,7 @@ bikeshed (1.5-0ubuntu1) UNRELEASED; urgency=low
     - Remove unused ${shlibs:Depends} from Depends.
     - Remove dependency on essential coreutils.
   * Switch to dpkg-source 3.0 (quilt) format.
+  * 1.1: Fix hyphen-used-as-minus-sign (thanks to lintian).
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 29 Oct 2010 18:35:44 +0200
 
