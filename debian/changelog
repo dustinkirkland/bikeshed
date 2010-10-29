@@ -2,6 +2,7 @@ bikeshed (1.5-0ubuntu1) UNRELEASED; urgency=low
 
   [ Benjamin Drung ]
   * Add a Makefile and simplify the packaging.
+  * debian/control: Remove unused ${shlibs:Depends} from Depends.
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 29 Oct 2010 18:35:44 +0200
 
