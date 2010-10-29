@@ -5,6 +5,7 @@ bikeshed (1.5-0ubuntu1) UNRELEASED; urgency=low
   * debian/control:
     - Remove unused ${shlibs:Depends} from Depends.
     - Remove dependency on essential coreutils.
+  * Switch to dpkg-source 3.0 (quilt) format.
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 29 Oct 2010 18:35:44 +0200
 
