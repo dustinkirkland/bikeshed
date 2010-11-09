@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-#    1..9 - handy hack to print a column from standard in
+#    col1..col9 - handy hack to print a column from standard in
 #
 #    Copyright (C) 2010 Dustin Kirkland <kirkland@ubuntu.com>
 #
@@ -25,4 +25,5 @@ if [ $# -gt 0 ]; then
 else
     ifs="-F "
 fi
-awk "$ifs" '{print $'$(basename $0)'}' "$@"
+b=$(basename $0)
+awk "$ifs" '{print $'${b#col}'}' "$@"

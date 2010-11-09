@@ -2,7 +2,7 @@ PREFIX ?= /usr
 VERSION = 1.5
 
 SCRIPTS = \
-	1 \
+	col1 \
 	bch \
 	bzrp \
 	dman \
@@ -13,28 +13,28 @@ SCRIPTS = \
 	$(NULL)
 
 LINKS = \
-	2 \
-	3 \
-	4 \
-	5 \
-	6 \
-	7 \
-	8 \
-	9 \
+	col2 \
+	col3 \
+	col4 \
+	col5 \
+	col6 \
+	col7 \
+	col8 \
+	col9 \
 	NF \
 	pbget \
 	pbputs \
 	$(NULL)
 
-TARGET_2 = 1
-TARGET_3 = 1
-TARGET_4 = 1
-TARGET_5 = 1
-TARGET_6 = 1
-TARGET_7 = 1
-TARGET_8 = 1
-TARGET_9 = 1
-TARGET_NF = 1
+TARGET_col2 = col1
+TARGET_col3 = col1
+TARGET_col4 = col1
+TARGET_col5 = col1
+TARGET_col6 = col1
+TARGET_col7 = col1
+TARGET_col8 = col1
+TARGET_col9 = col1
+TARGET_NF = col1
 TARGET_pbget = pbput
 TARGET_pbputs = pbput
 
@@ -56,7 +56,7 @@ install:
 	$(foreach script,$(SCRIPTS),install $(script) $(DESTDIR)$(PREFIX)/bin/$(script) &&) true
 	$(foreach script,$(SCRIPTS),install $(script).1 $(DESTDIR)$(PREFIX)/share/man/man1/$(script).1 &&) true
 	$(foreach link,$(LINKS),ln -s $(TARGET_$(link)) $(DESTDIR)$(PREFIX)/bin/$(link) &&) true
-	$(foreach link,$(LINKS),ln -s $(TARGET_$(link)).1 $(DESTDIR)$(PREFIX)/share/man/man1/$(link).1 &&) true
+	$(foreach link,$(LINKS),ln -s $(TARGET_$(link)).1.gz $(DESTDIR)$(PREFIX)/share/man/man1/$(link).1.gz &&) true
 
 dist: bikeshed-$(VERSION).tar.gz
 
