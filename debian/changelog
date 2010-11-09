@@ -17,6 +17,7 @@ bikeshed (1.5) UNRELEASED; urgency=low
     of the 1..9 scripts/links;  I'm capitulating and renaming them
     to col1..col9
   * release-build: clean up bzr garbage
+  * wifi-status: fix license, quote text
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 25 Oct 2010 14:47:08 -0400
 
