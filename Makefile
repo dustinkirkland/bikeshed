@@ -39,7 +39,7 @@ TARGET_pbget = pbput
 TARGET_pbputs = pbput
 
 EXTRA_DIST = \
-	q \
+	system-search \
 	img/bikeshed.odp \
 	img/bikeshed.png \
 	img/bikeshed_14.png \

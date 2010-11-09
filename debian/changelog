@@ -18,6 +18,7 @@ bikeshed (1.5) UNRELEASED; urgency=low
     to col1..col9
   * release-build: clean up bzr garbage
   * wifi-status: fix license, quote text
+  * Makefile, q => system-search: rename the tool
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 25 Oct 2010 14:47:08 -0400
 

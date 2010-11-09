@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-#    q - unified search of the system
+#    system-search - unified search of the system
 #
 #    Copyright (C) 2010 Dustin Kirkland <kirkland@ubuntu.com>
 #
