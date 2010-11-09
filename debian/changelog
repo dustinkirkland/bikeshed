@@ -1,5 +1,14 @@
-bikeshed (1.5) unreleased; urgency=low
+bikeshed (1.5) UNRELEASED; urgency=low
 
+  [ Benjamin Drung ]
+  * Add a Makefile and simplify the packaging.
+  * debian/control:
+    - Remove unused ${shlibs:Depends} from Depends.
+    - Remove dependency on essential coreutils.
+  * Switch to dpkg-source 3.0 (quilt) format.
+  * 1.1: Fix hyphen-used-as-minus-sign (thanks to lintian).
+
+  [ Dustin Kirkland ]
   * 1.1, debian/links: add NF documentation in the manpage
   * pbput: drop umask code, unnecessary
   * wifi-status: track kernel messages about wireless too
