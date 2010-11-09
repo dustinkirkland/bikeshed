@@ -1,4 +1,4 @@
-bikeshed (1.5) UNRELEASED; urgency=low
+bikeshed (1.5-0ubuntu1) natty; urgency=low
 
   [ Benjamin Drung ]
   * Add a Makefile and simplify the packaging.
@@ -20,7 +20,7 @@ bikeshed (1.5) UNRELEASED; urgency=low
   * wifi-status: fix license, quote text
   * Makefile, q => system-search: rename the tool
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 25 Oct 2010 14:47:08 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 09 Nov 2010 17:45:53 -0600
 
 bikeshed (1.4-0ubuntu1) natty; urgency=low
 
