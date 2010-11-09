@@ -85,6 +85,6 @@ echo "# If everything looks good, release:"
 echo "  release"
 echo
 echo "# Otherwise:"
-echo "  bzr revert debian/changelog"
+echo "  bzr revert debian/changelog; rm debian/changelog*~"
 echo
 echo
