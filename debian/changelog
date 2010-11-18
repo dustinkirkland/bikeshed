@@ -1,8 +1,9 @@
 bikeshed (1.6) unreleased; urgency=low
 
-  * UNRELEASED
+  [ Nobuto MURATA ]
+  * dman: set users' locale when gettting manpages, LP: #677200
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 09 Nov 2010 17:45:59 -0600
+ -- Nobuto MURATA <nobuto@nobuto-murata.org>  Fri, 19 Nov 2010 06:27:17 +0900
 
 bikeshed (1.5-0ubuntu1) natty; urgency=low
 
