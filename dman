@@ -41,8 +41,10 @@ fi
 if [ ! -z "$LC_MESSAGES" ]; then
 	LOCALE="$LC_MESSAGES"
 fi
-if echo $LOCALE | grep -q "^en"; then
+if [ "$LOCALE" = C ]; then
 	LOCALE=""
+elif [ ! -z "$LOCALE" ]; then
+	LOCALE="${LOCALE%%_*}"
 fi
 
 URL="http://manpages.ubuntu.com/manpages.gz/"
@@ -53,6 +55,10 @@ for i in `seq 1 9`; do
 	man="$mandir/$i"
 	if wget -O "$man" "$URL/$DISTRIB_CODENAME/$LOCALE/man$i/$PAGE.$i.gz" 2>/dev/null; then
 		man $MAN_ARGS -l "$man" || true
+	elif [ ! -z "$LOCALE" -a "$LOCALE" != en ]; then
+		if wget -O "$man" "$URL/$DISTRIB_CODENAME//man$i/$PAGE.$i.gz" 2>/dev/null; then
+			man $MAN_ARGS -l "$man" || true
+		fi
 	fi
 	rm -f "$man"
 done
