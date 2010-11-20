@@ -21,7 +21,10 @@
 
 cmd=$(shift)
 
-opts="-F -R -X"
+pager=$(readlink /etc/alternatives/pager)
+if [ $pager = /bin/less ]; then
+	opts="-F -R -X"
+fi
 # NOTE: The $opts are specific to vi-compatible pagers, like 'less'.
 #       It would be nice to have a better way of detecting this.
 #       Currently, these support:

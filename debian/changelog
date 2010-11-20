@@ -2,8 +2,10 @@ bikeshed (1.6) unreleased; urgency=low
 
   [ Nobuto MURATA ]
   * dman: set users' locale when gettting manpages, LP: #677200
+  * bzrp: avoid passing unsupported options to pager other than less,
+    LP: #677049
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 19 Nov 2010 19:01:38 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 19 Nov 2010 19:02:38 -0600
 
 bikeshed (1.5-0ubuntu1) natty; urgency=low
 
