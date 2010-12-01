@@ -1,0 +1,59 @@
+#!/bin/sh -e
+#
+#    webanonymous - anonymize web traffic by tunneling through
+#                   any EC2 instance, if you have one running
+#
+#    Copyright (C) 2010 Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    Authors:
+#        Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+PROG=$(basename "$0")
+USER="ubuntu"
+SOCKS="10800"
+#SQUID="3128"
+#SSH_OPTS="-f -N -C -D $SOCKS -L $SQUID:localhost:$SQUID"
+SSH_OPTS="-f -N -C -D $SOCKS"
+PIDFILE="$HOME/.cache/$PROG.pid"
+
+case $1 in
+	start)	
+		instances=$(ec2-describe-instances | grep "^INSTANCE.*running")
+		hostname=$(echo "$instances" | awk '{print $4}')
+		keypair=$(echo "$instances" | awk '{print $7}')
+		gconftool-2 -t string -s /system/proxy/mode "manual"
+		gconftool-2 -t string -s /system/proxy/socks_host "localhost"
+		gconftool-2 -t string -s /system/proxy/socks_port "$SOCKS"
+		exec ssh $SSH_OPTS $USER@$hostname
+#		gconftool-2 -t string -s /system/http_proxy/use_http_proxy "true"
+#		gconftool-2 -t string -s /system/http_proxy/host "localhost"
+#		gconftool-2 -t int -s /system/http_proxy/port "$SQUID"
+	;;
+	stop)
+		gconftool-2 -t string -s /system/proxy/mode "off"
+#		gconftool-2 -t string -s /system/http_proxy/use_http_proxy "false"
+		pkill -f "ssh $SSH_OPTS $USER@.*amazonaws.com"
+	;;
+	status)
+		if pgrep -f "ssh $SSH_OPTS $USER@.*amazonaws.com" >/dev/null; then
+			echo "Running"
+		else
+			echo "Not running"
+		fi
+	;;
+	*)
+		exit 1
+	;;
+esac
