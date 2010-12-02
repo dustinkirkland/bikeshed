@@ -48,7 +48,7 @@ status_info() {
 	flags=$(ps -o args= ${_RET_PID})
 	for flag in $flags; do
 		case "${pflag}:${flag}" in
-			*:${RUSER}@*) uhost="${flag}";;
+			${socks:-xxxxx}:*) uhost="${flag}";;
 			*:ControlPath=*) cpath=${flag};;
 			-D:*) socks=${flag};;
 		esac
@@ -98,9 +98,15 @@ case $1 in
 		[ -n "${_RET_PID}" ] &&
 			error "${PROG} is already running as ${_RET_PID}. please stop first"
 
-		info "Looking for running cloud instances..."
-		hostname=$(${EC2PRE}describe-instances  | awk '-F\t' '$6 == "running" { print $4; exit(0); }')
-		[ -z "$hostname" ] && error "No running instances found -- try starting a cloud instance"
+		if [ -z "$2" ]; then
+			info "Looking for running cloud instances..."
+			hostname=$(${EC2PRE}describe-instances  | awk '-F\t' '$6 == "running" { print $4; exit(0); }')
+			[ -z "$hostname" ] && error "No running instances found -- try starting a cloud instance"
+			uhost=${RUSER}@${hostname}
+		else
+			uhost=${2}
+		fi
+			
 		info "Selecting instance [$hostname]..."
 		info "Configuring gnome..."
 		gconftool-2 -t string -s /system/proxy/mode "auto" \
@@ -116,7 +122,7 @@ case $1 in
 		info "You may need to restart your browser(s)..."
 		SSH_TUNNEL_NAME="${SSH_TUNNEL_NAME}" \
 			bash -c 'exec -a ${SSH_TUNNEL_NAME} -- "$@"' arg0 \
-			ssh ${O_OPTS} -f -N -C -D "${SOCKS}" "$RUSER@$hostname"
+			ssh ${O_OPTS} -f -N -C -D "${SOCKS}" "${uhost}"
 		[ $? -eq 0 ] || error "connection ssh failed"
 	;;
 	stop)
