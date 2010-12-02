@@ -7,6 +7,7 @@
 #
 #    Authors:
 #        Dustin Kirkland <kirkland@ubuntu.com>
+#	 Scott Moser <smoser@ubuntu.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,6 +21,17 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+## Debugging info:
+## The following "works for me" to use http://ip2location.com to check
+## if the proxy is up and functional:
+## $ curl --silent --socks4 localhost:${PORT} http://www.ip2location.com/ |
+##     sed -n -e 's,.*Livedemo1_lblISP[^>]*>\([^<]*\)<.*,\1,p' \
+##            -e 's,.*Livedemo1_lblIpAddress[^>]*>\([^<]*\)<.*,\1,p' 
+##
+## Where 'PORT' is the port as shown by 'status'
+## If you remove the '--socks4', curl will connect directly, and you should
+## see other information.
+
 error() {
 	echo "ERROR: $@" 1>&2
 	exit 1
@@ -29,34 +41,83 @@ info() {
 	echo "INFO: $@"
 }
 
+status_info() {
+	_RET_PID="" _RET_USERHOST="" _RET_CONNECTED="" _RET_SOCKS=""
+	_RET_PID=$(pgrep -f "${SSH_TUNNEL_NAME}" -U "${UID}") || return 0
+	local flags="" flag="" uhost="" cpath="" pflag="" socks=""
+	flags=$(ps -o args= ${_RET_PID})
+	for flag in $flags; do
+		case "${pflag}:${flag}" in
+			*:${RUSER}@*) uhost="${flag}";;
+			*:ControlPath=*) cpath=${flag};;
+			-D:*) socks=${flag};;
+		esac
+		pflag=${flag}
+	done
+	[ -n "${uhost}" ] && _RET_USERHOST=${uhost}
+	[ -n "${socks}" ] && _RET_SOCKS=${socks}
+	if [ -n "${cpath}" -a -n "${uhost}" ]; then
+		_RET_CONNECTED=0
+		ssh -o "${cpath}" -o ControlMaster=no "${uhost}" \
+			/bin/true && _RET_CONNECTED=1
+	fi
+}
+
+Usage() {
+	cat <<EOF
+${PROG}: [ options ] command
+
+    manage a socks/ssh tunnel to an ec2 instance
+
+    command is one of 'start', 'stop', or 'status'
+    options:
+       -h | --help      show this message
+EOF
+}
 
 PROG=$(basename "$0")
-USER="ubuntu"
-SSH_OPTS="-f -N -C -D"
+EC2PRE=${EC2PRE:-ec2-}
+RUSER="ubuntu"
+UID=$(id -u)
+SSH_TUNNEL_NAME="${PROG}-ssh"
+CONTROL_PATH="$HOME/.${PROG}.${SSH_TUNNEL_NAME}"
+O_OPTS="-o ControlMaster=yes -o ControlPath=$HOME/.${SSH_TUNNEL_NAME}.ssh"
 SOCKS=0
 while [ "$SOCKS" -lt 10000 ] || (netstat -an | grep -qs "$SOCKS"); do
-	# Randomize the port selection
-	SOCKS=$(echo | awk '{srand(); printf "%d\n", (rand()*10000+10000)}')
+        # Randomize the port selection
+        SOCKS=$(echo | awk '{srand(); printf "%d\n", (rand()*10000+10000)}')
 done
+SSH_OPTS="-f -N -C ${O_OPTS} -D ${SOCKS}"
+
+[ $# -eq 0 ] && { Usage 1>&2; exit 1; }
+[ "$1" = "--help" -o "$1" = "-h" ] && { Usage; exit 0; }
 
 case $1 in
 	start)
+		status_info
+		[ -n "${_RET_PID}" ] &&
+			error "${PROG} is already running as ${_RET_PID}. please stop first"
+
 		info "Looking for running cloud instances..."
-		hostname=$(ec2-describe-instances  | awk '-F\t' '$6 == "running" { print $4; exit(0); }')
+		hostname=$(${EC2PRE}describe-instances  | awk '-F\t' '$6 == "running" { print $4; exit(0); }')
 		[ -z "$hostname" ] && error "No running instances found -- try starting a cloud instance"
 		info "Selecting instance [$hostname]..."
 		info "Configuring gnome..."
-		gconftool-2 -t string -s /system/proxy/mode "auto"
-		gconftool-2 -t string -s /system/proxy/socks_host "localhost"
-		gconftool-2 -t string -s /system/proxy/socks_port "$SOCKS"
+		gconftool-2 -t string -s /system/proxy/mode "auto" \
+			-t string -s /system/proxy/socks_host "localhost" \
+			-t string -s /system/proxy/socks_port "$SOCKS"
 		# BUG: This is a nasty dirty hack, but a bug in chromium prevents it
 		#      from re-reading socks proxy information from gconf.
-		for i in $(find "$HOME/.config/chromium" -type f -name "*.pac"); do
-			sed -i "s/'SOCKS5 localhost:.*'/'SOCKS5 localhost:$SOCKS'/" "$i"
-		done
+		find "$HOME/.config/chromium" -name "*.pac" -type f -print0 2>/dev/null |
+			xargs -0 --no-run-if-empty \
+				sed -i "s/'SOCKS5 localhost:.*'/'SOCKS5 localhost:$SOCKS'/"
+			
 		info "Establishing tunnel on port [$SOCKS]..."
 		info "You may need to restart your browser(s)..."
-		exec ssh $SSH_OPTS $SOCKS $USER@$hostname
+		SSH_TUNNEL_NAME="${SSH_TUNNEL_NAME}" \
+			bash -c 'exec -a ${SSH_TUNNEL_NAME} -- "$@"' arg0 \
+			ssh ${O_OPTS} -f -N -C -D "${SOCKS}" "$RUSER@$hostname"
+		[ $? -eq 0 ] || error "connection ssh failed"
 	;;
 	stop)
 		info "De-configuring gnome..."
@@ -64,21 +125,27 @@ case $1 in
 		info "Terminating tunnel..."
 		# BUG: Ideally, we'd save the pid of the ssh process and kill that here.
 		#      For now, kill any/all tunnels to AWS.
-		pkill -f "ssh $SSH_OPTS.* $USER@.*amazonaws.com"
+		pkill -f "${SSH_TUNNEL_NAME}" -U "${UID}"
 		info "You may need to restart your browser(s)..."
 	;;
 	status)
-		if pgrep -f "ssh $SSH_OPTS.* $USER@.*amazonaws.com" >/dev/null; then
-			echo "$PROG is running"
+		status_info
+		[ -n "${_RET_PID}" ] || { echo "$PROG is not running"; exit 1; }
+		if [ "${_RET_CONNECTED}" = "1" ]; then
+			echo "$PROG connected."
+			info "pid=[${_RET_PID}] host=[${_RET_USERHOST}] port=[${_RET_SOCKS}]"
 			exit 0
 		else
-			echo "$PROG is not running"
+			echo "$PROG not connected."
+			info "Seems bad connection on pid [${_RET_PID}] to [${_RET_USERHOST}]"
 			exit 1
 		fi
-	;;
-	*)
-		error "Unknown parameter"
+ 	;;
+ 	*)
+ 		error "Unknown parameter"
 	;;
 esac
 
 exit 0
+
+# vi: ts=4 noexpandtab
