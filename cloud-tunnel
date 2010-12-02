@@ -76,7 +76,8 @@ case $1 in
 		done
 		info "Establishing tunnel on port [$SOCKS]..."
 		info "You may need to restart your browser(s)..."
-		bash -c 'exec -a ${SSH_TUNNEL_NAME} -- "$@"' arg0 \
+		SSH_TUNNEL_NAME="${SSH_TUNNEL_NAME}" \
+			bash -c 'exec -a ${SSH_TUNNEL_NAME} -- "$@"' arg0 \
 			ssh $SSH_OPTS "$SOCKS" "$USER@$hostname"
 	;;
 	stop)
