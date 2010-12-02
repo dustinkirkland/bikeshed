@@ -79,6 +79,7 @@ case $1 in
 		SSH_TUNNEL_NAME="${SSH_TUNNEL_NAME}" \
 			bash -c 'exec -a ${SSH_TUNNEL_NAME} -- "$@"' arg0 \
 			ssh $SSH_OPTS "$SOCKS" "$USER@$hostname"
+		[ $? -eq 0 ] || error "connection ssh failed"
 	;;
 	stop)
 		info "De-configuring gnome..."
