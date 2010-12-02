@@ -34,7 +34,7 @@ PROG=$(basename "$0")
 USER="ubuntu"
 SSH_OPTS="-f -N -C -D"
 SOCKS=0
-while [ "$SOCKS" -lt 10000 ]; do
+while [ "$SOCKS" -lt 10000 ] || (netstat -an | grep -qs "$SOCKS"); do
 	# Randomize the port selection
 	SOCKS=$(echo | awk '{srand(); printf "%d\n", (rand()*10000+10000)}')
 done
@@ -42,7 +42,7 @@ done
 case $1 in
 	start)
 		info "Looking for running cloud instances..."
-		hostname=$(ec2-describe-instances | grep "^INSTANCE.*running" | awk '{print $4}')
+		hostname=$(ec2-describe-instances  | awk '-F\t' '$6 == "running" { print $4; exit(0); }')
 		[ -z "$hostname" ] && error "No running instances found -- try starting a cloud instance"
 		info "Selecting instance [$hostname]..."
 		info "Configuring gnome..."
