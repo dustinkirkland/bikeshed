@@ -32,6 +32,8 @@ info() {
 
 PROG=$(basename "$0")
 USER="ubuntu"
+UID=$(id -u)
+SSH_TUNNEL_NAME="${PROG}-ssh"
 SSH_OPTS="-f -N -C -D"
 SOCKS=$(awk '{srand(); printf "%d\n", (rand()*10000+10000)}' < /dev/null)
 
@@ -52,7 +54,8 @@ case $1 in
 		done
 		info "Establishing tunnel on port [$SOCKS]..."
 		info "You may need to restart your browser(s)..."
-		exec ssh $SSH_OPTS $SOCKS $USER@$hostname
+		bash -c 'exec -a ${SSH_TUNNEL_NAME} -- "$@"' arg0 \
+			ssh $SSH_OPTS "$SOCKS" "$USER@$hostname"
 	;;
 	stop)
 		info "De-configuring gnome..."
@@ -60,11 +63,11 @@ case $1 in
 		info "Terminating tunnel..."
 		# BUG: Ideally, we'd save the pid of the ssh process and kill that here.
 		#      For now, kill any/all tunnels to AWS.
-		pkill -f "ssh $SSH_OPTS.* $USER@.*amazonaws.com"
+		pkill -f "${SSH_TUNNEL_NAME}" -U "${UID}"
 		info "You may need to restart your browser(s)..."
 	;;
 	status)
-		if pgrep -f "ssh $SSH_OPTS.* $USER@.*amazonaws.com" >/dev/null; then
+		if pgrep -f "${SSH_TUNNEL_NAME}" -U "${UID}" >/dev/null; then
 			echo "$PROG is running"
 			exit 0
 		else
