@@ -23,8 +23,6 @@
 PROG=$(basename "$0")
 USER="ubuntu"
 SOCKS="10800"
-#SQUID="3128"
-#SSH_OPTS="-f -N -C -D $SOCKS -L $SQUID:localhost:$SQUID"
 SSH_OPTS="-f -N -C -D $SOCKS"
 
 error() {
@@ -41,13 +39,9 @@ case $1 in
 		gconftool-2 -t string -s /system/proxy/socks_host "localhost"
 		gconftool-2 -t string -s /system/proxy/socks_port "$SOCKS"
 		exec ssh $SSH_OPTS $USER@$hostname
-#		gconftool-2 -t string -s /system/http_proxy/use_http_proxy "true"
-#		gconftool-2 -t string -s /system/http_proxy/host "localhost"
-#		gconftool-2 -t int -s /system/http_proxy/port "$SQUID"
 	;;
 	stop)
 		gconftool-2 -t string -s /system/proxy/mode "off"
-#		gconftool-2 -t string -s /system/http_proxy/use_http_proxy "false"
 		# BUG: Ideally, we'd save the pid of the ssh process and kill that here
 		pkill -f "ssh $SSH_OPTS $USER@.*amazonaws.com"
 	;;
