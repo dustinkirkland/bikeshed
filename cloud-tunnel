@@ -51,7 +51,7 @@ USER="ubuntu"
 UID=$(id -u)
 SSH_TUNNEL_NAME="${PROG}-ssh"
 SSH_OPTS="-f -N -C -D"
-SOCKS=$(awk '{srand(); printf "%d\n", (rand()*10000+10000)}' < /dev/null)
+SOCKS=$(awk 'BEGIN {srand(); printf "%d\n", (rand()*10000+10000)}' < /dev/null)
 
 [ $# -eq 0 ] && { Usage 1>&2; exit 1; }
 [ "$1" = "--help" -o "$1" = "-h" ] && { Usage; exit 0; }
