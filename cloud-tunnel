@@ -46,9 +46,9 @@ case $1 in
 		[ -z "$hostname" ] && error "No running instances found -- try starting a cloud instance"
 		info "Selecting instance [$hostname]..."
 		info "Configuring gnome..."
-		gconftool-2 -t string -s /system/proxy/mode "auto"
-		gconftool-2 -t string -s /system/proxy/socks_host "localhost"
-		gconftool-2 -t string -s /system/proxy/socks_port "$SOCKS"
+		gconftool-2 -t string -s /system/proxy/mode "auto" \
+			-t string -s /system/proxy/socks_host "localhost" \
+			-t string -s /system/proxy/socks_port "$SOCKS"
 		# BUG: This is a nasty dirty hack, but a bug in chromium prevents it
 		#      from re-reading socks proxy information from gconf.
 		for i in $(find "$HOME/.config/chromium" -type f -name "*.pac"); do
