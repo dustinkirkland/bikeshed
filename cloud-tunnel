@@ -1,7 +1,7 @@
 #!/bin/sh -e
 #
-#    cloud-tunnel - anonymize web traffic by encrypting and tunneling
-#                   traffic through a public cloud instance
+#    cloud-tunnel - encrypt and tunnel web traffic through
+#                   a public cloud instance
 #
 #    Copyright (C) 2010 Dustin Kirkland <kirkland@ubuntu.com>
 #
@@ -20,37 +20,59 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-PROG=$(basename "$0")
-USER="ubuntu"
-SOCKS="10800"
-SSH_OPTS="-f -N -C -D $SOCKS"
-
 error() {
 	echo "ERROR: $@" 1>&2
 	exit 1
 }
 
+info() {
+	echo "INFO: $@"
+}
+
+
+PROG=$(basename "$0")
+USER="ubuntu"
+SSH_OPTS="-f -N -C -D"
+SOCKS=0
+while [ "$SOCKS" -lt 10000 ]; do
+	# Randomize the port selection
+	SOCKS=$(echo | awk '{srand(); printf "%d\n", (rand()*10000+10000)}')
+done
+
 case $1 in
-	start)	
-		instances=$(ec2-describe-instances | grep "^INSTANCE.*running")
-		hostname=$(echo "$instances" | awk '{print $4}')
+	start)
+		info "Looking for running cloud instances..."
+		hostname=$(ec2-describe-instances | grep "^INSTANCE.*running" | awk '{print $4}')
 		[ -z "$hostname" ] && error "No running instances found -- try starting a cloud instance"
-		gconftool-2 -t string -s /system/proxy/mode "manual"
+		info "Selecting instance [$hostname]..."
+		info "Configuring gnome..."
+		gconftool-2 -t string -s /system/proxy/mode "auto"
 		gconftool-2 -t string -s /system/proxy/socks_host "localhost"
 		gconftool-2 -t string -s /system/proxy/socks_port "$SOCKS"
-		exec ssh $SSH_OPTS $USER@$hostname
+		# BUG: This is a nasty dirty hack, but a bug in chromium prevents it
+		#      from re-reading socks proxy information from gconf.
+		for i in $(find "$HOME/.config/chromium" -type f -name "*.pac"); do
+			sed -i "s/'SOCKS5 localhost:.*'/'SOCKS5 localhost:$SOCKS'/" "$i"
+		done
+		info "Establishing tunnel on port [$SOCKS]..."
+		info "You may need to restart your browser(s)..."
+		exec ssh $SSH_OPTS $SOCKS $USER@$hostname
 	;;
 	stop)
-		gconftool-2 -t string -s /system/proxy/mode "off"
-		# BUG: Ideally, we'd save the pid of the ssh process and kill that here
-		pkill -f "ssh $SSH_OPTS $USER@.*amazonaws.com"
+		info "De-configuring gnome..."
+		gconftool-2 -t string -s /system/proxy/mode "none"
+		info "Terminating tunnel..."
+		# BUG: Ideally, we'd save the pid of the ssh process and kill that here.
+		#      For now, kill any/all tunnels to AWS.
+		pkill -f "ssh $SSH_OPTS.* $USER@.*amazonaws.com"
+		info "You may need to restart your browser(s)..."
 	;;
 	status)
-		if pgrep -f "ssh $SSH_OPTS $USER@.*amazonaws.com" >/dev/null; then
-			echo "$PROG: running"
+		if pgrep -f "ssh $SSH_OPTS.* $USER@.*amazonaws.com" >/dev/null; then
+			echo "$PROG is running"
 			exit 0
 		else
-			echo "$PROG: not running"
+			echo "$PROG is not running"
 			exit 1
 		fi
 	;;
