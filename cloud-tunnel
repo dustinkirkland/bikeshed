@@ -46,6 +46,7 @@ EOF
 }
 
 PROG=$(basename "$0")
+EC2PRE=${EC2PRE:-ec2-}
 USER="ubuntu"
 UID=$(id -u)
 SSH_TUNNEL_NAME="${PROG}-ssh"
@@ -61,7 +62,7 @@ case $1 in
 			error "${PROG} is already running as ${_RET}. please stop first"
 
 		info "Looking for running cloud instances..."
-		hostname=$(ec2-describe-instances  | awk '-F\t' '$6 == "running" { print $4; exit(0); }')
+		hostname=$(${EC2PRE}describe-instances  | awk '-F\t' '$6 == "running" { print $4; exit(0); }')
 		[ -z "$hostname" ] && error "No running instances found -- try starting a cloud instance"
 		info "Selecting instance [$hostname]..."
 		info "Configuring gnome..."
