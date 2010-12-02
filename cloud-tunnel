@@ -33,12 +33,27 @@ get_pid() {
 	_RET=$(pgrep -f "${SSH_TUNNEL_NAME}" -U "${UID}")
 }
 
+Usage() {
+	cat <<EOF
+${PROG}: [ options ] command
+
+    manage a socks/ssh tunnel to an ec2 instance
+
+    command is one of 'start', 'stop', or 'status'
+    options:
+       -h | --help      show this message
+EOF
+}
+
 PROG=$(basename "$0")
 USER="ubuntu"
 UID=$(id -u)
 SSH_TUNNEL_NAME="${PROG}-ssh"
 SSH_OPTS="-f -N -C -D"
 SOCKS=$(awk '{srand(); printf "%d\n", (rand()*10000+10000)}' < /dev/null)
+
+[ $# -eq 0 ] && { Usage 1>&2; exit 1; }
+[ "$1" = "--help" -o "$1" = "-h" ] && { Usage; exit 0; }
 
 case $1 in
 	start)
@@ -83,9 +98,6 @@ case $1 in
  	;;
  	*)
  		error "Unknown parameter"
-	;;
-	*)
-		error "Unknown parameter"
 	;;
 esac
 
