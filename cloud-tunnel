@@ -33,11 +33,7 @@ info() {
 PROG=$(basename "$0")
 USER="ubuntu"
 SSH_OPTS="-f -N -C -D"
-SOCKS=0
-while [ "$SOCKS" -lt 10000 ]; do
-	# Randomize the port selection
-	SOCKS=$(echo | awk '{srand(); printf "%d\n", (rand()*10000+10000)}')
-done
+SOCKS=$(awk '{srand(); printf "%d\n", (rand()*10000+10000)}' < /dev/null)
 
 case $1 in
 	start)
