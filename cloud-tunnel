@@ -20,6 +20,17 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+## Debugging info:
+## The following "works for me" to use http://ip2location.com to check
+## if the proxy is up and functional:
+## $ curl --silent --socks4 localhost:${PORT} http://www.ip2location.com/ |
+##     sed -n -e 's,.*Livedemo1_lblISP[^>]*>\([^<]*\)<.*,\1,p' \
+##            -e 's,.*Livedemo1_lblIpAddress[^>]*>\([^<]*\)<.*,\1,p' 
+##
+## Where 'PORT' is the port as shown by 'status'
+## If you remove the '--socks4', curl will connect directly, and you should
+## see other information.
+
 error() {
 	echo "ERROR: $@" 1>&2
 	exit 1
