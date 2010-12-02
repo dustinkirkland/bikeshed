@@ -1,7 +1,7 @@
 #!/bin/sh -e
 #
-#    cloud-tunnel - encrypt and tunnel web traffic through
-#                   a public cloud instance
+#    socks-prox - establish and encrypted connection for tunneling
+#                 traffic through a socks proxy
 #
 #    Copyright (C) 2010 Dustin Kirkland <kirkland@ubuntu.com>
 #
@@ -112,7 +112,7 @@ case $1 in
 			xargs -0 --no-run-if-empty \
 				sed -i "s/'SOCKS5 localhost:.*'/'SOCKS5 localhost:$SOCKS'/"
 			
-		info "Establishing tunnel on port [$SOCKS]..."
+		info "Establishing tunnel to [$hostname] on port [$SOCKS]..."
 		info "You may need to restart your browser(s)..."
 		SSH_TUNNEL_NAME="${SSH_TUNNEL_NAME}" \
 			bash -c 'exec -a ${SSH_TUNNEL_NAME} -- "$@"' arg0 \
