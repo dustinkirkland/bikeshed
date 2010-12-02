@@ -80,7 +80,7 @@ case $1 in
 	start)
 		status_info
 		[ -n "${_RET_PID}" ] &&
-			error "${PROG} is already running as ${_RET}. please stop first"
+			error "${PROG} is already running as ${_RET_PID}. please stop first"
 
 		info "Looking for running cloud instances..."
 		hostname=$(${EC2PRE}describe-instances  | awk '-F\t' '$6 == "running" { print $4; exit(0); }')
