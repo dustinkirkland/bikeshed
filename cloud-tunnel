@@ -71,9 +71,10 @@ case $1 in
 			-t string -s /system/proxy/socks_port "$SOCKS"
 		# BUG: This is a nasty dirty hack, but a bug in chromium prevents it
 		#      from re-reading socks proxy information from gconf.
-		for i in $(find "$HOME/.config/chromium" -type f -name "*.pac"); do
-			sed -i "s/'SOCKS5 localhost:.*'/'SOCKS5 localhost:$SOCKS'/" "$i"
-		done
+		find "$HOME/.config/chromium" -name "*.pac" -type f -print0 2>/dev/null |
+			xargs -0 --no-run-if-empty \
+				sed -i "s/'SOCKS5 localhost:.*'/'SOCKS5 localhost:$SOCKS'/"
+			
 		info "Establishing tunnel on port [$SOCKS]..."
 		info "You may need to restart your browser(s)..."
 		SSH_TUNNEL_NAME="${SSH_TUNNEL_NAME}" \
