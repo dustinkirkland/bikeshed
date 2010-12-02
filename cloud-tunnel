@@ -47,7 +47,7 @@ EOF
 
 PROG=$(basename "$0")
 EC2PRE=${EC2PRE:-ec2-}
-USER="ubuntu"
+RUSER="ubuntu"
 UID=$(id -u)
 SSH_TUNNEL_NAME="${PROG}-ssh"
 SSH_OPTS="-f -N -C -o ControlPath=none -D"
@@ -79,7 +79,7 @@ case $1 in
 		info "You may need to restart your browser(s)..."
 		SSH_TUNNEL_NAME="${SSH_TUNNEL_NAME}" \
 			bash -c 'exec -a ${SSH_TUNNEL_NAME} -- "$@"' arg0 \
-			ssh $SSH_OPTS "$SOCKS" "$USER@$hostname"
+			ssh $SSH_OPTS "$SOCKS" "$RUSER@$hostname"
 		[ $? -eq 0 ] || error "connection ssh failed"
 	;;
 	stop)
