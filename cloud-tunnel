@@ -29,8 +29,26 @@ info() {
 	echo "INFO: $@"
 }
 
-get_pid() {
-	_RET=$(pgrep -f "${SSH_TUNNEL_NAME}" -U "${UID}")
+status_info() {
+	_RET_PID="" _RET_USERHOST="" _RET_CONNECTED="" _RET_SOCKS=""
+	_RET_PID=$(pgrep -f "${SSH_TUNNEL_NAME}" -U "${UID}") || return 0
+	local flags="" flag="" uhost="" cpath="" pflag="" socks=""
+	flags=$(ps -o args= ${_RET_PID})
+	for flag in $flags; do
+		case "${pflag}:${flag}" in
+			*:${RUSER}@*) uhost="${flag}";;
+			*:ControlPath=*) cpath=${flag};;
+			-D:*) socks=${flag};;
+		esac
+		pflag=${flag}
+	done
+	[ -n "${uhost}" ] && _RET_USERHOST=${uhost}
+	[ -n "${socks}" ] && _RET_SOCKS=${socks}
+	if [ -n "${cpath}" -a -n "${uhost}" ]; then
+		_RET_CONNECTED=0
+		ssh -o "${cpath}" -o ControlMaster=no "${uhost}" \
+			/bin/true && _RET_CONNECTED=1
+	fi
 }
 
 Usage() {
@@ -50,15 +68,18 @@ EC2PRE=${EC2PRE:-ec2-}
 RUSER="ubuntu"
 UID=$(id -u)
 SSH_TUNNEL_NAME="${PROG}-ssh"
-SSH_OPTS="-f -N -C -o ControlPath=none -D"
+CONTROL_PATH="$HOME/.${PROG}.${SSH_TUNNEL_NAME}"
+O_OPTS="-o ControlMaster=yes -o ControlPath=$HOME/.${SSH_TUNNEL_NAME}.ssh"
 SOCKS=$(awk 'BEGIN {srand(); printf "%d\n", (rand()*10000+10000)}' < /dev/null)
+SSH_OPTS="-f -N -C ${O_OPTS} -D ${SOCKS}"
 
 [ $# -eq 0 ] && { Usage 1>&2; exit 1; }
 [ "$1" = "--help" -o "$1" = "-h" ] && { Usage; exit 0; }
 
 case $1 in
 	start)
-		get_pid &&
+		status_info
+		[ -n "${_RET_PID}" ] &&
 			error "${PROG} is already running as ${_RET}. please stop first"
 
 		info "Looking for running cloud instances..."
@@ -79,7 +100,7 @@ case $1 in
 		info "You may need to restart your browser(s)..."
 		SSH_TUNNEL_NAME="${SSH_TUNNEL_NAME}" \
 			bash -c 'exec -a ${SSH_TUNNEL_NAME} -- "$@"' arg0 \
-			ssh $SSH_OPTS "$SOCKS" "$RUSER@$hostname"
+			ssh ${O_OPTS} -f -N -C -D "${SOCKS}" "$RUSER@$hostname"
 		[ $? -eq 0 ] || error "connection ssh failed"
 	;;
 	stop)
@@ -92,11 +113,13 @@ case $1 in
 		info "You may need to restart your browser(s)..."
 	;;
 	status)
-		if get_pid; then
-			echo "$PROG is running [${_RET}]"
+		status_info
+		[ -n "${_RET_PID}" ] || { echo "$PROG is not running"; exit 1; }
+		if [ "${_RET_CONNECTED}" = "1" ]; then
+			echo "$PROG connected. port=${_RET_SOCKS} pid=${_RET_PID} host=${_RET_USERHOST}"
 			exit 0
 		else
-			echo "$PROG is not running"
+			echo "$PROG seems bad connection on pid ${_RET_PID} to ${_RET_USERHOST}"
 			exit 1
 		fi
  	;;
