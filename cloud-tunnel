@@ -50,7 +50,7 @@ EC2PRE=${EC2PRE:-ec2-}
 USER="ubuntu"
 UID=$(id -u)
 SSH_TUNNEL_NAME="${PROG}-ssh"
-SSH_OPTS="-f -N -C -D"
+SSH_OPTS="-f -N -C -o ControlPath=none -D"
 SOCKS=$(awk 'BEGIN {srand(); printf "%d\n", (rand()*10000+10000)}' < /dev/null)
 
 [ $# -eq 0 ] && { Usage 1>&2; exit 1; }
