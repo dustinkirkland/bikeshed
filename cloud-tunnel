@@ -29,6 +29,9 @@ info() {
 	echo "INFO: $@"
 }
 
+get_pid() {
+	_RET=$(pgrep -f "${SSH_TUNNEL_NAME}" -U "${UID}")
+}
 
 PROG=$(basename "$0")
 USER="ubuntu"
@@ -39,6 +42,9 @@ SOCKS=$(awk '{srand(); printf "%d\n", (rand()*10000+10000)}' < /dev/null)
 
 case $1 in
 	start)
+		get_pid &&
+			error "${PROG} is already running as ${_RET}. please stop first"
+
 		info "Looking for running cloud instances..."
 		hostname=$(ec2-describe-instances  | awk '-F\t' '$6 == "running" { print $4; exit(0); }')
 		[ -z "$hostname" ] && error "No running instances found -- try starting a cloud instance"
@@ -67,13 +73,16 @@ case $1 in
 		info "You may need to restart your browser(s)..."
 	;;
 	status)
-		if pgrep -f "${SSH_TUNNEL_NAME}" -U "${UID}" >/dev/null; then
-			echo "$PROG is running"
+		if get_pid; then
+			echo "$PROG is running [${_RET}]"
 			exit 0
 		else
 			echo "$PROG is not running"
 			exit 1
 		fi
+ 	;;
+ 	*)
+ 		error "Unknown parameter"
 	;;
 	*)
 		error "Unknown parameter"
