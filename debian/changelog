@@ -1,6 +1,6 @@
 bikeshed (1.7) unreleased; urgency=low
 
-  * UNRELEASED
+  * COPYING: add GPL license, LP: #663292
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 19 Nov 2010 22:20:29 -0600
 
