@@ -1,0 +1,51 @@
+#!/bin/sh -e
+#
+#    runone - run just one instance at a time of some command and
+#             unique set of arguments (useful for cronjobs, eg)
+#
+#    Copyright (C) 2010 Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    Authors:
+#        Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+PROG="runone"
+
+# Cache pids here, to keep one user from DoS'ing another
+DIR="$HOME/.cache/$PROG/"
+mkdir -p "$DIR"
+
+# Calculate the hash of the command and arguments
+CMDHASH=$(echo "$@" | md5sum | col1)
+PIDFILE="$DIR/$CMDHASH.pid"
+
+# Look for exists processes
+if [ -r "$PIDFILE" ]; then
+	PID=$(cat "$PIDFILE")
+	if CMDHASH2=$(ps o cmd "$PID" | tail -n1 | md5sum | col1); then
+		# Make sure the pid's process matches exactly
+		if [ "$CMDHASH" = "$CMDHASH2" ]; then
+			echo "ERROR: Already running [$PID]" 1>&2
+			exit 1
+		fi
+	else
+		# Remove stale PIDFILE
+		rm -f "$PIDFILE"
+	fi
+fi
+
+# Save the pid
+echo $$ > "$PIDFILE"
+# Exec the command
+exec $@

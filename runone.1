@@ -1,0 +1,26 @@
+.TH runone 1 "9 Jan 2011" bikeshed "bikeshed"
+.SH NAME
+runone \- run just one instance at a time of some command and unique set of arguments (useful for cronjobs, eg)
+
+.SH SYNOPSIS
+\fBrunone\fP COMMAND [ARGS]
+
+.SH DESCRIPTION
+\fBrunone\fP is a wrapper script that runs no more than one unique instance of some command with a unique set of arguments.
+
+This is often useful with cronjobs, when you want no more than one copy running at a time.
+
+.SH EXAMPLE
+In one shell:
+
+ $ runone rsync -azP $HOME $USER@example.com:/srv/backup
+
+In another shell, while the first is still running:
+
+ $ runone rsync -azP $HOME $USER@example.com:/srv/backup
+ ERROR: Already running [17868]
+
+.SH AUTHOR
+This manpage and the utility was written by Dustin Kirkland <kirkland@ubuntu.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 3 published by the Free Software Foundation.
+
+On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL.
