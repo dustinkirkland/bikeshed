@@ -16,7 +16,8 @@ Recommends: bzr,
             gnupg,
             lzma,
             pastebinit,
-            sensible-utils
+            sensible-utils,
+	    util-linux
 Description: random useful tools that do not yet have a permanent home
  Bikeshed is a collection of random but useful tools and utilities that
  either don't quite fit anywhere else, or have not yet been accepted

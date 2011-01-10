@@ -28,6 +28,7 @@ mkdir -p "$DIR"
 
 # Calculate the hash of the command and arguments
 CMDHASH=$(echo "$@" | md5sum | col1)
-PIDFILE="$DIR/$CMDHASH"
+FLAG="$DIR/$CMDHASH"
 
-( flock -x -n -c $@) > "$PIDFILE"
+# Run the specified commands, assuming we can flock this command string's hash
+flock -xn "$FLAG" $@
