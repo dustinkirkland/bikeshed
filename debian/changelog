@@ -1,7 +1,7 @@
 bikeshed (1.7) unreleased; urgency=low
 
   * COPYING: add GPL license, LP: #663292
-  * Makefile, runone, runone.1: add the runone utility
+  * Makefile, run-one, run-one.1: add the run-one utility
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 19 Nov 2010 22:20:29 -0600
 
