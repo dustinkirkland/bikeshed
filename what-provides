@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-#    whatprovides - what package provides a binary in your path
+#    what-provides - what package provides a binary in your path
 #
 #    Copyright (C) 2010 Dustin Kirkland <kirkland@ubuntu.com>
 #

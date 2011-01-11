@@ -4,6 +4,8 @@ bikeshed (1.7) unreleased; urgency=low
   * Makefile, run-one, run-one.1: add the run-one utility
   * run-one, run-one.1: use flock, mention in documentation
   * debian/control: util-linux needed for flock
+  * Makefile, what-provides.1, whatprovides => what-provides:
+    provide a what-provides utility
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 19 Nov 2010 22:20:29 -0600
 
