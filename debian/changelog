@@ -1,4 +1,4 @@
-bikeshed (1.7) unreleased; urgency=low
+bikeshed (1.7-0ubuntu1) natty; urgency=low
 
   * COPYING: add GPL license, LP: #663292
   * Makefile, run-one, run-one.1: add the run-one utility
@@ -7,7 +7,7 @@ bikeshed (1.7) unreleased; urgency=low
   * Makefile, what-provides.1, whatprovides => what-provides:
     provide a what-provides utility
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 19 Nov 2010 22:20:29 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 11 Jan 2011 10:24:47 -0600
 
 bikeshed (1.6-0ubuntu1) natty; urgency=low
 
