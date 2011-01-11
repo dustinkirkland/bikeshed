@@ -22,12 +22,12 @@
 
 PROG="run-one"
 
-# Cache pids here, to keep one user from DoS'ing another
+# Cache hashes here, to keep one user from DoS'ing another
 DIR="$HOME/.cache/$PROG"
 mkdir -p "$DIR"
 
 # Calculate the hash of the command and arguments
-CMDHASH=$(echo "$@" | md5sum | col1)
+CMDHASH=$(echo "$@" | md5sum | awk '{print $1}')
 FLAG="$DIR/$CMDHASH"
 
 # Run the specified commands, assuming we can flock this command string's hash
