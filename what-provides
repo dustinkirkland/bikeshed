@@ -20,5 +20,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 for i in "$@"; do
-	dpkg -S $(which "$i")
+	if which "$i" >/dev/null; then
+		dpkg -S $(which "$i")
+	else
+		for j in $(locate "$i"); do
+			dpkg -S "$j" || true
+		done
+	fi
 done

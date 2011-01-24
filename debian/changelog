@@ -5,6 +5,7 @@ bikeshed (1.8) unreleased; urgency=low
   * bch.1, bzrp.1, col1.1, dman.1, pbput.1, release.1, release-build.1,
     run-one.1, what-provides.1, wifi-status.1: add URL to GPL license
   * Makefile, run-one, run-one.1: moved to run-one package/project
+  * what-provides: if file not in patch, search the system for it
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 11 Jan 2011 10:24:53 -0600
 
