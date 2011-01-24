@@ -9,7 +9,6 @@ SCRIPTS = \
 	pbput \
 	release \
 	release-build \
-	run-one \
 	what-provides \
 	wifi-status \
 	$(NULL)
