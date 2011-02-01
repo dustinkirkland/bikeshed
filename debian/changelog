@@ -1,6 +1,6 @@
 bikeshed (1.9) unreleased; urgency=low
 
-  * UNRELEASED
+  * what-provides: exit non-zero, if no match found
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 27 Jan 2011 14:54:57 -0600
 
