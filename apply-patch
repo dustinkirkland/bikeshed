@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+#    apply-patch - apply the patch specified on the argument line,
+#                  automatically detecting the patch level
+#
+#    Copyright (C) 2011 Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    Authors:
+#        Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# apply-patch [PATCHFILE]
+
+P=
+for i in $(seq 0 16); do
+	if patch -p$i --dry-run <"$@" 1>/dev/null 2>&1; then
+		P=$i
+	fi
+done
+
+if [ -n "$P" ]; then
+	patch -p$P <"$@"
+else
+	echo "ERROR: Unable to determine suitable patch strip level" 1>&2
+	exit 1
+fi

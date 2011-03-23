@@ -1,0 +1,22 @@
+.TH apply\-patch 1 "23 March 2011" bikeshed "bikeshed"
+.SH NAME
+apply\-patch \- apply a patch against the current directory, automatically detecting the patch strip level
+
+.SH SYNOPSIS
+\fBapply\-patch\fP PATCHFILE
+
+.SH DESCRIPTION
+\fBapply\-patch\fP is a simply wrapper for the \fBpatch\fP(1) utility.  It has two usability advantages over using \fBpatch\fP(1) alone, in the simple case of applying a patch:
+
+ 1) it automatically detects the patch strip level (the \-p parameter to \fBpatch\fP(1))
+
+ 2) it takes the patch file in as a parameter, rather than as a stream on STDIN
+
+.SH SEE ALSO
+\fBpatch\fP(1)
+
+.SH AUTHOR
+This manpage and the utility was written by Dustin Kirkland <kirkland@ubuntu.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 3 published by the Free Software Foundation.
+
+On Debian systems, the complete text of the GNU General Public License can be found in /usr/share/common-licenses/GPL, or on the web at \fIhttp://www.gnu.org/licenses/gpl.txt\fP.
+
