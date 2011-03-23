@@ -3,6 +3,7 @@ bikeshed (1.9) unreleased; urgency=low
   * what-provides: exit non-zero, if no match found
   * apply-patch, apply-patch.1: add a utility for applying patches
     more cleanly
+  * bch.1: fix formatting
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 27 Jan 2011 14:54:57 -0600
 
