@@ -1,3 +1,9 @@
+bikeshed (1.11) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 25 Mar 2011 16:30:21 -0500
+
 bikeshed (1.10-0ubuntu1) natty; urgency=low
 
   * Makefile: brown paper bag, forgot to add apply-patch to the Makefile
