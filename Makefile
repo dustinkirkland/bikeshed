@@ -2,6 +2,7 @@ PREFIX ?= /usr
 VERSION = 1.5
 
 SCRIPTS = \
+	apply-patch \
 	col1 \
 	bch \
 	bzrp \
