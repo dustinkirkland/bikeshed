@@ -1,6 +1,8 @@
 bikeshed (1.11) unreleased; urgency=low
 
-  * apply-patch, apply-patch.1: support URLs
+  * apply-patch, apply-patch.1:
+    - support URLs
+    - use patch -i rather than stdin
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 25 Mar 2011 16:30:21 -0500
 
