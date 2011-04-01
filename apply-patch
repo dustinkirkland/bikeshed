@@ -20,17 +20,37 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# apply-patch [PATCHFILE]
+# apply-patch [PATCHFILE|URL]
 
 P=
+DIFF="$1"
+
+# If $1 is a URL, grab it!
+case "$1" in
+	http://*|https://*|ftp://*)
+		DIFF=$(mktemp)
+		trap "rm -f $DIFF 2>/dev/null || true" EXIT HUP INT QUIT TERM
+		if which wget >/dev/null 2>&1; then
+			if ! wget -q -O"$DIFF" "$1"; then
+				echo "ERROR: Unable to retrieve [$1]" 1>&2
+				exit 1
+			fi
+		else
+			echo "ERROR: Please install wget to use a URL with this tool" 1>&2
+			exit 1
+		fi
+	;;
+esac
+
+# Try patch levels 0 - 16
 for i in $(seq 0 16); do
-	if patch -p$i --dry-run <"$@" 1>/dev/null 2>&1; then
+	if patch -p$i --dry-run <"$DIFF" 1>/dev/null 2>&1; then
 		P=$i
 	fi
 done
 
 if [ -n "$P" ]; then
-	patch -p$P <"$@"
+	patch -p$P <"$DIFF"
 else
 	echo "ERROR: Unable to determine suitable patch strip level" 1>&2
 	exit 1

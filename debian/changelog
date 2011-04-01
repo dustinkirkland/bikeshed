@@ -1,6 +1,6 @@
 bikeshed (1.11) unreleased; urgency=low
 
-  * UNRELEASED
+  * apply-patch, apply-patch.1: support URLs
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 25 Mar 2011 16:30:21 -0500
 
