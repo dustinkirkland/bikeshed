@@ -1,4 +1,4 @@
-bikeshed (1.11) unreleased; urgency=low
+bikeshed (1.11-0ubuntu1) natty; urgency=low
 
   * apply-patch, apply-patch.1:
     - support URLs
