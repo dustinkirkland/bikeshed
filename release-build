@@ -67,13 +67,13 @@ fi
 bzr bd
 sed -i "s/) unreleased;/-0ubuntu1~ppa1) hardy;/i" debian/changelog
 bzr bd -S
-sed -i "s/ppa1) hardy;/ppa2) karmic;/" debian/changelog
+sed -i "s/ppa1) hardy;/ppa2) lucid;/" debian/changelog
 bzr bd -S
-sed -i "s/ppa2) karmic;/ppa3) lucid;/" debian/changelog
+sed -i "s/ppa2) karmic;/ppa3) maverick;/" debian/changelog
 bzr bd -S
-sed -i "s/ppa3) lucid;/ppa4) maverick;/" debian/changelog
+sed -i "s/ppa3) lucid;/ppa4) natty;/" debian/changelog
 bzr bd -S
-sed -i "s/~ppa4) maverick;/) natty;/" debian/changelog
+sed -i "s/~ppa4) maverick;/) oneiric;/" debian/changelog
 bzr bd -S
 
 echo

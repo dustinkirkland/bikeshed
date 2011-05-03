@@ -1,3 +1,9 @@
+bikeshed (1.11-0ubuntu2) UNRELEASED; urgency=low
+
+  * release, release-build: bump versions for oneiric
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 May 2011 11:59:43 -0500
+
 bikeshed (1.11-0ubuntu1) natty; urgency=low
 
   * apply-patch, apply-patch.1:
