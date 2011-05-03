@@ -1,6 +1,6 @@
 bikeshed (1.11) unreleased; urgency=low
 
-  * release, release-build: bump versions for oneiric
+  * release, release-build: bump versions for oneiric, drop karmic
   * debian/source/format, === removed directory debian/source:
     - fix build errors yield by debian/source
 
