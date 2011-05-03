@@ -1,10 +1,10 @@
-bikeshed (1.11) unreleased; urgency=low
+bikeshed (1.11-0ubuntu1) oneiric; urgency=low
 
   * release, release-build: bump versions for oneiric, drop karmic
   * debian/source/format, === removed directory debian/source:
     - fix build errors yield by debian/source
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 May 2011 11:59:43 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 May 2011 12:08:12 -0500
 
 bikeshed (1.11-0ubuntu1) natty; urgency=low
 
