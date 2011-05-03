@@ -1,6 +1,8 @@
 bikeshed (1.11) unreleased; urgency=low
 
   * release, release-build: bump versions for oneiric
+  * debian/source/format, === removed directory debian/source:
+    - fix build errors yield by debian/source
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 May 2011 11:59:43 -0500
 
