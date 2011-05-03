@@ -1,11 +1,5 @@
 bikeshed (1.12) unreleased; urgency=low
 
-  * UNRELEASED
-
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 May 2011 12:08:14 -0500
-
-bikeshed (1.11-0ubuntu1) oneiric; urgency=low
-
   * release, release-build: bump versions for oneiric, drop karmic
   * debian/source/format, === removed directory debian/source:
     - fix build errors yield by debian/source
