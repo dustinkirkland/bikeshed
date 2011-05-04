@@ -19,22 +19,37 @@
 
 PROG=$(basename $0)
 URL="http://pastebin.com"
+TEMPLATE="$PROG.XXXXXXXXXX"
+[ -d "$TMPDIR" ] && TEMPLATE="$TMPDIR/$TEMPLATE" || TEMPLATE="/tmp/$TEMPLATE"
 
-# Create a secure tempfile
-TEMP=$(mktemp)
-trap "rm -f $TEMP 2>/dev/null || true" EXIT HUP INT QUIT TERM
+# Create a secure tempfiles
+TEMP=$(mktemp $TEMPLATE)
+TEMP2=$(mktemp $TEMPLATE)
+trap "rm -f $TEMP $TEMP2 2>/dev/null || true" EXIT HUP INT QUIT TERM
 
 case "$PROG" in
 	pbget)
 		url=$(echo "$1" | sed -e "s:.com/:.com/download.php?i=:")
 		wget -q -O- "$url" | base64 -d | lzma -d > "$TEMP"
 		# Support secure uploads
-		gpg -d "$TEMP" 2>/dev/null || cat "$TEMP"
+		if gpg -d "$TEMP" >"$TEMP2" 2>/dev/null; then
+			# Upload was encrypted
+			mv -f "$TEMP2" "$TEMP"
+		fi
+		if LC=C file "$TEMP" | grep -qs "^$TEMP: POSIX tar archive"; then
+			# Download is a tarball; unpack safely
+			[ -d "$2" ] && DIR="$2" || DIR=$(mktemp -d $TEMPLATE)
+			tar -C "$DIR" -xvf "$TEMP" 2>/dev/null || cat "$TEMP"
+			echo "INFO: Output is in [$DIR]"
+		else
+			# Upload came from stdin, so display on stdout
+			cat "$TEMP"
+		fi
 	;;
 	pbput|pbputs)
 		if [ -r "$1" ]; then
 			# Read file from argument
-			cat "$1" > "$TEMP"
+			tar cf "$TEMP" "$1"
 		else
 			# Read from standard in
 			cat /dev/stdin > "$TEMP"

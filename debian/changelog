@@ -1,6 +1,7 @@
 bikeshed (1.13) unreleased; urgency=low
 
-  * UNRELEASED
+  * pbput, pbput.1: automatically support preserving filenames, directory
+    structures, etc, via tar
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 04 May 2011 15:17:12 -0500
 
