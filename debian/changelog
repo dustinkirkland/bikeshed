@@ -1,3 +1,9 @@
+bikeshed (1.13) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 04 May 2011 15:17:12 -0500
+
 bikeshed (1.12-0ubuntu1) oneiric; urgency=low
 
   * release, release-build: bump versions for oneiric, drop karmic
