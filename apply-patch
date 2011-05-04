@@ -46,6 +46,7 @@ esac
 for i in $(seq 0 16); do
 	if patch -p$i --dry-run -i "$DIFF" 1>/dev/null 2>&1; then
 		P=$i
+		break
 	fi
 done
 

@@ -3,6 +3,7 @@ bikeshed (1.12) unreleased; urgency=low
   * release, release-build: bump versions for oneiric, drop karmic
   * debian/source/format, === removed directory debian/source:
     - fix build errors yield by debian/source
+  * apply-patch: break immediately after finding the right strip level
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 03 May 2011 12:08:12 -0500
 
