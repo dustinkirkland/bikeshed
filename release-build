@@ -52,6 +52,11 @@ get_orig_source() {
 	ls -halF ../${PKG}_${VER}.orig.tar.gz
 }
 
+if ! head -n1 debian/changelog | grep -i "unreleased"; then
+	if bzr diff debian/changelog | diffstat | grep -qs '1 file changed, 1 insertion(+), 1 deletion(-)'; then
+		bzr revert debian/changelog
+	fi
+fi
 head -n1 debian/changelog | grep -i "unreleased" || error "This version must be 'unreleased'"
 
 rm -rf ../build-area/
@@ -60,9 +65,9 @@ get_orig_source
 if tar -tvf ../"$PKG"_*.orig.tar.gz | egrep "\.bzr|debian"; then
 	error "Release tarball has invalid files"
 fi
-if tar -tvf ../"$PKG"_*.orig.tar.gz | egrep "/bin/|/lib/" | grep -v Makefile | grep -v "rwxr-xr-x"; then
-	error "Release tarball has binaries with incorrect permissions"
-fi
+#if tar -tvf ../"$PKG"_*.orig.tar.gz | egrep "/bin/|/lib/" | grep -v Makefile | grep -v "rwxr-xr-x"; then
+#	error "Release tarball has binaries with incorrect permissions"
+#fi
 
 bzr bd
 sed -i "s/) unreleased;/-0ubuntu1~ppa1) hardy;/i" debian/changelog
