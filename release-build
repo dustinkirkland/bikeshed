@@ -49,7 +49,9 @@ get_orig_source() {
 	fi
 	tar -C $tmp --exclude .bzr --exclude debian --exclude "*~" -zcvf ../${PKG}_${VER}.orig.tar.gz ${PKG}-${VER}
 	rm -rf $tmp
-	ls -halF ../${PKG}_${VER}.orig.tar.gz
+	# Sign the tarball
+	gpg --armor --sign --detach-sig ../${PKG}_${VER}.orig.tar.gz
+	ls -halF ../${PKG}_${VER}.orig.tar.gz*
 }
 
 if ! head -n1 debian/changelog | grep -i "unreleased"; then

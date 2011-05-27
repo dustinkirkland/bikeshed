@@ -39,9 +39,6 @@ dch --release
 bzr tag --delete $MAJOR.$MINOR-0ubuntu1 || true
 debcommit --release --message="releasing $MAJOR.$MINOR"
 
-# Sign the tarball
-gpg --armor --sign --detach-sig ../"$PKG"_*.orig.tar.gz
-
 # Open the next release for development
 nextminor=`expr $MINOR + 1`
 if [ -r "usr/bin/$PKG" ]; then

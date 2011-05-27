@@ -3,12 +3,14 @@ bikeshed (1.13) unreleased; urgency=low
   * pbput, pbput.1: automatically support preserving filenames, directory
     structures, etc, via tar
   * release-build:
-   - drop perms check
-   - auto revert changelog if just unreleased/released change
+    - drop perms check
+    - auto revert changelog if just unreleased/released change
   * Makefile, release-build:
-   - add a release-test mode
+    - add a release-test mode
   * debian/control, release:
-   - use pitti's lp-project-upload from ubuntu-dev-tools to upload new release
+    - use pitti's lp-project-upload from ubuntu-dev-tools to upload new release
+  * release, release-build:
+    - move the tarball signing to the orig building
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 04 May 2011 15:17:12 -0500
 
