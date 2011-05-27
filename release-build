@@ -86,10 +86,19 @@ echo
 echo "# Test this build:"
 echo "  sudo dpkg -Oi ../$PKG_*.deb"
 echo
-echo "# If everything looks good, release:"
-echo "  release"
-echo
-echo "# Otherwise:"
-echo "  bzr revert debian/changelog; rm debian/changelog*~"
-echo
+
+if [ "$0" = "release-test" ]; then
+	bzr revert debian/changelog
+	rm debian/changelog*~
+	echo "# If testing looks good, release-build:"
+	echo "  release-build"
+	echo
+else
+	echo "# If everything looks good, release:"
+	echo "  release"
+	echo
+	echo "# Otherwise:"
+	echo "  bzr revert debian/changelog; rm debian/changelog*~"
+	echo
+fi
 echo

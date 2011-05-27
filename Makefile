@@ -59,6 +59,7 @@ install:
 	$(foreach script,$(SCRIPTS),install $(script).1 $(DESTDIR)$(PREFIX)/share/man/man1/$(script).1 &&) true
 	$(foreach link,$(LINKS),ln -s $(TARGET_$(link)) $(DESTDIR)$(PREFIX)/bin/$(link) &&) true
 	$(foreach link,$(LINKS),ln -s $(TARGET_$(link)).1.gz $(DESTDIR)$(PREFIX)/share/man/man1/$(link).1.gz &&) true
+	ln -s release-build $(DESTDIR)$(PREFIX)/bin/release-test
 
 dist: bikeshed-$(VERSION).tar.gz
 
