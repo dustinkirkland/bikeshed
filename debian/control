@@ -17,6 +17,7 @@ Recommends: bzr,
             lzma,
             pastebinit,
             sensible-utils,
+            ubuntu-dev-tools,
 	    util-linux
 Description: random useful tools that do not yet have a permanent home
  Bikeshed is a collection of random but useful tools and utilities that
