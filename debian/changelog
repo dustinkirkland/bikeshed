@@ -1,6 +1,6 @@
 bikeshed (1.15) unreleased; urgency=low
 
-  * UNRELEASED
+  * release: be explicit about what to upload
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 28 May 2011 12:55:27 -0500
 

@@ -57,7 +57,7 @@ echo "# To push:"
 echo "  bzr push lp:$PKG"
 echo
 echo "# Publish tarball to https://launchpad.net/$PKG/trunk/+addrelease"
-echo "  lp-project-upload ${PKG} ${MAJOR}.${MINOR} ../"$PKG"_*.orig.tar.gz ${MAJOR}.${nextminor}"
+echo "  lp-project-upload ${PKG} ${MAJOR}.${MINOR} ../"$PKG"_${MAJOR}.${MINOR}.orig.tar.gz ${MAJOR}.${nextminor}"
 echo
 echo "# To upload packages:"
 echo "  dput ppa:$PKG/ppa ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1*ppa*_source.changes"
