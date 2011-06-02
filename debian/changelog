@@ -1,6 +1,7 @@
 bikeshed (1.16) unreleased; urgency=low
 
-  * UNRELEASED
+  [ Andres Rodriguez ]
+  * release-build: build the binary after the last source build
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 02 Jun 2011 14:52:21 -0400
 

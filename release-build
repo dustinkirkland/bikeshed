@@ -73,8 +73,6 @@ fi
 #	error "Release tarball has binaries with incorrect permissions"
 #fi
 
-bzr bd
-
 if [ "$(basename $0)" = "release-test" ]; then
 	echo
 	echo "# Test this build:"
@@ -95,6 +93,7 @@ bzr bd -S
 sed -i "s/ppa3) maverick;/ppa4) natty;/" debian/changelog
 bzr bd -S
 sed -i "s/~ppa4) natty;/) oneiric;/" debian/changelog
+bzr bd
 bzr bd -S
 
 echo
