@@ -1,11 +1,11 @@
-bikeshed (1.15) unreleased; urgency=low
+bikeshed (1.15-0ubuntu1) oneiric; urgency=low
 
   * release: be explicit about what to upload
   * release-build:
     - clean up relic tarballs and signatures
     - clean up the location of the release-test logic
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 28 May 2011 12:55:27 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 02 Jun 2011 14:52:18 -0400
 
 bikeshed (1.14-0ubuntu1) oneiric; urgency=low
 
