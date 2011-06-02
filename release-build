@@ -47,9 +47,11 @@ get_orig_source() {
 		done
 		cd -
 	fi
+	rm -f ../${PKG}_${VER}.orig.tar.gz
 	tar -C $tmp --exclude .bzr --exclude debian --exclude "*~" -zcvf ../${PKG}_${VER}.orig.tar.gz ${PKG}-${VER}
 	rm -rf $tmp
 	# Sign the tarball
+	rm -f ../${PKG}_${VER}.orig.tar.gz.asc
 	gpg --armor --sign --detach-sig ../${PKG}_${VER}.orig.tar.gz
 	ls -halF ../${PKG}_${VER}.orig.tar.gz*
 }
@@ -72,6 +74,18 @@ fi
 #fi
 
 bzr bd
+
+if [ "$(basename $0)" = "release-test" ]; then
+	echo
+	echo "# Test this build:"
+	echo "  sudo dpkg -Oi ../$PKG_*.deb"
+	echo
+	echo "# If testing looks good, release-build:"
+	echo "  release-build"
+	echo
+	exit 0
+fi
+
 sed -i "s/) unreleased;/-0ubuntu1~ppa1) hardy;/i" debian/changelog
 bzr bd -S
 sed -i "s/ppa1) hardy;/ppa2) lucid;/" debian/changelog
@@ -88,19 +102,10 @@ echo
 echo "# Test this build:"
 echo "  sudo dpkg -Oi ../$PKG_*.deb"
 echo
-
-if [ "$0" = "release-test" ]; then
-	bzr revert debian/changelog
-	rm debian/changelog*~
-	echo "# If testing looks good, release-build:"
-	echo "  release-build"
-	echo
-else
-	echo "# If everything looks good, release:"
-	echo "  release"
-	echo
-	echo "# Otherwise:"
-	echo "  bzr revert debian/changelog; rm debian/changelog*~"
-	echo
-fi
+echo "# If everything looks good, release:"
+echo "  release"
+echo
+echo "# Otherwise:"
+echo "  bzr revert debian/changelog; rm debian/changelog*~"
+echo
 echo
