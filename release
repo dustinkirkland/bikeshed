@@ -39,6 +39,9 @@ dch --release
 bzr tag --delete $MAJOR.$MINOR-0ubuntu1 || true
 debcommit --release --message="releasing $MAJOR.$MINOR"
 
+changelog=$(mktemp ../changelog-XXXXXXX)
+grep -B 10000 -m1 '^ \-\- ' debian/changelog > "$changelog"
+
 # Open the next release for development
 nextminor=`expr $MINOR + 1`
 if [ -r "usr/bin/$PKG" ]; then
@@ -51,13 +54,13 @@ bzr commit -m "opening $MAJOR.$nextminor"
 echo
 echo "# Changes:"
 echo
-grep -A 999999 Changes: ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1_source.changes | grep -B 999999 Checksums-Sha1 | grep -v Chec
+cat "$changelog"
 echo
 echo "# To push:"
 echo "  bzr push lp:$PKG"
 echo
 echo "# Publish tarball to https://launchpad.net/$PKG/trunk/+addrelease"
-echo "  lp-project-upload ${PKG} ${MAJOR}.${MINOR} ../"$PKG"_${MAJOR}.${MINOR}.orig.tar.gz ${MAJOR}.${nextminor}"
+echo "  lp-project-upload ${PKG} ${MAJOR}.${MINOR} ../"$PKG"_${MAJOR}.${MINOR}.orig.tar.gz ${MAJOR}.${nextminor}" "$changelog" /dev/null
 echo
 echo "# To upload packages:"
 echo "  dput ppa:$PKG/ppa ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1*ppa*_source.changes"

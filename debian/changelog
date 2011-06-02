@@ -3,6 +3,10 @@ bikeshed (1.16) unreleased; urgency=low
   [ Andres Rodriguez ]
   * release-build: build the binary after the last source build
 
+  [ Dustin Kirkland ]
+  * release:
+    - use fancy new lp-project-upload feature (under development)
+
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 02 Jun 2011 14:52:21 -0400
 
 bikeshed (1.15-0ubuntu1) oneiric; urgency=low
