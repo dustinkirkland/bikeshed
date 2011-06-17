@@ -1,6 +1,7 @@
 bikeshed (1.17) unreleased; urgency=low
 
-  * UNRELEASED
+  * Makefile, sandbox, sandbox.1:
+    - add the sandbox utility
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 02 Jun 2011 18:04:00 -0400
 

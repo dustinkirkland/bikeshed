@@ -1,4 +1,4 @@
-PREFIX ?= /usr
+PREFIX ?sandbox = /usr
 VERSION = 1.5
 
 SCRIPTS = \
@@ -10,6 +10,7 @@ SCRIPTS = \
 	pbput \
 	release \
 	release-build \
+	sandbox \
 	what-provides \
 	wifi-status \
 	$(NULL)
