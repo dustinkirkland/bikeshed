@@ -1,11 +1,11 @@
-bikeshed (1.17) unreleased; urgency=low
+bikeshed (1.17-0ubuntu1) oneiric; urgency=low
 
   * what-repo, what-repo.1:
     - added the what-repo utility
   * Makefile:
     - fix makefile breakage
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 02 Jun 2011 18:04:00 -0400
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 03 Aug 2011 16:44:56 -0500
 
 bikeshed (1.16-0ubuntu1) oneiric; urgency=low
 
