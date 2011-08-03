@@ -1,3 +1,9 @@
+bikeshed (1.18) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 03 Aug 2011 16:44:58 -0500
+
 bikeshed (1.17-0ubuntu1) oneiric; urgency=low
 
   * what-repo, what-repo.1:
