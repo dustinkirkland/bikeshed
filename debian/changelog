@@ -2,6 +2,8 @@ bikeshed (1.17) unreleased; urgency=low
 
   * what-repo, what-repo.1:
     - added the what-repo utility
+  * Makefile:
+    - fix makefile breakage
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 02 Jun 2011 18:04:00 -0400
 
