@@ -12,6 +12,7 @@ SCRIPTS = \
 	release-build \
 	what-provides \
 	what-repo \
+	what-source \
 	wifi-status \
 	$(NULL)
 

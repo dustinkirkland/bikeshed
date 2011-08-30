@@ -1,6 +1,7 @@
 bikeshed (1.18) unreleased; urgency=low
 
-  * UNRELEASED
+  * Makefile, what-source:
+    - add a tool for determining the source package of some binary package
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 03 Aug 2011 16:44:58 -0500
 
