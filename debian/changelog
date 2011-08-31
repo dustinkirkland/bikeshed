@@ -1,11 +1,11 @@
-bikeshed (1.18) unreleased; urgency=low
+bikeshed (1.18-0ubuntu1) oneiric; urgency=low
 
   * Makefile, what-source:
     - add a tool for determining the source package of some binary package
   * pbput, pbput.1:
     - add support for public/private gpg signatures
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 03 Aug 2011 16:44:58 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Aug 2011 17:01:02 -0500
 
 bikeshed (1.17-0ubuntu1) oneiric; urgency=low
 
