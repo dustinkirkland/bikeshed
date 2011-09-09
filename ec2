@@ -1,0 +1,97 @@
+#!/bin/bash
+
+generate_ssh_host_keys() {
+	local d="$1"
+	local f=$(mktemp /tmp/ec2-user-data.XXXXXXXXXX)
+	printf "#cloud-config\nssh_keys:\n" >> "$f"
+	for i in rsa dsa; do
+		ssh-keygen -q -f "${d}/ssh_host_${i}_key" -t ${i} -N ""
+		printf "  ${i}_private: |\n" >> "$f"
+		sed "s/^/      /" "${d}/ssh_host_${i}_key" >> "$f"
+		echo >> "$f"
+		printf "  ${i}_public: " >> "$f"
+		cat "${d}/ssh_host_${i}_key.pub" >> "$f"
+		echo >> "$f"
+	done
+	_RET="$f"
+}
+
+add_known_hosts_entries() {
+	local i
+	local h="$1"
+	local ip="$2"
+	local d="$3"
+	for i in rsa dsa; do
+		printf "%s,%s %s %s\n" "$h" "$ip" $(awk '{print $1 " " $2}' "$d/ssh_host_${i}_key.pub") >> ~/.ssh/known_hosts
+	done
+	ssh-keygen -q -H
+	rm -rf "$d"
+}
+
+# Debugging, if I want to see what's going on
+#set -x
+
+# Optionally support release/size parameters
+size="$1"
+release="$2"
+
+# Default to t1.micro/oneiric
+[ -z "$size" ] && size="t1.micro"
+[ -z "$release" ] && release="oneiric daily"
+
+# Generate the user-data file, and a first set of keys
+d=$(mktemp -d /tmp/ec2.XXXXXXXXXX)
+generate_ssh_host_keys "$d"
+f="$_RET"
+
+# Get the run command from the uec-images page
+cmd="ubuntu-ec2-run -t $size --key $EC2_KEYPAIR_US_EAST_1 --user-data-file $f $release"
+id=$($cmd | grep "^INSTANCE" | awk '{print $2}')
+rm -f "$f"
+
+if [ -z "$id" ]; then
+	echo "ERROR: No instance id" 1>&2
+	exit 53
+fi
+
+# Loop until this instance is running
+while ! (ec2-describe-instances $id | grep -qs running); do
+	sleep 5
+done
+
+# Now that it's running, get the hostname and ip
+str=$(ec2-describe-instances $id | grep "^INSTANCE.*running")
+h=$(echo "$str" | awk '{print $4}')
+ip=$(echo "$str" | awk '{print $14}')
+
+# Add the known_hosts entry
+add_known_hosts_entries "$h" "$ip" "$d"
+
+# Generate a second (secure) set of keys, since the first set was stored in EC2 metadata.
+# Not a big deal, but local users would have had access to the private key.
+d=$(mktemp -d /tmp/ec2.XXXXXXXXXX)
+generate_ssh_host_keys "$d"
+f="$_RET"
+
+# Wait for SSH to come up
+while ! ssh -i $HOME/.ssh/ec2-keypair.pem ubuntu@$h true; do
+	sleep 1
+	true
+done
+
+# Securely install second set of keys to /etc/ssh
+tar -C "$d" -cf - . | ssh -i $HOME/.ssh/ec2-keypair.pem ubuntu@$h "sudo tar -C /etc/ssh -xf -; sudo service ssh restart"
+ssh-keygen -q -f ~/.ssh/known_hosts -R "$h"
+ssh-keygen -q -f ~/.ssh/known_hosts -R "$ip"
+add_known_hosts_entries "$h" "$ip" "$d"
+rm -rf "$d"
+
+# Now ssh in!
+while ! ssh -i $HOME/.ssh/ec2-keypair.pem ubuntu@$h; do
+	true
+done
+
+echo "# Remember to clean up!"
+echo "    ec2-terminate-instances $id"
+echo "    ssh-keygen -f ~/.ssh/known_hosts -R $h"
+echo "    ssh-keygen -f ~/.ssh/known_hosts -R $ip"
