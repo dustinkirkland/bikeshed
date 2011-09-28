@@ -1,5 +1,8 @@
 #!/bin/bash
 
+EC2_KNOWN_HOSTS="$HOME/.ssh/known_hosts.ec2"
+SSH_CMD="ssh -o UserKnownHostsFile=$EC2_KNOWN_HOSTS -i $HOME/.ssh/ec2-keypair.pem"
+
 generate_ssh_host_keys() {
 	local d="$1"
 	local f=$(mktemp /tmp/ec2-user-data.XXXXXXXXXX)
@@ -22,9 +25,9 @@ add_known_hosts_entries() {
 	local ip="$2"
 	local d="$3"
 	for i in rsa dsa; do
-		printf "%s,%s %s %s\n" "$h" "$ip" $(awk '{print $1 " " $2}' "$d/ssh_host_${i}_key.pub") >> ~/.ssh/known_hosts
+		printf "%s,%s %s %s\n" "$h" "$ip" $(awk '{print $1 " " $2}' "$d/ssh_host_${i}_key.pub") >> "$EC2_KNOWN_HOSTS"
 	done
-	ssh-keygen -q -H
+	#ssh-keygen -q -H -f "$EC2_KNOWN_HOSTS"
 	rm -rf "$d"
 }
 
@@ -43,6 +46,27 @@ release="$2"
 d=$(mktemp -d /tmp/ec2.XXXXXXXXXX)
 generate_ssh_host_keys "$d"
 f="$_RET"
+
+# SSH Import ID
+if [ -n "$LAUNCHPAD_ID" ] && false; then
+	echo "
+ssh_import_id: [$LAUNCHPAD_ID]
+" >> $f
+fi
+
+# Add bootmail
+if [ -n "$BOOTMAIL" ]; then
+	echo "
+debconf_selections: |
+    debconf bootmail/recipients string $BOOTMAIL
+
+packages:
+    bootmail
+
+runcmd:
+    sudo bootmail
+" >> $f
+fi
 
 # Get the run command from the uec-images page
 cmd="ubuntu-ec2-run -t $size --key $EC2_KEYPAIR_US_EAST_1 --user-data-file $f $release"
@@ -74,24 +98,38 @@ generate_ssh_host_keys "$d"
 f="$_RET"
 
 # Wait for SSH to come up
-while ! ssh -i $HOME/.ssh/ec2-keypair.pem ubuntu@$h true; do
+while ! $SSH_CMD ubuntu@$h true; do
 	sleep 1
 	true
 done
 
 # Securely install second set of keys to /etc/ssh
-tar -C "$d" -cf - . | ssh -i $HOME/.ssh/ec2-keypair.pem ubuntu@$h "sudo tar -C /etc/ssh -xf -; sudo service ssh restart"
-ssh-keygen -q -f ~/.ssh/known_hosts -R "$h"
-ssh-keygen -q -f ~/.ssh/known_hosts -R "$ip"
+#tar -C "$d" -cf - . | $SSH_CMD ubuntu@$h "sudo tar -C /etc/ssh -xf -; sudo service ssh restart"
+tar -C "$d" -cf - . | $SSH_CMD ubuntu@$h "sudo tar -C /etc/ssh -xf -"
+ssh-keygen -q -f "$EC2_KNOWN_HOSTS" -R "$h"
+ssh-keygen -q -f "$EC2_KNOWN_HOSTS" -R "$ip"
 add_known_hosts_entries "$h" "$ip" "$d"
 rm -rf "$d"
 
 # Now ssh in!
-while ! ssh -i $HOME/.ssh/ec2-keypair.pem ubuntu@$h; do
+while ! $SSH_CMD ubuntu@$h; do
 	true
 done
 
-echo "# Remember to clean up!"
-echo "    ec2-terminate-instances $id"
-echo "    ssh-keygen -f ~/.ssh/known_hosts -R $h"
-echo "    ssh-keygen -f ~/.ssh/known_hosts -R $ip"
+# Clean up?
+echo -n "Do you want to terminate this instance now? [y/N]: "
+answer=$(head -n1)
+case "$answer" in
+	y|Y)
+		ec2-terminate-instances $id
+		ssh-keygen -f $EC2_KNOWN_HOSTS -R $h
+		ssh-keygen -f $EC2_KNOWN_HOSTS -R $ip
+		rm -f "$EC2_KNOWN_HOSTS".old
+	;;
+	*)
+		echo "# Remember to clean up!"
+		echo "    ec2-terminate-instances $id"
+		echo "    ssh-keygen -f $EC2_KNOWN_HOSTS -R $h"
+		echo "    ssh-keygen -f $EC2_KNOWN_HOSTS -R $ip"
+	;;
+esac
