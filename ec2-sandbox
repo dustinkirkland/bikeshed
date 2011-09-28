@@ -47,8 +47,12 @@ d=$(mktemp -d /tmp/ec2.XXXXXXXXXX)
 generate_ssh_host_keys "$d"
 f="$_RET"
 
+echo "
+output: {all: '| tee -a /var/log/cloud-init-output.log'}
+" >> $f
+
 # SSH Import ID
-if [ -n "$LAUNCHPAD_ID" ] && false; then
+if [ -n "$LAUNCHPAD_ID" ]; then
 	echo "
 ssh_import_id: [$LAUNCHPAD_ID]
 " >> $f
@@ -64,7 +68,7 @@ packages:
     bootmail
 
 runcmd:
-    sudo bootmail
+    - sudo bootmail
 " >> $f
 fi
 
