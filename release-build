@@ -35,7 +35,7 @@ get_orig_source() {
 	# use tar instead
 	tmp=$(mktemp -d)
 	cp -a . $tmp/${PKG}-${VER}
-	cp -f debian/changelog $tmp/${PKG}-${VER}/ChangeLog
+	sed -e "s/ unreleased; urgency=/ released; urgency=/g" debian/changelog $tmp/${PKG}-${VER}/ChangeLog
 	if [ -r "$tmp/${PKG}-${VER}/configure.ac" ]; then
 		cd $tmp/${PKG}-${VER}
 		aclocal

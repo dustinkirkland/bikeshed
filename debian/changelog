@@ -1,6 +1,7 @@
 bikeshed (1.19) unreleased; urgency=low
 
-  * UNRELEASED
+  * release-build:
+    - note that this is 'released' in the generated ChangeLog
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Aug 2011 17:01:05 -0500
 
