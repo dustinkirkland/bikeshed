@@ -35,7 +35,7 @@ get_orig_source() {
 	# use tar instead
 	tmp=$(mktemp -d)
 	cp -a . $tmp/${PKG}-${VER}
-	sed -e "s/ unreleased; urgency=/ released; urgency=/g" debian/changelog $tmp/${PKG}-${VER}/ChangeLog
+	sed -e "s/ unreleased; urgency=/ released; urgency=/g" debian/changelog > $tmp/${PKG}-${VER}/ChangeLog
 	if [ -r "$tmp/${PKG}-${VER}/configure.ac" ]; then
 		cd $tmp/${PKG}-${VER}
 		aclocal
@@ -52,7 +52,6 @@ get_orig_source() {
 	rm -rf $tmp
 	# Sign the tarball
 	rm -f ../${PKG}_${VER}.orig.tar.gz.asc
-	gpg --armor --sign --detach-sig ../${PKG}_${VER}.orig.tar.gz
 	ls -halF ../${PKG}_${VER}.orig.tar.gz*
 }
 
@@ -97,6 +96,9 @@ bzr bd -S
 sed -i "s/~ppa5) oneiric;/) precise;/" debian/changelog
 bzr bd
 bzr bd -S
+
+# Sign the tarball
+gpg --armor --sign --detach-sig ../${PKG}_${VER}.orig.tar.gz
 
 echo
 echo

@@ -25,7 +25,7 @@ VER=$(head -n 1 debian/changelog | sed 's/^.*(//' | sed 's/).*//' | sed 's/-.*//
 MAJOR=$(echo "$VER" | awk -F. '{print $1}')
 MINOR=$(head -n1 debian/changelog | sed "s/^.*($MAJOR.//" | sed "s/-.*$//")
 
-LATEST="oneiric"
+LATEST="precise"
 
 error() {
 	echo "ERROR: $@" >&2

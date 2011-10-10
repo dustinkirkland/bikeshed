@@ -1,8 +1,12 @@
 bikeshed (1.19) unreleased; urgency=low
 
   * release-build:
-    - note that this is 'released' in the generated ChangeLog
+    - note that this is 'released' in the generated ChangeLog; write the
+      changelog properly
+    - sign the tarball further down
     - add 'precise' build target
+  * release:
+    - precise is development release
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Aug 2011 17:01:05 -0500
 
