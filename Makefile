@@ -4,6 +4,7 @@ VERSION = 1.5
 SCRIPTS = \
 	apply-patch \
 	col1 \
+	cloud-sandbox \
 	bch \
 	bzrp \
 	dman \

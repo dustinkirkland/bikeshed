@@ -7,6 +7,8 @@ bikeshed (1.19) unreleased; urgency=low
     - add 'precise' build target
   * release:
     - precise is development release
+  * cloud-sandbox.1, ec2-sandbox => cloud-sandbox, Makefile:
+    - add cloud-sandbox utilty
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Aug 2011 17:01:05 -0500
 

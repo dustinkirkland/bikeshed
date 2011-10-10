@@ -1,11 +1,11 @@
 #!/bin/bash
 
-EC2_KNOWN_HOSTS="$HOME/.ssh/known_hosts.ec2"
+EC2_KNOWN_HOSTS="$HOME/.ssh/known_hosts.cloud"
 SSH_CMD="ssh -o UserKnownHostsFile=$EC2_KNOWN_HOSTS -i $HOME/.ssh/ec2-keypair.pem"
 
 generate_ssh_host_keys() {
 	local d="$1"
-	local f=$(mktemp /tmp/ec2-user-data.XXXXXXXXXX)
+	local f=$(mktemp /tmp/cloud-user-data.XXXXXXXXXX)
 	printf "#cloud-config\nssh_keys:\n" >> "$f"
 	for i in rsa dsa; do
 		ssh-keygen -q -f "${d}/ssh_host_${i}_key" -t ${i} -N ""
@@ -43,7 +43,7 @@ release="$2"
 [ -z "$release" ] && release="oneiric daily"
 
 # Generate the user-data file, and a first set of keys
-d=$(mktemp -d /tmp/ec2.XXXXXXXXXX)
+d=$(mktemp -d /tmp/cloud.XXXXXXXXXX)
 generate_ssh_host_keys "$d"
 f="$_RET"
 
@@ -97,7 +97,7 @@ add_known_hosts_entries "$h" "$ip" "$d"
 
 # Generate a second (secure) set of keys, since the first set was stored in EC2 metadata.
 # Not a big deal, but local users would have had access to the private key.
-d=$(mktemp -d /tmp/ec2.XXXXXXXXXX)
+d=$(mktemp -d /tmp/cloud.XXXXXXXXXX)
 generate_ssh_host_keys "$d"
 f="$_RET"
 
