@@ -92,7 +92,9 @@ sed -i "s/ppa2) lucid;/ppa3) maverick;/" debian/changelog
 bzr bd -S
 sed -i "s/ppa3) maverick;/ppa4) natty;/" debian/changelog
 bzr bd -S
-sed -i "s/~ppa4) natty;/) oneiric;/" debian/changelog
+sed -i "s/ppa4) natty;/ppa5) oneiric;/" debian/changelog
+bzr bd -S
+sed -i "s/~ppa5) oneiric;/) precise;/" debian/changelog
 bzr bd
 bzr bd -S
 
