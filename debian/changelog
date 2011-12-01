@@ -1,4 +1,4 @@
-bikeshed (1.19) unreleased; urgency=low
+bikeshed (1.19-0ubuntu1) precise; urgency=low
 
   * release-build:
     - note that this is 'released' in the generated ChangeLog; write the
@@ -13,7 +13,7 @@ bikeshed (1.19) unreleased; urgency=low
     what-source, what-source.1:
     - moved what-* to its own package, what-utils
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Aug 2011 17:01:05 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 01 Dec 2011 15:09:45 -0600
 
 bikeshed (1.18-0ubuntu1) oneiric; urgency=low
 
