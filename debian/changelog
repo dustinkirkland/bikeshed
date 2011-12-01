@@ -9,6 +9,9 @@ bikeshed (1.19) unreleased; urgency=low
     - precise is development release
   * cloud-sandbox.1, ec2-sandbox => cloud-sandbox, Makefile:
     - add cloud-sandbox utilty
+  * Makefile, what-provides, what-provides.1, what-repo, what-repo.1,
+    what-source, what-source.1:
+    - moved what-* to its own package, what-utils
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Aug 2011 17:01:05 -0500
 
