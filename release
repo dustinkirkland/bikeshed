@@ -21,11 +21,12 @@
 
 
 PKG=$(head -n1 debian/changelog | awk '{print $1}')
+LATEST=$(distro-info --devel)
+sed -i "s/) unreleased;/-0ubuntu1) $LATEST;/i" debian/changelog
 VER=$(head -n 1 debian/changelog | sed 's/^.*(//' | sed 's/).*//' | sed 's/-.*//')
 MAJOR=$(echo "$VER" | awk -F. '{print $1}')
 MINOR=$(head -n1 debian/changelog | sed "s/^.*($MAJOR.//" | sed "s/-.*$//")
 
-LATEST="precise"
 
 error() {
 	echo "ERROR: $@" >&2
