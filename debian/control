@@ -12,6 +12,7 @@ Depends: ${misc:Depends}
 Recommends: bzr,
             bzr-builddeb,
             devscripts,
+            distro-info,
             dput,
             gnupg,
             lzma,
