@@ -17,6 +17,27 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+PKG=cloud-sandbox
+mkdir -p "$HOME/.${PKG}"
+[ -r "$HOME/.${PKG}/conf" ] && . "$HOME/.${PKG}/conf"
+
+if [ -z "$EC2_KEYPAIR" ]; then
+	echo "ERROR: You must define EC2_KEYPAIR to the path to your EC2 keypair pem file" 1>&2
+	echo "ERROR: You can do so in your environment or in [$HOME/.${PKG}/conf]" 1>&2
+	exit 1
+fi
+
+if [ -z "$LAUNCHPAD_ID" ]; then
+	echo "ERROR: You must define LAUNCHPAD_ID to your Launchpad.net user id" 1>&2
+	echo "ERROR: You can do so in your environment or in [$HOME/.${PKG}rc]" 1>&2
+	exit 1
+fi
+
+if [ -z "$BOOTMAIL" ]; then
+	echo "ERROR: You must define BOOTMAIL to an email address" 1>&2
+	echo "ERROR: You can do so in your environment or in [$HOME/.${PKG}rc]" 1>&2
+	exit 1
+fi
 
 EC2_KNOWN_HOSTS="$HOME/.ssh/known_hosts.cloud"
 SSH_CMD="ssh -o UserKnownHostsFile=$EC2_KNOWN_HOSTS -i $HOME/.ssh/ec2-keypair.pem"
@@ -67,6 +88,11 @@ f="$_RET"
 
 echo "
 output: {all: '| tee -a /var/log/cloud-init-output.log'}
+" >> $f
+
+# Add Byobu
+echo "
+byobu_by_default: system
 " >> $f
 
 # SSH Import ID
