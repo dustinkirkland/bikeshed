@@ -1,4 +1,4 @@
-bikeshed (1.20) unreleased; urgency=low
+bikeshed (1.20-0ubuntu1) precise; urgency=low
 
   * cloud-sandbox:
     - add copyright header
@@ -15,7 +15,7 @@ bikeshed (1.20) unreleased; urgency=low
   * debian/control:
     - fix syntax error
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 01 Dec 2011 15:09:50 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 12 Feb 2012 11:07:50 -0600
 
 bikeshed (1.19-0ubuntu1) precise; urgency=low
 
