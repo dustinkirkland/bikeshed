@@ -12,6 +12,8 @@ bikeshed (1.20) unreleased; urgency=low
   * cloud-sandbox, debian/control:
     - add a dependency of cloud-sandbox
     - improve detection of necessary env variables
+  * debian/control:
+    - fix syntax error
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 01 Dec 2011 15:09:50 -0600
 

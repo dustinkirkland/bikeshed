@@ -11,7 +11,7 @@ Architecture: all
 Depends: ${misc:Depends}
 Recommends: bzr,
             bzr-builddeb,
-            cloud-utils
+            cloud-utils,
             devscripts,
             distro-info,
             dput,
