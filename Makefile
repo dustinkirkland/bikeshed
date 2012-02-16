@@ -8,7 +8,6 @@ SCRIPTS = \
 	bch \
 	bzrp \
 	dman \
-	pbput \
 	release \
 	release-build \
 	wifi-status \
@@ -24,8 +23,6 @@ LINKS = \
 	col8 \
 	col9 \
 	NF \
-	pbget \
-	pbputs \
 	$(NULL)
 
 TARGET_col2 = col1
@@ -37,8 +34,6 @@ TARGET_col7 = col1
 TARGET_col8 = col1
 TARGET_col9 = col1
 TARGET_NF = col1
-TARGET_pbget = pbput
-TARGET_pbputs = pbput
 
 EXTRA_DIST = \
 	system-search \
