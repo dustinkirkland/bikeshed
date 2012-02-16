@@ -1,9 +1,9 @@
-bikeshed (1.21) unreleased; urgency=low
+bikeshed (1.21-0ubuntu1) precise; urgency=low
 
   * Makefile, pbput, pbput.1:
     - pbput/pbget moved to pastebinit
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 12 Feb 2012 11:08:51 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 16 Feb 2012 13:06:57 -0600
 
 bikeshed (1.20-0ubuntu1) precise; urgency=low
 
