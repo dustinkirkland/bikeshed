@@ -170,7 +170,7 @@ ssh-keygen -q -f "$EC2_KNOWN_HOSTS" -R "$ip"
 ssh-keygen -q -f "$EC2_KNOWN_HOSTS" -R "$privip"
 add_known_hosts_entries "$h" "$ip" "$d"
 add_known_hosts_entries "$h" "$privip" "$d"
-rm -r $d
+rm -rf $d
 
 # Now ssh in!
 while ! $SSH_CMD ubuntu@$h; do
