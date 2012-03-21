@@ -39,8 +39,13 @@ if [ -z "$BOOTMAIL" ]; then
 	exit 1
 fi
 
+if [ -z "$EC2_KEYPAIR_FILE" ]; then
+	#backsupport for default keypair file
+	EC2_KEYPAIR_FILE=$HOME/.ssh/ec2-keypair.pem
+fi
+
 EC2_KNOWN_HOSTS="$HOME/.ssh/known_hosts.cloud"
-SSH_CMD="ssh -o UserKnownHostsFile=$EC2_KNOWN_HOSTS -i $HOME/.ssh/ec2-keypair.pem"
+SSH_CMD="ssh -o UserKnownHostsFile=$EC2_KNOWN_HOSTS -i $EC2_KEYPAIR_FILE"
 
 generate_ssh_host_keys() {
 	local d="$1"
@@ -67,7 +72,6 @@ add_known_hosts_entries() {
 		printf "%s,%s %s %s\n" "$h" "$ip" $(awk '{print $1 " " $2}' "$d/ssh_host_${i}_key.pub") >> "$EC2_KNOWN_HOSTS"
 	done
 	#ssh-keygen -q -H -f "$EC2_KNOWN_HOSTS"
-	rm -rf "$d"
 }
 
 # Debugging, if I want to see what's going on
@@ -117,7 +121,7 @@ runcmd:
 fi
 
 # Get the run command from the uec-images page
-cmd="ubuntu-ec2-run -t $size --key $EC2_KEYPAIR_US_EAST_1 --user-data-file $f $release"
+cmd="ubuntu-ec2-run -t $size --key $EC2_KEYPAIR --user-data-file $f $release"
 id=$($cmd | grep "^INSTANCE" | awk '{print $2}')
 rm -f "$f"
 
@@ -135,9 +139,16 @@ done
 str=$(ec2-describe-instances $id | grep "^INSTANCE.*running")
 h=$(echo "$str" | awk '{print $4}')
 ip=$(echo "$str" | awk '{print $14}')
+privip=$(echo "$str" | awk '{print $15}')
+
+# Create --tag Name, sets the instance name
+# Create --tag Created, sets a timestamp in a tag
+created=$(date)
+ec2-create-tags "$id" --tag Name="$LAUNCHPAD_ID" --tag Created="$created" --tag LaunchedBy="$PKG"
 
 # Add the known_hosts entry
 add_known_hosts_entries "$h" "$ip" "$d"
+add_known_hosts_entries "$h" "$privip" "$d"
 
 # Generate a second (secure) set of keys, since the first set was stored in EC2 metadata.
 # Not a big deal, but local users would have had access to the private key.
@@ -156,8 +167,10 @@ done
 tar -C "$d" -cf - . | $SSH_CMD ubuntu@$h "sudo tar -C /etc/ssh -xf -"
 ssh-keygen -q -f "$EC2_KNOWN_HOSTS" -R "$h"
 ssh-keygen -q -f "$EC2_KNOWN_HOSTS" -R "$ip"
+ssh-keygen -q -f "$EC2_KNOWN_HOSTS" -R "$privip"
 add_known_hosts_entries "$h" "$ip" "$d"
-rm -rf "$d"
+add_known_hosts_entries "$h" "$privip" "$d"
+rm -rf $d
 
 # Now ssh in!
 while ! $SSH_CMD ubuntu@$h; do
@@ -172,6 +185,7 @@ case "$answer" in
 		ec2-terminate-instances $id
 		ssh-keygen -f $EC2_KNOWN_HOSTS -R $h
 		ssh-keygen -f $EC2_KNOWN_HOSTS -R $ip
+		ssh-keygen -f $EC2_KNOWN_HOSTS -R $privip
 		rm -f "$EC2_KNOWN_HOSTS".old
 	;;
 	*)
@@ -179,5 +193,6 @@ case "$answer" in
 		echo "    ec2-terminate-instances $id"
 		echo "    ssh-keygen -f $EC2_KNOWN_HOSTS -R $h"
 		echo "    ssh-keygen -f $EC2_KNOWN_HOSTS -R $ip"
+		echo "    ssh-keygen -f $EC2_KNOWN_HOSTS -R $privip"
 	;;
 esac

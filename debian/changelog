@@ -1,6 +1,9 @@
 bikeshed (1.22) unreleased; urgency=low
 
-  * UNRELEASED
+  * cloud-sandbox:
+    - merge from Eddie Garcia, making cloud-sandbox more generally useful
+    - added known-hosts entry for private ip address
+    - fixed bug removing temp directory
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 16 Feb 2012 13:06:59 -0600
 
