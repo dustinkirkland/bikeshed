@@ -1,3 +1,9 @@
+bikeshed (1.23) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 20 Mar 2012 20:00:14 -0500
+
 bikeshed (1.22-0ubuntu1) precise; urgency=low
 
   * cloud-sandbox:
