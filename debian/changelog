@@ -1,4 +1,4 @@
-bikeshed (1.22) unreleased; urgency=low
+bikeshed (1.22-0ubuntu1) precise; urgency=low
 
   * cloud-sandbox:
     - merge from Eddie Garcia, making cloud-sandbox more generally useful
@@ -8,7 +8,7 @@ bikeshed (1.22) unreleased; urgency=low
     - make keypair finding a little more informative
     - fix error about rc vs. conf
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 16 Feb 2012 13:06:59 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 20 Mar 2012 20:00:02 -0500
 
 bikeshed (1.21-0ubuntu1) precise; urgency=low
 
