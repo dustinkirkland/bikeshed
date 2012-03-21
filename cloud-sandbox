@@ -21,21 +21,22 @@ PKG=cloud-sandbox
 mkdir -p "$HOME/.${PKG}"
 [ -r "$HOME/.${PKG}/conf" ] && . "$HOME/.${PKG}/conf"
 
-if [ -z "$EC2_KEYPAIR" ]; then
+if [ -z "$EC2_KEYPAIR" ] || ! ec2-describe-keypairs "$EC2_KEYPAIR" >/dev/null 2>&1; then
 	echo "ERROR: You must define EC2_KEYPAIR to the path to your EC2 keypair pem file" 1>&2
 	echo "ERROR: You can do so in your environment or in [$HOME/.${PKG}/conf]" 1>&2
+	ec2-describe-keypairs
 	exit 1
 fi
 
 if [ -z "$LAUNCHPAD_ID" ]; then
 	echo "ERROR: You must define LAUNCHPAD_ID to your Launchpad.net user id" 1>&2
-	echo "ERROR: You can do so in your environment or in [$HOME/.${PKG}rc]" 1>&2
+	echo "ERROR: You can do so in your environment or in [$HOME/.${PKG}/conf]" 1>&2
 	exit 1
 fi
 
 if [ -z "$BOOTMAIL" ]; then
 	echo "ERROR: You must define BOOTMAIL to an email address" 1>&2
-	echo "ERROR: You can do so in your environment or in [$HOME/.${PKG}rc]" 1>&2
+	echo "ERROR: You can do so in your environment or in [$HOME/.${PKG}/conf]" 1>&2
 	exit 1
 fi
 
