@@ -1,6 +1,7 @@
 bikeshed (1.23) unreleased; urgency=low
 
-  * UNRELEASED
+  * Makefile, purge-old-kernels, purge-old-kernels.1:
+    - add the purge-old-kernels tool
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 20 Mar 2012 20:00:14 -0500
 

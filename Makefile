@@ -8,6 +8,7 @@ SCRIPTS = \
 	bch \
 	bzrp \
 	dman \
+	purge-old-kernels \
 	release \
 	release-build \
 	wifi-status \
