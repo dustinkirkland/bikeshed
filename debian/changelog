@@ -1,9 +1,13 @@
 bikeshed (1.23) unreleased; urgency=low
 
+  [ Dustin Kirkland ]
   * Makefile, purge-old-kernels, purge-old-kernels.1:
     - add the purge-old-kernels tool
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 20 Mar 2012 20:00:14 -0500
+  [ Marius Gedminas ]
+  * purge-old-kernels: fix counting of old kernels
+
+ -- Dustin Kirkland <kirkland@xps>  Thu, 03 May 2012 09:39:21 -0500
 
 bikeshed (1.22-0ubuntu1) precise; urgency=low
 

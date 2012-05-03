@@ -45,7 +45,7 @@ while [ ! -z "$1" ]; do
 done
 
 # Build our list of kernel packages to purge
-PURGE=$(ls -tr /boot/vmlinuz-* | grep -v "$(uname -r)$" | head -n -${KEEP} | cut -d- -f2- | awk '{print "linux-image-" $0}')
+PURGE=$(ls -tr /boot/vmlinuz-* | head -n -${KEEP} | grep -v "$(uname -r)$" | cut -d- -f2- | awk '{print "linux-image-" $0}')
 
 if [ -z "$PURGE" ]; then
 	echo "No kernels are eligible for removal"
