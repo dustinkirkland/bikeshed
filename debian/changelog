@@ -1,11 +1,11 @@
-bikeshed (1.24) unreleased; urgency=low
+bikeshed (1.24-0ubuntu1) quantal; urgency=low
 
   * release-build:
     - fix last build to quantal
   * debian/control:
     - add lptools, for lp upload command used by release
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 06 May 2012 10:45:56 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 06 May 2012 10:56:12 -0500
 
 bikeshed (1.23-0ubuntu1) quantal; urgency=low
 
