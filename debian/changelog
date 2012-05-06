@@ -3,11 +3,12 @@ bikeshed (1.23) unreleased; urgency=low
   [ Dustin Kirkland ]
   * Makefile, purge-old-kernels, purge-old-kernels.1:
     - add the purge-old-kernels tool
+  * debian/control: recommend bzrtools (for cdiff)
 
   [ Marius Gedminas ]
   * purge-old-kernels: fix counting of old kernels
 
- -- Dustin Kirkland <kirkland@xps>  Thu, 03 May 2012 09:39:21 -0500
+ -- Dustin Kirkland <kirkland@xps>  Sun, 06 May 2012 10:18:08 -0500
 
 bikeshed (1.22-0ubuntu1) precise; urgency=low
 
