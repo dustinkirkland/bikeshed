@@ -98,7 +98,7 @@ sed -i "s/ppa2) natty;/ppa3) oneiric;/" debian/changelog
 debuild -S
 sed -i "s/ppa3) oneiric;/ppa4) precise;/" debian/changelog
 debuild -S
-sed -i "s/ppa4) precise;/ppa5) quantal;/" debian/changelog
+sed -i "s/~ppa4) precise;/) quantal;/" debian/changelog
 debuild
 debuild -S
 cd ..
