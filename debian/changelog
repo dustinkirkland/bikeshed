@@ -1,9 +1,9 @@
-bikeshed (1.26) unreleased; urgency=low
+bikeshed (1.26-0ubuntu1) quantal; urgency=low
 
   * release:
     - update release script with new ppa build names
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 24 Jun 2012 22:24:46 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 24 Jun 2012 22:26:50 -0500
 
 bikeshed (1.25-0ubuntu1) quantal; urgency=low
 
