@@ -1,3 +1,9 @@
+bikeshed (1.26) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 24 Jun 2012 22:24:46 -0500
+
 bikeshed (1.25-0ubuntu1) quantal; urgency=low
 
   * release-build:
