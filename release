@@ -64,6 +64,6 @@ echo "# Publish tarball to https://launchpad.net/$PKG/trunk/+addrelease"
 echo "  lp-project-upload ${PKG} ${MAJOR}.${MINOR} ../"$PKG"_${MAJOR}.${MINOR}.orig.tar.gz ${MAJOR}.${nextminor}" "$changelog" /dev/null
 echo
 echo "# To upload packages:"
-echo "  dput ppa:$PKG/ppa ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1*ppa*_source.changes"
+echo "  dput ppa:$PKG/ppa ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1~*_source.changes"
 echo "  dput ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1_source.changes"
 echo

@@ -1,6 +1,7 @@
 bikeshed (1.26) unreleased; urgency=low
 
-  * UNRELEASED
+  * release:
+    - update release script with new ppa build names
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 24 Jun 2012 22:24:46 -0500
 
