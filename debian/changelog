@@ -1,9 +1,9 @@
-bikeshed (1.25) unreleased; urgency=low
+bikeshed (1.25-0ubuntu1) quantal; urgency=low
 
   * release-build:
     - drop the enumerated ppa builds, use the code name
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 06 May 2012 10:56:15 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 24 Jun 2012 22:24:43 -0500
 
 bikeshed (1.24-0ubuntu1) quantal; urgency=low
 
