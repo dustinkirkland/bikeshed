@@ -121,6 +121,17 @@ runcmd:
 " >> $f
 fi
 
+# Write random seed
+SEED="$(head -c 512 /dev/urandom | base64 -w 0)"
+echo "
+write_files:
+-   encoding: b64
+    content: $SEED
+    owner: root:root
+    path: /dev/urandom
+    perms: '0666'
+" >> $f
+
 # Get the run command from the uec-images page
 cmd="ubuntu-ec2-run -t $size --key $EC2_KEYPAIR --user-data-file $f $release"
 id=$($cmd | grep "^INSTANCE" | awk '{print $2}')
