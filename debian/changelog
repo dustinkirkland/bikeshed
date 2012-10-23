@@ -6,6 +6,9 @@ bikeshed (1.27) unreleased; urgency=low
     - add route information
   * cloud-sandbox:
     - seed urandom
+  * release-build:
+    - deprecate natty
+    - add raring
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 24 Jun 2012 22:26:53 -0500
 

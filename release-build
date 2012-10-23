@@ -92,13 +92,13 @@ cd "${PKG}-${VER}/"
 cp -af "$olddir"/debian .
 sed -i "s/) unreleased;/-0ubuntu1~lucid) lucid;/i" debian/changelog
 debuild -S
-sed -i "s/lucid) lucid;/natty) natty;/" debian/changelog
-debuild -S
-sed -i "s/natty) natty;/oneiric) oneiric;/" debian/changelog
+sed -i "s/lucid) lucid;/oneiric) oneiric;/" debian/changelog
 debuild -S
 sed -i "s/oneiric) oneiric;/precise) precise;/" debian/changelog
 debuild -S
-sed -i "s/~precise) precise;/) quantal;/" debian/changelog
+sed -i "s/precise) precise;/quantal) quantal;/" debian/changelog
+debuild -S
+sed -i "s/~quantal) quantal;/) raring;/" debian/changelog
 debuild
 debuild -S
 cd ..
