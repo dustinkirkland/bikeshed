@@ -5,6 +5,7 @@ SCRIPTS = \
 	apply-patch \
 	col1 \
 	cloud-sandbox \
+	ctail \
 	bch \
 	bzrp \
 	dman \
