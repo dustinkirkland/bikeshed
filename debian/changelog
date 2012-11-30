@@ -1,3 +1,9 @@
+bikeshed (1.29) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 30 Nov 2012 09:36:22 -0600
+
 bikeshed (1.28-0ubuntu1) raring; urgency=low
 
   * purge-old-kernels:
