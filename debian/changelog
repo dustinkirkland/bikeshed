@@ -1,6 +1,7 @@
 bikeshed (1.28) unreleased; urgency=low
 
-  * UNRELEASED
+  * purge-old-kernels:
+    - validate candidate packages
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 23 Oct 2012 17:32:36 -0500
 
