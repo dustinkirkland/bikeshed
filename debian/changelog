@@ -1,9 +1,9 @@
-bikeshed (1.28) unreleased; urgency=low
+bikeshed (1.28-0ubuntu1) raring; urgency=low
 
   * purge-old-kernels:
     - validate candidate packages
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 23 Oct 2012 17:32:36 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 30 Nov 2012 09:36:18 -0600
 
 bikeshed (1.27-0ubuntu1) raring; urgency=low
 
