@@ -1,0 +1,46 @@
+#!/bin/sh
+#
+#    dual-push - push a bzr branch to both Launchpad and Github
+#    Copyright (C) Dustin Kirkland <dustin.kirkland@gmail.com>
+#
+#    Authors: Dustin Kirkland <dustin.kirkland@gmail.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+set -e
+
+# Ensure that we're in a bzr branch
+# TODO: Support both bzr-to-git and git-to-bzr syncs
+[ -d ${PWD}/.bzr ] || exit 1
+echo "INFO: bzr exists"
+bzr push "$@"
+
+# Handle bootstrapping of a new branch
+if [ $(basename "$0") = "dual-push-create" ]; then
+	mkdir -p ${PWD}.git
+	OLDPWD="${PWD}"
+	cd ${PWD}.git
+	git init .
+	# export + import + push
+	bzr fast-export --export-marks=../.marks.bzr ${OLDPWD} | git fast-import --quiet --export-marks=../.marks.git
+	git remote add origin git@github.com:${GITHUB_ID}/$(basename ${OLDPWD}).git
+	git push -u origin master
+elif [ -d ${PWD}.git ]; then
+	echo "INFO: git exists"
+	OLDPWD="${PWD}"
+	cd ${PWD}.git
+	# Export + import + push
+	bzr fast-export --export-marks=../.marks.bzr ${OLDPWD} | git fast-import --quiet --export-marks=../.marks.git
+	git push
+fi
