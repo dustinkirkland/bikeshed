@@ -1,4 +1,4 @@
-bikeshed (1.29) unreleased; urgency=low
+bikeshed (1.29-0ubuntu1) raring; urgency=low
 
   * release, release-build:
     - add instructions for dual-push and pypi uploads
@@ -9,7 +9,7 @@ bikeshed (1.29) unreleased; urgency=low
   * multi-push.1:
     - delete example, fix formatting
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 30 Nov 2012 09:36:22 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 06 Feb 2013 16:31:06 -0600
 
 bikeshed (1.28-0ubuntu1) raring; urgency=low
 
