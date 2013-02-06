@@ -65,12 +65,9 @@ head -n1 debian/changelog | grep -i "unreleased" || error "This version must be 
 rm -rf ../build-area/
 get_orig_source
 
-if tar -tvf ../"$PKG"_*.orig.tar.gz | egrep "\.bzr|debian"; then
+if tar -tvf ../"$PKG"_*.orig.tar.gz | egrep "\.bzr|debian|\.o$"; then
 	error "Release tarball has invalid files"
 fi
-#if tar -tvf ../"$PKG"_*.orig.tar.gz | egrep "/bin/|/lib/" | grep -v Makefile | grep -v "rwxr-xr-x"; then
-#	error "Release tarball has binaries with incorrect permissions"
-#fi
 
 if [ "$(basename $0)" = "release-test" ]; then
 	echo
