@@ -4,6 +4,8 @@ bikeshed (1.29) unreleased; urgency=low
     - add instructions for dual-push and pypi uploads
   * dual-push => multi-push, Makefile, multi-push.1, release:
     - initial crack at a bzr/git sync script
+  * release:
+    - handle setup.py version incrementing
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 30 Nov 2012 09:36:22 -0600
 

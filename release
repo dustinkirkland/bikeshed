@@ -50,6 +50,9 @@ if [ -r "usr/bin/$PKG" ]; then
 fi
 dch -v "$MAJOR.$nextminor" "UNRELEASED"
 sed -i "s/$MAJOR.$nextminor) .*;/$MAJOR.$nextminor) unreleased;/" debian/changelog
+if [ -f setup.py ]; then
+	sed -i "s/version='$MAJOR.$MINOR'/version='$MAJOR.$nextminor'/" setup.py
+fi
 bzr commit -m "opening $MAJOR.$nextminor"
 
 echo
