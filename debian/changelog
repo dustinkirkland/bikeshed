@@ -1,6 +1,7 @@
 bikeshed (1.30) unreleased; urgency=low
 
-  * UNRELEASED
+  * release:
+    - don't do the push, just echo it ;-)  whoops.
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 06 Feb 2013 16:31:12 -0600
 

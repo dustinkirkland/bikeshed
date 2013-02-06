@@ -62,7 +62,7 @@ cat "$changelog"
 echo
 echo "# To push:"
 if [ -d "../${PKG}.git" ] && command -v multi-push >/dev/null; then
-	multi-push lp:$PKG
+	echo "  multi-push lp:$PKG"
 else
 	echo "  bzr push lp:$PKG"
 fi
