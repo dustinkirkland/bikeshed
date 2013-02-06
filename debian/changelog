@@ -7,7 +7,7 @@ bikeshed (1.29) unreleased; urgency=low
   * release:
     - handle setup.py version incrementing
   * multi-push.1:
-    - delete example
+    - delete example, fix formatting
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 30 Nov 2012 09:36:22 -0600
 
