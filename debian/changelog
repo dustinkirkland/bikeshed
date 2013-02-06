@@ -1,10 +1,10 @@
-bikeshed (1.31) unreleased; urgency=low
+bikeshed (1.31-0ubuntu1) raring; urgency=low
 
   * release:
     - fix order, upload to pypi before ppa/ubuntu
     - must sdist
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 06 Feb 2013 16:34:14 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 06 Feb 2013 16:45:15 -0600
 
 bikeshed (1.30-0ubuntu1) raring; urgency=low
 
