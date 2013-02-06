@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-#    dual-push - push a bzr branch to both Launchpad and Github
+#    multi-push - push a bzr branch to both Launchpad and Github
 #    Copyright (C) Dustin Kirkland <dustin.kirkland@gmail.com>
 #
 #    Authors: Dustin Kirkland <dustin.kirkland@gmail.com>
@@ -21,13 +21,14 @@
 set -e
 
 # Ensure that we're in a bzr branch
-# TODO: Support both bzr-to-git and git-to-bzr syncs
+# TODO: Currently LP is master, GH is slave
+# TODO: Should support both directions
 [ -d ${PWD}/.bzr ] || exit 1
 echo "INFO: bzr exists"
 bzr push "$@"
 
 # Handle bootstrapping of a new branch
-if [ $(basename "$0") = "dual-push-create" ]; then
+if [ $(basename "$0") = "multi-push-init" ]; then
 	mkdir -p ${PWD}.git
 	OLDPWD="${PWD}"
 	cd ${PWD}.git

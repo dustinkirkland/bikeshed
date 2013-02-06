@@ -1,5 +1,5 @@
 PREFIX = /usr
-VERSION = 1.5
+VERSION = 1.29
 
 SCRIPTS = \
 	apply-patch \
@@ -9,6 +9,7 @@ SCRIPTS = \
 	bch \
 	bzrp \
 	dman \
+	multi-push \
 	purge-old-kernels \
 	release \
 	release-build \
@@ -57,6 +58,7 @@ install:
 	$(foreach link,$(LINKS),ln -s $(TARGET_$(link)) $(DESTDIR)$(PREFIX)/bin/$(link) &&) true
 	$(foreach link,$(LINKS),ln -s $(TARGET_$(link)).1.gz $(DESTDIR)$(PREFIX)/share/man/man1/$(link).1.gz &&) true
 	ln -s release-build $(DESTDIR)$(PREFIX)/bin/release-test
+	ln -s multi-push $(DESTDIR)$(PREFIX)/bin/multi-push-init
 
 dist: bikeshed-$(VERSION).tar.gz
 

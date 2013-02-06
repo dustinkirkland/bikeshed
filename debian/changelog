@@ -1,9 +1,9 @@
 bikeshed (1.29) unreleased; urgency=low
 
-  * dual-push:
-    - initial crack at a bzr/git sync script
   * release, release-build:
     - add instructions for dual-push and pypi uploads
+  * dual-push => multi-push, Makefile, multi-push.1, release:
+    - initial crack at a bzr/git sync script
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 30 Nov 2012 09:36:22 -0600
 
