@@ -22,10 +22,9 @@
 
 PKG=$(head -n1 debian/changelog | awk '{print $1}')
 LATEST=$(distro-info --devel)
-sed -i "s/) unreleased;/-0ubuntu1) $LATEST;/i" debian/changelog
 VER=$(head -n 1 debian/changelog | sed 's/^.*(//' | sed 's/).*//' | sed 's/-.*//')
 MAJOR=$(echo "$VER" | awk -F. '{print $1}')
-MINOR=$(head -n1 debian/changelog | sed "s/^.*($MAJOR.//" | sed "s/-.*$//")
+MINOR=$(head -n1 debian/changelog | sed -e "s/^.*($MAJOR.//" -e "s/).*$//")
 
 
 error() {
@@ -33,7 +32,18 @@ error() {
 	exit 1
 }
 
-head -n1 debian/changelog | grep "$LATEST" || error "This version must be ready for release"
+# Check for "UNRELEASED" messages in our changes file
+grep -qsi "unreleased" ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1_source.changes && error "'UNRELEASED' appears in ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1_source.changes" || true
+
+# Ensure that we don't have uncommitted changes
+bzr_stat="$(bzr stat)" || error "Cannot 'bzr stat'"
+if "$bzr_stat" | grep -v "bzr shelve"; then
+	error "'bzr stat' is dirty... \n$bzr_stat"
+fi
+
+# Append our packaging to the version in the changelog
+sed -i "s/) unreleased;/-0ubuntu1) $LATEST;/i" debian/changelog
+(head -n1 debian/changelog | grep "$LATEST") || error "This version must be ready for release"
 
 # Tag the release in bzr
 dch --release
@@ -72,7 +82,7 @@ echo "  lp-project-upload ${PKG} ${MAJOR}.${MINOR} ../"$PKG"_${MAJOR}.${MINOR}.o
 echo
 if [ -f "setup.py" ]; then
 	echo "# To push to PyPI:"
-	echo "  python setup.py sdist upload"
+	echo "  cd ../${PKG}-${MAJOR}.${MINOR}/ && python setup.py sdist upload && cd -"
 	echo
 fi
 echo "# To upload packages:"

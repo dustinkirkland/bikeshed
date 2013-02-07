@@ -109,7 +109,7 @@ gpg --armor --sign --detach-sig ../${PKG}_${VER}.orig.tar.gz
 echo
 echo
 echo "# Test this build:"
-echo "  sudo dpkg -Oi ../$PKG_*.deb"
+echo "  sudo dpkg -Oi ../*_${VER}-0ubuntu1*.deb"
 echo
 echo "# If everything looks good, release:"
 echo "  release"
