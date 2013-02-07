@@ -1,14 +1,14 @@
-bikeshed (1.32) unreleased; urgency=low
+bikeshed (1.32-0ubuntu1) raring; urgency=low
 
   * release, release-build:
     - add a bit more checking to ensure release is ready
-      + look for 'unreleased' in the changes file
+      + look for 'un-released' in the changes file
       + check bzr for uncommitted changes
     - do our pypi upload from the tarball directory, rather than
       disturbing our current directory with dist/ and egg info
     - print more precise dpkg -i instructions
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 06 Feb 2013 16:45:17 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Feb 2013 11:47:03 -0600
 
 bikeshed (1.31-0ubuntu1) raring; urgency=low
 
