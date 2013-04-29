@@ -20,7 +20,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 if [ -z "$1" ]; then
-	dev=$(iwconfig 2>/dev/null | grep '802.11' | awk '{print $1}') 
+	dev=$(iwconfig 2>/dev/null | grep '802.11' | tail -n1 | awk '{print $1}') 
 else
 	dev="$1"
 fi

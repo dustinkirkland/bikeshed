@@ -3,6 +3,8 @@ bikeshed (1.33) unreleased; urgency=low
   * release, release-build:
     - use 'unstable' if no ubuntu release is defined
     - drop oneiric,l add saucy
+  * wifi-status:
+    - use last wifi (?) adapter if there are more than one
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Feb 2013 11:47:07 -0600
 
