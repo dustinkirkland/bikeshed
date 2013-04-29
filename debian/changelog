@@ -1,6 +1,8 @@
 bikeshed (1.33) unreleased; urgency=low
 
-  * UNRELEASED
+  * release, release-build:
+    - use 'unstable' if no ubuntu release is defined
+    - drop oneiric,l add saucy
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Feb 2013 11:47:07 -0600
 

@@ -21,7 +21,7 @@
 
 
 PKG=$(head -n1 debian/changelog | awk '{print $1}')
-LATEST=$(distro-info --devel)
+LATEST=$(distro-info --devel || echo "unstable")
 VER=$(head -n 1 debian/changelog | sed 's/^.*(//' | sed 's/).*//' | sed 's/-.*//')
 MAJOR=$(echo "$VER" | awk -F. '{print $1}')
 MINOR=$(head -n1 debian/changelog | sed -e "s/^.*($MAJOR.//" -e "s/).*$//")
