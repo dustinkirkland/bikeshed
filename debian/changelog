@@ -5,6 +5,8 @@ bikeshed (1.33) unreleased; urgency=low
     - drop oneiric,l add saucy
   * wifi-status:
     - use last wifi (?) adapter if there are more than one
+  * debian/control:
+    - fix lintian warning, no need for util-linux in deps/recs
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Feb 2013 11:47:07 -0600
 
