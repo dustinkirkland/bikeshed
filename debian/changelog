@@ -1,4 +1,4 @@
-bikeshed (1.33) unreleased; urgency=low
+bikeshed (1.33-0ubuntu1) saucy; urgency=low
 
   * release, release-build:
     - use 'unstable' if no ubuntu release is defined
@@ -12,7 +12,7 @@ bikeshed (1.33) unreleased; urgency=low
   * debian/control:
     - bump standards
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Feb 2013 11:47:07 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 29 Apr 2013 09:59:07 -0500
 
 bikeshed (1.32-0ubuntu1) raring; urgency=low
 
