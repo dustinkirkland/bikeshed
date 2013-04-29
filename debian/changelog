@@ -7,6 +7,8 @@ bikeshed (1.33) unreleased; urgency=low
     - use last wifi (?) adapter if there are more than one
   * debian/control:
     - fix lintian warning, no need for util-linux in deps/recs
+  * col1.1, purge-old-kernels.1:
+    - fix lintian warnings about manpage sections
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Feb 2013 11:47:07 -0600
 
