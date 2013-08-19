@@ -1,9 +1,9 @@
-bikeshed (1.34) unreleased; urgency=low
+bikeshed (1.34-0ubuntu1) saucy; urgency=low
 
   * release, release-build:
     - add first pass at building upstream Debian packages during release
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 29 Apr 2013 09:59:09 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 19 Aug 2013 18:28:50 -0500
 
 bikeshed (1.33-0ubuntu1) saucy; urgency=low
 
