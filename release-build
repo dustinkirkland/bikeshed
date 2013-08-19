@@ -98,6 +98,8 @@ debuild -S
 sed -i "s/~raring) raring;/) saucy;/" debian/changelog
 debuild
 debuild -S
+sed -i "s/-0ubuntu1.*) .*;/-1) unstable;/" debian/changelog
+debuild -S
 cd ..
 cp -af * "$olddir/.."
 cd "$olddir"

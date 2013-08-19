@@ -89,3 +89,8 @@ echo "# To upload packages:"
 echo "  dput ppa:$PKG/ppa ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1~*_source.changes"
 echo "  dput ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1_source.changes"
 echo
+if [ -n "$DEBIAN_STAGING" ]; then
+	echo "# To upload for Debian sponsoring:"
+	echo " rsync -aP ../${PKG}_${MAJOR}.${MINOR}-1* ../"$PKG"_${MAJOR}.${MINOR}.orig.tar.gz* ${DEBIAN_STAGING}/${PKG}/"
+	echo
+fi
