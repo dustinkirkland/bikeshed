@@ -2,6 +2,9 @@ bikeshed (1.35) unreleased; urgency=low
 
   * wifi-status:
     - add ping to wifi-status
+  * release:
+    - add ssh rm command
+  * release:
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 19 Aug 2013 18:28:52 -0500
 
