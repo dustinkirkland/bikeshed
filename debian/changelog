@@ -1,6 +1,7 @@
 bikeshed (1.35) unreleased; urgency=low
 
-  * UNRELEASED
+  * wifi-status:
+    - add ping to wifi-status
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 19 Aug 2013 18:28:52 -0500
 

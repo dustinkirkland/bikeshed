@@ -24,4 +24,4 @@ if [ -z "$1" ]; then
 else
 	dev="$1"
 fi
-watch -n1 "iwconfig $dev; ifconfig $dev; route -n; echo; (grep $dev: /var/log/syslog | tail -n 10 | sort -r)"
+watch -n1 "iwconfig $dev; ifconfig $dev; route -n; echo; (grep $dev: /var/log/syslog | tail -n 10 | sort -r); echo; ping -I $dev -c 1 8.8.8.8"
