@@ -1,4 +1,4 @@
-bikeshed (1.35) unreleased; urgency=low
+bikeshed (1.35-0ubuntu1) saucy; urgency=low
 
   * wifi-status:
     - add ping to wifi-status
@@ -6,7 +6,7 @@ bikeshed (1.35) unreleased; urgency=low
     - add ssh rm command
     - add missing *
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 19 Aug 2013 18:28:52 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 12 Sep 2013 10:59:41 -0500
 
 bikeshed (1.34-0ubuntu1) saucy; urgency=low
 
