@@ -91,7 +91,7 @@ echo "  dput ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1_source.changes"
 echo
 if [ -n "$DEBIAN_STAGING" ]; then
 	echo "# To upload for Debian sponsoring:"
-	echo " ssh ${DEBIAN_STAGING%%:*} rm -f ${DEBIAN_STAGING##*:}/${PKG}/"
+	echo " ssh ${DEBIAN_STAGING%%:*} rm -f ${DEBIAN_STAGING##*:}/${PKG}/*"
 	echo " rsync -aP ../${PKG}_${MAJOR}.${MINOR}-1* ../"$PKG"_${MAJOR}.${MINOR}.orig.tar.gz* ${DEBIAN_STAGING}/${PKG}/"
 	echo
 fi
