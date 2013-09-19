@@ -1,9 +1,9 @@
-bikeshed (1.36) unreleased; urgency=low
+bikeshed (1.36-0ubuntu1) saucy; urgency=low
 
   * release-build:
     - build the latest dev package source for PPA upload, too
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 12 Sep 2013 10:59:43 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 19 Sep 2013 15:25:10 -0500
 
 bikeshed (1.35-0ubuntu1) saucy; urgency=low
 
