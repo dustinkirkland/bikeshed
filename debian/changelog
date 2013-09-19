@@ -1,6 +1,7 @@
 bikeshed (1.36) unreleased; urgency=low
 
-  * UNRELEASED
+  * release-build:
+    - build the latest dev package source for PPA upload, too
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 12 Sep 2013 10:59:43 -0500
 
