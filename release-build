@@ -39,12 +39,8 @@ get_orig_source() {
 	if [ -r "$tmp/${PKG}-${VER}/configure.ac" ]; then
 		cd $tmp/${PKG}-${VER}
 		aclocal
-		automake --add-missing
+		automake --add-missing --copy
 		autoconf
-		for i in INSTALL install-sh missing; do
-			rm -f $i
-			cp -av /usr/share/automake-1.11/$i .
-		done
 		cd -
 	fi
 	rm -f ../${PKG}_${VER}.orig.tar.gz
