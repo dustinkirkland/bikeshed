@@ -1,9 +1,9 @@
-bikeshed (1.37) unreleased; urgency=low
+bikeshed (1.37-0ubuntu1) unstable; urgency=low
 
   * release-build:
     - remove hardcoded path to automake tools
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 19 Sep 2013 15:25:14 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Oct 2013 15:41:16 -0500
 
 bikeshed (1.36-0ubuntu1) saucy; urgency=low
 
