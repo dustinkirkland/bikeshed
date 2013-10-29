@@ -1,9 +1,9 @@
-bikeshed (1.38) unreleased; urgency=low
+bikeshed (1.38-0ubuntu1) trusty; urgency=low
 
   * release-build:
     - add "trusty"
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Oct 2013 15:41:18 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 29 Oct 2013 16:48:46 -0500
 
 bikeshed (1.37-0ubuntu1) unstable; urgency=low
 
