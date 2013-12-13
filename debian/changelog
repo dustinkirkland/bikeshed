@@ -1,6 +1,7 @@
 bikeshed (1.39) unreleased; urgency=low
 
-  * UNRELEASED
+  * purge-old-kernels, purge-old-kernels.1:
+    - remove old header packages, too
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 29 Oct 2013 16:48:49 -0500
 
