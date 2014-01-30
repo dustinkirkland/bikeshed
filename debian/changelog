@@ -1,6 +1,7 @@
 bikeshed (1.40) unreleased; urgency=low
 
-  * UNRELEASED
+  * debian/control:
+    - release and release-build depend on debhelper
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 13 Dec 2013 10:46:06 -0600
 
