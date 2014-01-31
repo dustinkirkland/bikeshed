@@ -1,9 +1,9 @@
-bikeshed (1.40) unreleased; urgency=low
+bikeshed (1.40-0ubuntu1) trusty; urgency=low
 
   * debian/control:
     - release and release-build depend on debhelper
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 13 Dec 2013 10:46:06 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 31 Jan 2014 00:24:59 +0000
 
 bikeshed (1.39-0ubuntu1) trusty; urgency=low
 
