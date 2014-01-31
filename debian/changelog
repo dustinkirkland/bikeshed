@@ -1,3 +1,9 @@
+bikeshed (1.41) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 31 Jan 2014 00:25:01 +0000
+
 bikeshed (1.40-0ubuntu1) trusty; urgency=low
 
   * debian/control:
