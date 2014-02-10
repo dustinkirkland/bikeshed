@@ -1,9 +1,9 @@
-bikeshed (1.41) unreleased; urgency=low
+bikeshed (1.41-0ubuntu1) trusty; urgency=low
 
   * release-build:
     - deprecate quantal and raring
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 31 Jan 2014 00:25:01 +0000
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 10 Feb 2014 14:24:19 -0600
 
 bikeshed (1.40-0ubuntu1) trusty; urgency=low
 
