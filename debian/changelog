@@ -1,3 +1,9 @@
+bikeshed (1.42) unreleased; urgency=low
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 10 Feb 2014 14:24:23 -0600
+
 bikeshed (1.41-0ubuntu1) trusty; urgency=low
 
   * release-build:
