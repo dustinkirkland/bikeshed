@@ -87,7 +87,7 @@ sed -i "s/) unreleased;/-0ubuntu1~lucid) lucid;/i" debian/changelog
 debuild -S
 sed -i "s/lucid) lucid;/precise) precise;/" debian/changelog
 debuild -S
-sed -i "s/raring) precise;/saucy) saucy;/" debian/changelog
+sed -i "s/precise) precise;/saucy) saucy;/" debian/changelog
 debuild -S
 sed -i "s/saucy) saucy;/trusty) trusty;/" debian/changelog
 debuild -S
