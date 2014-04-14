@@ -14,6 +14,7 @@ SCRIPTS = \
 	release \
 	release-build \
 	wifi-status \
+        vigpg \
 	$(NULL)
 
 LINKS = \
