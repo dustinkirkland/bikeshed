@@ -84,7 +84,7 @@ release="$2"
 
 # Default to t1.micro/latest
 [ -z "$size" ] && size="t1.micro"
-[ -z "$release" ] && release="$(distro-info --devel) daily"
+[ -z "$release" ] && release="$(distro-info --devel || distro-info --all | tail -n 1) daily"
 
 # Generate the user-data file, and a first set of keys
 d=$(mktemp -d /tmp/cloud.XXXXXXXXXX)

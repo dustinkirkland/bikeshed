@@ -2,6 +2,8 @@ bikeshed (1.43) unreleased; urgency=low
 
   * debian/control, Makefile, vigpg:
     - add a script for editing gpg encrypted files
+  * cloud-sandbox: LP: #1309591
+    - work around distro-info bug
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 10 Feb 2014 14:43:29 -0600
 
