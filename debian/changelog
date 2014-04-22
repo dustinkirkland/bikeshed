@@ -1,3 +1,9 @@
+bikeshed (1.44) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 22 Apr 2014 10:35:32 -0500
+
 bikeshed (1.43-0ubuntu1) unstable; urgency=low
 
   * debian/control, Makefile, vigpg:
