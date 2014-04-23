@@ -1,6 +1,7 @@
 bikeshed (1.45) unreleased; urgency=medium
 
-  * UNRELEASED
+  * cloud-sandbox:
+    - safer use of ubuntu-distro-info, from Scott Moser
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 23 Apr 2014 18:17:19 -0500
 
