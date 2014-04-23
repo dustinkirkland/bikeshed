@@ -1,3 +1,9 @@
+bikeshed (1.45) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 23 Apr 2014 18:17:19 -0500
+
 bikeshed (1.44-0ubuntu1) unstable; urgency=medium
 
   * release-build:
