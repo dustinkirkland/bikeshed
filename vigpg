@@ -41,7 +41,9 @@ error() {
 }
 
 # Try to decrypt the target file
-(cat "$encrypted_file" | gpg -d > "$cleartext_file") 		|| error "Unable to decrypt target"
+if [ -e "$encrypted_file" ]; then
+	(cat "$encrypted_file" | gpg -d > "$cleartext_file") 		|| error "Unable to decrypt target"
+fi
 
 # Grab a checksum of the cleartext data before modification
 before=$(sha512sum "$cleartext_file")
