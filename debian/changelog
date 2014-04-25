@@ -1,10 +1,10 @@
-bikeshed (1.45) unreleased; urgency=medium
+bikeshed (1.45-0ubuntu1) unstable; urgency=medium
 
   * cloud-sandbox:
     - safer use of ubuntu-distro-info, from Scott Moser
   * vigpg, wifi-status.1:
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 23 Apr 2014 18:17:19 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 25 Apr 2014 07:42:05 -0500
 
 bikeshed (1.44-0ubuntu1) unstable; urgency=medium
 
