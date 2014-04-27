@@ -33,7 +33,7 @@ get_orig_source() {
 	# bzr export needs a --exclude option for the following to work:
 	#  $ bzr export ../${PKG}_${VER}.orig.tar.gz
 	# use tar instead
-	tmp=$(mktemp -d -t /tmp/release-build-XXXXXXXX)
+	tmp=$(mktemp -d /tmp/release-build-XXXXXXXX)
 	cp -a . $tmp/${PKG}-${VER}
 	sed -e "s/ unreleased; urgency=/ released; urgency=/g" debian/changelog > $tmp/${PKG}-${VER}/ChangeLog
 	if [ -r "$tmp/${PKG}-${VER}/configure.ac" ]; then
@@ -77,7 +77,7 @@ if [ "$(basename $0)" = "release-test" ]; then
 fi
 
 olddir=$(pwd)
-dir=$(mktemp -d -t /tmp/release-build-XXXXXXXX)
+dir=$(mktemp -d /tmp/release-build-XXXXXXXX)
 cd $dir
 cp -af "$olddir"/../${PKG}_${VER}.orig.tar.gz .
 tar zxvf ${PKG}_${VER}.orig.tar.gz
