@@ -1,6 +1,7 @@
 bikeshed (1.46) unreleased; urgency=medium
 
-  * UNRELEASED
+  * debian/control, wifi-status:
+    - add super slick support for monitoring wifi-status within byobu
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 25 Apr 2014 07:42:13 -0500
 

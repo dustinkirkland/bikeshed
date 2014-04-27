@@ -9,7 +9,8 @@ Homepage: http://launchpad.net/bikeshed
 Package: bikeshed
 Architecture: all
 Depends: ${misc:Depends}
-Recommends: bzr,
+Recommends: byobu,
+            bzr,
             bzr-builddeb,
             bzrtools,
             cloud-utils,
