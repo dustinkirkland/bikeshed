@@ -28,7 +28,7 @@ DIFF="$1"
 # If $1 is a URL, grab it!
 case "$1" in
 	http://*|https://*|ftp://*)
-		DIFF=$(mktemp)
+		DIFF=$(mktemp -t /tmp/apply-patch-XXXXXXXX)
 		trap "rm -f $DIFF 2>/dev/null || true" EXIT HUP INT QUIT TERM
 		if which wget >/dev/null 2>&1; then
 			if ! wget -q -O"$DIFF" "$1"; then
