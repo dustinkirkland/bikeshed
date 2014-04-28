@@ -1,11 +1,11 @@
-bikeshed (1.46) unreleased; urgency=medium
+bikeshed (1.46-0ubuntu1) utopic; urgency=medium
 
   * debian/control, wifi-status:
     - add super slick support for monitoring wifi-status within byobu
   * apply-patch, release-build:
     - take ownership of our temp files/directories
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 25 Apr 2014 07:42:13 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 28 Apr 2014 09:30:54 -0700
 
 bikeshed (1.45-0ubuntu1) unstable; urgency=medium
 
