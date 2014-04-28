@@ -1,3 +1,9 @@
+bikeshed (1.47) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 28 Apr 2014 09:30:58 -0700
+
 bikeshed (1.46-0ubuntu1) utopic; urgency=medium
 
   * debian/control, wifi-status:
