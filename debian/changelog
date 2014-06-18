@@ -1,6 +1,7 @@
 bikeshed (1.47) unreleased; urgency=medium
 
-  * UNRELEASED
+  * ctail, ctail.1, debian/control:
+    - ctail moved to byobu package
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 28 Apr 2014 09:30:58 -0700
 
