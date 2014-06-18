@@ -4,6 +4,8 @@ bikeshed (1.47) unreleased; urgency=medium
     - ctail moved to byobu package
   * Makefile, wifi-status, wifi-status.1:
     - moved to byobu package
+  * col1, col1.1, Makefile:
+    - moved to the byobu package
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 28 Apr 2014 09:30:58 -0700
 
