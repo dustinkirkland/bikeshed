@@ -5,7 +5,6 @@ SCRIPTS = \
 	apply-patch \
 	col1 \
 	cloud-sandbox \
-	ctail \
 	bch \
 	bzrp \
 	dman \
@@ -13,7 +12,6 @@ SCRIPTS = \
 	purge-old-kernels \
 	release \
 	release-build \
-	wifi-status \
         vigpg \
 	$(NULL)
 
