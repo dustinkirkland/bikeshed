@@ -25,7 +25,7 @@ set -e
 cleartext_file=$(mktemp /dev/shm/.vigpg-XXXXXXXXXXXX)
 
 # Ensure that we always remove the cleartext_file on any exit
-trap "rm -f ${cleartext_file} "$cleartext_file".gpg 2>/dev/null || true" EXIT HUP INT QUIT TERM
+trap "shred -f ${cleartext_file} "$cleartext_file".gpg 2>/dev/null || true" EXIT HUP INT QUIT TERM
 
 # Encrypted file from argv
 encrypted_file="$1"
