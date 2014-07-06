@@ -1,4 +1,4 @@
-bikeshed (1.47) unreleased; urgency=medium
+bikeshed (1.47-0ubuntu1) utopic; urgency=medium
 
   * ctail, ctail.1, debian/control:
     - ctail moved to byobu package
@@ -9,7 +9,7 @@ bikeshed (1.47) unreleased; urgency=medium
   * vigpg:
     - shred, rather than rm, the files
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 28 Apr 2014 09:30:58 -0700
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 06 Jul 2014 15:51:16 -0500
 
 bikeshed (1.46-0ubuntu1) utopic; urgency=medium
 
