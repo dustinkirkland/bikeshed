@@ -1,3 +1,9 @@
+bikeshed (1.48) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 06 Jul 2014 15:51:21 -0500
+
 bikeshed (1.47-0ubuntu1) utopic; urgency=medium
 
   * ctail, ctail.1, debian/control:
