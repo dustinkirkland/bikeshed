@@ -1,6 +1,7 @@
 bikeshed (1.48) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release-build:
+    - drop support for saucy
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 06 Jul 2014 15:51:21 -0500
 
