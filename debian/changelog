@@ -1,9 +1,9 @@
-bikeshed (1.48) unreleased; urgency=medium
+bikeshed (1.48-0ubuntu1) utopic; urgency=medium
 
   * release-build:
     - drop support for saucy
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 06 Jul 2014 15:51:21 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 28 Jul 2014 09:12:02 +0100
 
 bikeshed (1.47-0ubuntu1) utopic; urgency=medium
 
