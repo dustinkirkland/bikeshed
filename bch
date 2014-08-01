@@ -22,5 +22,10 @@
 
 msg=$(bzr diff | grep "^===" | sed -e "s:^.* file '::" -e "s:'::g" | grep -v "debian/changelog" | sort -u | xargs -i echo -n "{}, ")
 msg=$(echo "$msg" | sed -e "s:, $::")
+
 dch -a $@ "$msg: "
-exec dch -e
+if [ -z "$TMUX" ]; then
+	exec dch -e
+else
+        tmux new-window -n bch "bzrp cdiff; head -n1" \; split-window -h "dch -e"
+fi
