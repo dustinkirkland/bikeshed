@@ -3,6 +3,7 @@ bikeshed (1.49) unreleased; urgency=medium
   * bch:
     - use tmux split to show the colorized diff (left) and edit the
       changelog (right)
+    - close diff split on dch exit
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 28 Jul 2014 09:12:03 +0100
 
