@@ -1,6 +1,7 @@
 bikeshed (1.50) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release:
+    - handle byobu.in
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 05 Aug 2014 23:23:56 +0200
 

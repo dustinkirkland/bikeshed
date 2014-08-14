@@ -57,6 +57,8 @@ grep -B 10000 -m1 '^ \-\- ' debian/changelog > "$changelog"
 nextminor=`expr $MINOR + 1`
 if [ -r "usr/bin/$PKG" ]; then
 	sed -i "s/^VERSION=.*$/VERSION=$MAJOR.$nextminor/" usr/bin/$PKG
+elif [ -r "usr/bin/${PKG}.in" ]; then
+	sed -i "s/^VERSION=.*$/VERSION=$MAJOR.$nextminor/" usr/bin/${PKG}.in
 fi
 dch -v "$MAJOR.$nextminor" "UNRELEASED"
 sed -i "s/$MAJOR.$nextminor) .*;/$MAJOR.$nextminor) unreleased;/" debian/changelog
