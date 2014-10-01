@@ -2,6 +2,8 @@ bikeshed (1.51) unreleased; urgency=medium
 
   * apply-patch:
     - fix typo
+  * Makefile, name-search, name-search.1:
+    - add a new script, to check if various namespaces are available
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 14 Aug 2014 00:32:35 -0500
 

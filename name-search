@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+#    name-search - check for namespaces, helpful when naming
+#                  an open source project
+#
+#    Copyright (C) 2014 Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    Authors:
+#        Dustin Kirkland <kirkland@ubuntu.com>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+FAIL=0
+name="$1"
+
+fail() {
+	tput setaf 1
+	tput bold
+	echo "FAIL: $@" 1>&2
+	tput sgr 0
+	FAIL=1
+}
+
+info() {
+	tput setaf 2
+	tput bold
+	echo "INFO: $@"
+	tput sgr 0
+}
+
+apt-cache show $name >/dev/null 2>&1 && fail "Package not available" || info "Package available"
+wget http://github.com/$name >/dev/null 2>&1 && fail "Github not available" || info "Github available"
+wget https://launchpad.net/~$name >/dev/null 2>&1 && fail "Launchpad team not available" || info "Launchpad team available"
+wget https://launchpad.net/$name >/dev/null 2>&1 && fail "Launchpad project not available" || info "Launchpad project available"
+nslookup ${name}.org >/dev/null 2>&1 && fail ".org not available" || info ".org may be available"
+nsloopup ${name}.net >/dev/null 2>&1 && fail ".net not available" || info ".net may be available"
+nslookup ${name}.io >/dev/null 2>&1 && fail ".io not available" || info ".io may be available"
+
+[ "$FAIL" = "0" ]

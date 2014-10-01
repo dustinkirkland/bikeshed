@@ -8,6 +8,7 @@ SCRIPTS = \
 	bzrp \
 	dman \
 	multi-push \
+	name-search \
 	purge-old-kernels \
 	release \
 	release-build \
