@@ -1,6 +1,7 @@
 bikeshed (1.51) unreleased; urgency=medium
 
-  * UNRELEASED
+  * apply-patch:
+    - fix typo
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 14 Aug 2014 00:32:35 -0500
 
