@@ -1,6 +1,7 @@
 bikeshed (1.52) unreleased; urgency=medium
 
-  * UNRELEASED
+  * name-search:
+    - don't leave garbage laying around
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 01 Oct 2014 07:41:32 -0500
 

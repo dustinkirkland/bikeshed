@@ -40,9 +40,9 @@ info() {
 }
 
 apt-cache show $name >/dev/null 2>&1 && fail "Package not available" || info "Package available"
-wget http://github.com/$name >/dev/null 2>&1 && fail "Github not available" || info "Github available"
-wget https://launchpad.net/~$name >/dev/null 2>&1 && fail "Launchpad team not available" || info "Launchpad team available"
-wget https://launchpad.net/$name >/dev/null 2>&1 && fail "Launchpad project not available" || info "Launchpad project available"
+wget -O /dev/null http://github.com/$name >/dev/null 2>&1 && fail "Github not available" || info "Github available"
+wget -O /dev/null https://launchpad.net/~$name >/dev/null 2>&1 && fail "Launchpad team not available" || info "Launchpad team available"
+wget -O /dev/null https://launchpad.net/$name >/dev/null 2>&1 && fail "Launchpad project not available" || info "Launchpad project available"
 nslookup ${name}.org >/dev/null 2>&1 && fail ".org not available" || info ".org may be available"
 nsloopup ${name}.net >/dev/null 2>&1 && fail ".net not available" || info ".net may be available"
 nslookup ${name}.io >/dev/null 2>&1 && fail ".io not available" || info ".io may be available"
