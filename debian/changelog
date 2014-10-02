@@ -1,9 +1,9 @@
-bikeshed (1.52) unreleased; urgency=medium
+bikeshed (1.52-0ubuntu1) utopic; urgency=medium
 
   * name-search:
     - don't leave garbage laying around
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 01 Oct 2014 07:41:32 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 02 Oct 2014 15:27:27 -0500
 
 bikeshed (1.51-0ubuntu1) utopic; urgency=medium
 
