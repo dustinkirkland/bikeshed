@@ -1,3 +1,9 @@
+bikeshed (1.53) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 02 Oct 2014 15:27:29 -0500
+
 bikeshed (1.52-0ubuntu1) utopic; urgency=medium
 
   * name-search:
