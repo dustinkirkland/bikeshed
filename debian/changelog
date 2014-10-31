@@ -1,3 +1,9 @@
+bikeshed (1.54) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 31 Oct 2014 16:31:58 -0500
+
 bikeshed (1.53-0ubuntu1) vivid; urgency=medium
 
   * release-build:
