@@ -1,6 +1,7 @@
 bikeshed (1.53) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release-build:
+    - add support for vivid
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 02 Oct 2014 15:27:29 -0500
 
