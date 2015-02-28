@@ -22,6 +22,7 @@ Recommends: byobu,
             lptools,
             lzma,
             pastebinit,
+            run-one,
             sensible-utils,
             ubuntu-dev-tools,
             vim

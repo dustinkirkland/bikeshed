@@ -57,7 +57,7 @@ after=$(sha512sum "$cleartext_file")
 
 if [ "$before" != "$after" ]; then
 	# File was modified, so we need to re-encrypt and overwrite our previous file
-	gpg --default-recipient-self -s -e "$cleartext_file"	 	|| error "Unable to re-encrypt target"
+	run-one-until-success gpg --default-recipient-self -s -e "$cleartext_file"	 	|| error "Unable to re-encrypt target"
 	cat "$cleartext_file".gpg > "$1"				|| error "Unable to write new encrypted file"
 	echo
 	echo "Successfully encrypted update file [$encrypted_file]"
