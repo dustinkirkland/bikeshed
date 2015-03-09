@@ -1,8 +1,13 @@
 bikeshed (1.54) unreleased; urgency=medium
 
+  [ Dustin Kirkland ]
   * debian/control, vigpg:
     - when re-encrypting, run-one-until-success to ensure we write
       out the encrypted file
+
+  [ Adrien Cunin ]
+  * cloud-sandbox.1:
+    - removed dman stuff copy pasted into cloud-sandbox.1
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 31 Oct 2014 16:31:58 -0500
 
