@@ -1,4 +1,4 @@
-bikeshed (1.54) unreleased; urgency=medium
+bikeshed (1.54-0ubuntu1) unstable; urgency=medium
 
   [ Dustin Kirkland ]
   * debian/control, vigpg:
@@ -11,7 +11,7 @@ bikeshed (1.54) unreleased; urgency=medium
   * cloud-sandbox.1:
     - removed dman stuff copy pasted into cloud-sandbox.1
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 31 Oct 2014 16:31:58 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 02 May 2015 18:43:04 -0500
 
 bikeshed (1.53-0ubuntu1) vivid; urgency=medium
 
