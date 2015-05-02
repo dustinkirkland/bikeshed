@@ -4,6 +4,8 @@ bikeshed (1.54) unreleased; urgency=medium
   * debian/control, vigpg:
     - when re-encrypting, run-one-until-success to ensure we write
       out the encrypted file
+  * cloud-sandbox.1, release-build:
+    - deprecate lucid
 
   [ Adrien Cunin ]
   * cloud-sandbox.1:
