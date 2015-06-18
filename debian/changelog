@@ -1,9 +1,9 @@
-bikeshed (1.55) unreleased; urgency=medium
+bikeshed (1.55-0ubuntu1) wily; urgency=medium
 
   * Makefile, vigpg, vigpg.1:
     - vigpg promoted to byobu 5.94
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 02 May 2015 18:43:08 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Jun 2015 20:18:06 -0500
 
 bikeshed (1.54-0ubuntu1) unstable; urgency=medium
 
