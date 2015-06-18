@@ -12,6 +12,7 @@ Depends: ${misc:Depends}
 Recommends: byobu,
             bzr,
             bzr-builddeb,
+            bzr-fastimport,
             bzrtools,
             cloud-utils,
             debhelper,
