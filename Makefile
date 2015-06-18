@@ -12,7 +12,6 @@ SCRIPTS = \
 	purge-old-kernels \
 	release \
 	release-build \
-        vigpg \
 	$(NULL)
 
 EXTRA_DIST = \
