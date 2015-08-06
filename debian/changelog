@@ -1,8 +1,8 @@
-bikeshed (1.57) unreleased; urgency=medium
+bikeshed (1.57-0ubuntu1) wily; urgency=medium
 
   * release-build: add wily
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Jun 2015 20:30:19 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 06 Aug 2015 15:07:07 -0500
 
 bikeshed (1.56-0ubuntu1) wily; urgency=medium
 
