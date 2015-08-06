@@ -91,7 +91,9 @@ sed -i "s/trusty) trusty;/utopic) utopic;/" debian/changelog
 debuild -S
 sed -i "s/utopic) utopic;/vivid) vivid;/" debian/changelog
 debuild -S
-sed -i "s/~vivid) vivid;/) vivid;/" debian/changelog
+sed -i "s/~vivid) vivid;/vidid) wily;/" debian/changelog
+debuild -S
+sed -i "s/~wily) wily;/) wily;/" debian/changelog
 debuild
 debuild -S
 sed -i "s/-0ubuntu1.*) .*;/-1) unstable;/" debian/changelog
