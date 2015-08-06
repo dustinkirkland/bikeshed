@@ -1,6 +1,7 @@
 bikeshed (1.58) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release-build:
+    - fix build for wily
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 06 Aug 2015 15:07:09 -0500
 
