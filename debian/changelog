@@ -1,6 +1,7 @@
 bikeshed (1.59) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release-build:
+    - deprecate utopic
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 06 Aug 2015 15:13:35 -0500
 
