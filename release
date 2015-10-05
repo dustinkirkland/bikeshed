@@ -84,7 +84,7 @@ echo "  lp-project-upload ${PKG} ${MAJOR}.${MINOR} ../"$PKG"_${MAJOR}.${MINOR}.o
 echo
 if [ -f "setup.py" ]; then
 	echo "# To push to PyPI:"
-	echo "  cd ../${PKG}-${MAJOR}.${MINOR}/ && python setup.py sdist upload && cd -"
+	echo "  cd ../${PKG}-${MAJOR}.${MINOR}/ && ./setup.py sdist upload && cd -"
 	echo
 fi
 echo "# To upload packages:"
