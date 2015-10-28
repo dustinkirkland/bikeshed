@@ -1,11 +1,11 @@
-bikeshed (1.60) unreleased; urgency=medium
+bikeshed (1.60-0ubuntu1) xenial; urgency=medium
 
   * release:
     - run setup.py (to use the interpreter specified by the author)
   * release-build:
     - add xenial
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 06 Aug 2015 15:20:49 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 28 Oct 2015 09:40:28 +0900
 
 bikeshed (1.59-0ubuntu1) wily; urgency=medium
 
