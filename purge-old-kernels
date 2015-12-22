@@ -138,7 +138,7 @@ VersionsToPurge="$(head -n ${num} <<<"${Versions}")"
 
 if [ "${VersionsToPurge}" ]; then
 	# purge linux packages matching the versions
-	apt-get -q ${simulate} ${yes} purge --auto-remove $(
+	apt-get -q ${simulate} ${yes} purge $(
     sed -r -e 's/\./\\./g' -e 's/.*/^linux-.+-&($|-)/' <<<"$VersionsToPurge")
 else
 	echo "0 kernels purged."
