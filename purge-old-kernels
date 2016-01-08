@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#  Copyright (C) 2015       Jarno Suni (8@iki.fi)
+#  Copyright (C) 2015, 2016       Jarno Suni (8@iki.fi)
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -33,9 +33,13 @@ Options:
     -h, -?, --help  Display this help and exit.
     -k NUM,
     --keep NUM,
-    --keep=NUM	    Keep NUM kernels that are older than the currently
-                    used one. Default is 1.
-    -s, --simulate  Dry-run; don't actually remove packages. You do not
+    --keep=NUM      Keep NUM kernels that are older than the currently
+                    used one. Default is 1. More older kernels may be
+                    kept, if they have such reverse dependencies
+                    installed that are required for getting kernel
+                    updates, or if there are more than one type of
+                    kernels installed with same version number.
+    -s, --simulate  Dry-run; do not actually remove packages. You do not
                     have to be superuser with this option.
     -y, --yes       Purge without user confirmation.
 
@@ -62,7 +66,7 @@ while :; do
             exit
             ;;
         -k|--keep)
-			if ! ${2:+false}; then
+            if ! ${2:+false}; then
               n=$2
               shift 2
               continue
@@ -76,12 +80,12 @@ while :; do
         --keep=)
              error 'Must specify a non-empty "--keep NUM" argument.'
             ;;
-		-s|--simulate)
-			simulate="-s"
-			;;
+        -s|--simulate)
+            simulate="-s"
+            ;;
         -y|--yes)
-			yes="-y"
-			;;
+            yes="-y"
+            ;;
         --)              # End of all options.
             shift
             break
@@ -131,15 +135,22 @@ sort --version-sort --unique)"
 # current kernel version number (present in the respective kernel
 # package name, too)
 current="$(uname -r | cut -f1,2 -d-)"
+# List versions of kernels that have reserve dependencies
+LatestVersions="$(dpkg-query -W -f='${Package} ${Status}\n' |
+ awk '/^linux-image-(generic|lowlatency|virtual)(-lts-[^ ]+|) install ok installed/{print $1}' |
+ xargs dpkg-query -W -f='${Depends}\n' |
+ sed -nr "s/.*linux-image-([[:digit:].]+-[^-]+)-.*/\1/p" | sort -uV)"
 
 # keep n versions that are older than the current one (if they exist).
 num=$(awk '($0==c){a=NR-1-n; if(a>0){print a}else{print 0} exit}' c=${current} n=$n <<<"${Versions}")
-VersionsToPurge="$(head -n ${num} <<<"${Versions}")"
+
+# Get the older versions to remove; never remove latest kernels though.
+VersionsToPurge="$(comm -23 <(head -n ${num} <<<"${Versions}") <(echo -e "${LatestVersions}"))"
 
 if [ "${VersionsToPurge}" ]; then
-	# purge linux packages matching the versions
-	apt-get -q ${simulate} ${yes} purge $(
+    # purge linux packages matching the versions
+    apt-get -q ${simulate} ${yes} purge --auto-remove $(
     sed -r -e 's/\./\\./g' -e 's/.*/^linux-.+-&($|-)/' <<<"$VersionsToPurge")
 else
-	echo "0 kernels purged."
+    echo "0 kernels purged."
 fi
