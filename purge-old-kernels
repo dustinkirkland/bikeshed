@@ -45,7 +45,7 @@ Options:
                     updates. Also, if a key linux-image package is
                     marked "hold" by e.g. apt-mark, kernels with the
                     respective version are not removed.
-    -s, --simulate  Dry-run; don't actually remove packages. You do not
+    -s, --simulate  Dry-run; do not actually remove packages. You do not
                     have to be superuser with this option.
     -y, --yes       Purge without user confirmation.
 
