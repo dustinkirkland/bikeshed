@@ -1,9 +1,9 @@
-bikeshed (1.61) unreleased; urgency=medium
+bikeshed (1.61-0ubuntu1) xenial; urgency=medium
 
   * multi-push:
     - force upload local revision to remote repo
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 28 Oct 2015 09:40:31 +0900
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 13 Jan 2016 10:07:20 +0200
 
 bikeshed (1.60-0ubuntu1) xenial; urgency=medium
 
