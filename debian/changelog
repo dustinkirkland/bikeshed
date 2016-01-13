@@ -1,6 +1,7 @@
 bikeshed (1.61) unreleased; urgency=medium
 
-  * UNRELEASED
+  * multi-push:
+    - force upload local revision to remote repo
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 28 Oct 2015 09:40:31 +0900
 

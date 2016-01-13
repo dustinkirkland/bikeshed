@@ -43,5 +43,5 @@ elif [ -d ${PWD}.git ]; then
 	cd ${PWD}.git
 	# Export + import + push
 	bzr fast-export --export-marks=../.marks.bzr ${OLDPWD} | git fast-import --quiet --export-marks=../.marks.git
-	git push
+	git push -f origin master
 fi
