@@ -126,7 +126,7 @@ Pkgs="$(dpkg-query -W -f='${Status} ${Package}\n' "linux-*" |
  awk '$2!="ok" || ($3!="installed" && $3!="not-installed") {print $4}')"
 if [ "${Pkgs}" ]; then
  echo -e "WARNING: The following linux packages are not properly\
- installed. You may want to purge or reinstall them manually:\n"${Pkgs} >&2
+ installed or purged. You may want to purge or reinstall them manually:\n"${Pkgs} >&2
  if ! [ "$yes" ]; then
   read -r -p "Continue anyway (y/n)? " response
   response=${response,,}    # tolower
@@ -165,9 +165,9 @@ if [ "${Versions}" ]; then
     # List versions of kernels that have reserve dependencies
 
     LatestVersions="$(dpkg-query -W -f='${Package} ${Status}\n' |
-    awk '/^linux-(.+-|)image-[^0-9]+(-lts-[^ ]+|) (install|hold) ok installed/{print $1}' |
-    xargs dpkg-query -W -f='${Depends}\n' |
-    sed -nr "s/\<linux-(.+-|)image-([0-9.]+-[^-]+)-.*/\2/p" | sort -uV)"
+	awk '/^linux-(.+-)?image-[^0-9]+(-lts-[^ ]+)? (install|hold) ok installed/{print $1}' |
+	xargs dpkg-query -W -f='${Depends}\n' |
+	sed -nr "s/\<linux-(.+-)?image-([0-9.]+-[^-]+)-.*/\2/p" | sort -uV)"
 
     # Get the older versions to remove; never remove latest kernels though.
     CandidateVersionsToPurge="$(comm -23 <(head -n ${num} <<<"${Versions}") \
