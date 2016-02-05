@@ -1,9 +1,9 @@
-bikeshed (1.62) unreleased; urgency=medium
+bikeshed (1.62-0ubuntu1) xenial; urgency=medium
 
   * release-build:
     - deprecate vivid
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 13 Jan 2016 10:07:25 +0200
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 04 Feb 2016 22:05:47 -0600
 
 bikeshed (1.61-0ubuntu1) xenial; urgency=medium
 
