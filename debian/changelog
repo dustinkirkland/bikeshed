@@ -1,6 +1,7 @@
 bikeshed (1.62) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release-build:
+    - deprecate vivid
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 13 Jan 2016 10:07:25 +0200
 
