@@ -1,6 +1,7 @@
 bikeshed (1.63) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release:
+    - use the new model of updating __version__ in */__init__.py
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 04 Feb 2016 22:05:49 -0600
 

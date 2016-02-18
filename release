@@ -65,6 +65,9 @@ sed -i "s/$MAJOR.$nextminor) .*;/$MAJOR.$nextminor) unreleased;/" debian/changel
 if [ -f setup.py ]; then
 	sed -i "s/version='$MAJOR.$MINOR'/version='$MAJOR.$nextminor'/" setup.py
 fi
+if [ -f */__init__.py ]; then
+	sed -i "s/__version__ = '$MAJOR.$MINOR'/__version__ = '$MAJOR.$nextminor'/" */__init__.py
+fi
 bzr commit -m "opening $MAJOR.$nextminor"
 
 echo
