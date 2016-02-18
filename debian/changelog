@@ -1,9 +1,9 @@
-bikeshed (1.63) unreleased; urgency=medium
+bikeshed (1.63-0ubuntu1) xenial; urgency=medium
 
   * release:
     - use the new model of updating __version__ in */__init__.py
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 04 Feb 2016 22:05:49 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 18 Feb 2016 12:44:28 -0800
 
 bikeshed (1.62-0ubuntu1) xenial; urgency=medium
 
