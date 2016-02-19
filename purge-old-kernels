@@ -1,58 +1,199 @@
-#!/bin/sh
+#!/bin/bash
 #
-#    purge-old-kernels - remove old kernel packages
-#    Copyright (C) 2012 Dustin Kirkland <kirkland@ubuntu.com>
+#  Copyright (C) 2015, 2016       Jarno Suni (8@iki.fi)
 #
-#    Authors: Dustin Kirkland <kirkland@ubuntu.com>
-#             Kees Cook <kees@ubuntu.com>
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
 #
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, version 3 of the License.
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
 #
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Ensure we're running as root
-if [ "$(id -u)" != 0 ]; then
-	echo "ERROR: This script must run as root.  Hint..." 1>&2
-	echo "  sudo $0 $@" 1>&2
-	exit 1
-fi
+set -o nounset
+set -o errexit
+#set -o xtrace
 
-# NOTE: This script will ALWAYS keep the currently running kernel
-# NOTE: Default is to keep 2 more, user overrides with --keep N
-KEEP=2
-# NOTE: Any unrecognized option will be passed straight through to apt-get
-APT_OPTS=
-while [ ! -z "$1" ]; do
-	case "$1" in
-		--keep)
-			# User specified the number of kernels to keep
-			KEEP="$2"
-			shift 2
-		;;
-		*)
-			APT_OPTS="$APT_OPTS $1"
-			shift 1
-		;;
-	esac
+# Usage info
+show_help() {
+cat << EOF
+Usage: ${0##*/} [OPTION]...
+Purge some kernel related packages that have older version than the
+current kernel. This is especially useful in order to prevent /boot
+partition from getting full. Also purge the kernel packages of certain
+version, if the installed key linux-image packages are marked for
+removal by dpkg --set-selections.
+
+First warn, if some linux-* packages are only partially or
+unsuccessfully installed, and let user choose, if to continue or not.
+
+Options:
+    -h, -?, --help  Display this help and exit.
+    -k NUM,
+    --keep NUM,
+    --keep=NUM      Keep NUM kernels that are older than the currently
+                    used one. Default is 1. More older kernels may be
+                    kept, if they have such reverse dependencies
+                    installed that are required for getting kernel
+                    updates. Also, if a key linux-image package is
+                    marked "hold" by e.g. apt-mark, kernels with the
+                    respective version are not removed.
+    -s, --simulate  Dry-run; do not actually remove packages. You do not
+                    have to be superuser with this option.
+    -y, --yes       Purge without user confirmation.
+
+Exit Status:
+    Exit with 1, if some command line argument is invalid.
+    Exit with 2, if current kernel is not installed or is marked for
+    removal. Otherwise inherit the exit status of the apt-get purge
+    command issued.
+EOF
+}
+
+error()
+{
+   echo 'ERROR: '"$1" >&2
+   exit ${2:-1}
+}
+
+n=1
+yes=""
+simulate=""
+
+while :; do
+    case ${1-} in
+        -h|-\?|--help)
+            show_help
+            exit
+            ;;
+        -k|--keep)
+            if ! ${2:+false}; then
+              n=$2
+              shift 2
+              continue
+            else
+               error 'Must specify a non-empty "--keep NUM" argument.'
+            fi
+            ;;
+        --keep=?*)
+            n=${1#*=} # Delete everything up to "=" and assign the remainder.
+            ;;
+        --keep=)
+             error 'Must specify a non-empty "--keep NUM" argument.'
+            ;;
+        -s|--simulate)
+            simulate="-s"
+            ;;
+        -y|--yes)
+            yes="-y"
+            ;;
+        --)              # End of all options.
+            shift
+            break
+            ;;
+        -?*)
+            echo 'WARNING: Unknown option (ignored): '"$1" >&2
+            ;;
+        # Default case: If no more options then break out of the loop.
+        *)
+            break
+    esac
+
+    shift
 done
 
-# Build our list of kernel packages to purge
-CANDIDATES=$(ls -tr /boot/vmlinuz-* | head -n -${KEEP} | grep -v "$(uname -r)$" | cut -d- -f2- | awk '{print "linux-image-" $0 " linux-headers-" $0}' )
-for c in $CANDIDATES; do
-	dpkg-query -s "$c" >/dev/null 2>&1 && PURGE="$PURGE $c"
-done
-
-if [ -z "$PURGE" ]; then
-	echo "No kernels are eligible for removal"
-	exit 0
+if [ $# -ne 0 ]; then
+ show_help
+ exit
 fi
 
-apt-get $APT_OPTS remove --purge $PURGE
+! [[ "$n" =~ ^[0-9]+$ ]] && error "$n is invalid number of older kernels to keep." 1
+# $n is valid number
+
+! dpkg-query -W -f='${Status}\n' "linux-image-$(uname -r)" |
+ grep -qE "^(install|hold) ok installed" &&
+error "Current kernel is not successfully installed or it is marked for removal." 2
+# current kernel is successfully installed and wanted so
+
+Pkgs="$(dpkg-query -W -f='${Status} ${Package}\n' "linux-*" |
+ awk '$2!="ok" || ($3!="installed" && $3!="not-installed") {print $4}')"
+if [ "${Pkgs}" ]; then
+ echo -e "WARNING: The following linux packages are not properly\
+ installed or purged. You may want to purge or reinstall them manually:\n"${Pkgs} >&2
+ if ! [ "$yes" ]; then
+  read -r -p "Continue anyway (y/n)? " response
+  response=${response,,}    # tolower
+  ! [[ $response =~ ^(yes|y)$ ]] && exit
+ fi
+ echo
+fi
+
+# Versions of installed kernel packages to decide, if remove or not
+Versions="$(dpkg-query -W -f='${Status} ${Package}\n' |
+sed -nr "s/^(install|hold) ok installed linux-image-([0-9.]+-[^-]+)-.+/\2/p" |
+sort -Vu)"
+
+# Versions of installed kernel packages marked for removal
+CandidateVersionsToPurge="$(dpkg-query -W -f='${Status} ${Package}\n' |
+sed -nr "s/^(deinstall|purge) ok installed linux-image-([0-9.]+-[^-]+)-.+/\2/p" |
+sort -Vu)"
+
+VersionsToPurge=""
+if [ "${CandidateVersionsToPurge}" ]; then
+# Do not include versions that are present in ${Versions}, in case both
+# -generic and -lowlatency kenrels are installed, but only the other is
+# marked for removal.
+ VersionsToPurge="$(comm -23 <(echo -e "${CandidateVersionsToPurge}") \
+  <(echo -e "${Versions}"))"
+fi
+
+if [ "${Versions}" ]; then
+
+ # keep n versions that are older than the current one (if they exist).
+ num=$(awk '($0==c){a=NR-1-n; if(a>0){print a}else{print 0} exit}' \
+ c=$(uname -r | cut -f1,2 -d-) n=$n <<<"${Versions}")
+
+ if (("${num}" > 0)); then
+
+    # List versions of kernels that have reserve dependencies
+
+    LatestVersions="$(dpkg-query -W -f='${Package} ${Status}\n' |
+	awk '/^linux-(.+-)?image-[^0-9]+(-lts-[^ ]+)? (install|hold) ok installed/{print $1}' |
+	xargs dpkg-query -W -f='${Depends}\n' |
+	sed -nr "s/\<linux-(.+-)?image-([0-9.]+-[^-]+)-.*/\2/p" | sort -uV)"
+
+    # Get the older versions to remove; never remove latest kernels though.
+    CandidateVersionsToPurge="$(comm -23 <(head -n ${num} <<<"${Versions}") \
+     <(echo -e "${LatestVersions}"))"
+
+    if [ "${CandidateVersionsToPurge}" ] ; then
+
+        for version in ${CandidateVersionsToPurge}; do
+         if ! dpkg-query -W -f='${Status}\n' "linux-image-${version}-*" |
+          grep -q '^hold'; then
+           # purge version, if it is not marked as held by e.g. apt-get hold
+           if [ "${VersionsToPurge}" ]; then
+            VersionsToPurge+=$'\n'"${version}"
+           else
+            VersionsToPurge="${version}"
+           fi
+         fi
+        done
+    fi
+ fi
+fi
+
+if [ "${VersionsToPurge}" ]; then
+    # purge linux packages matching the versions
+    apt-get -q ${simulate} ${yes} purge --auto-remove $(
+    sed -r -e 's/\./\\./g' -e 's/.*/^linux-.+-&($|-)/' <<<"${VersionsToPurge}")
+else
+    echo "0 kernels purged."
+fi
