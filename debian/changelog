@@ -6,7 +6,7 @@ bikeshed (1.65) unreleased; urgency=medium
 
 bikeshed (1.64-0ubuntu1) xenial; urgency=medium
 
-  * UNRELEASED
+  * move purge-old-kernels to byobu
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 18 Feb 2016 12:44:29 -0800
 
