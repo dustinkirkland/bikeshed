@@ -1,3 +1,9 @@
+bikeshed (1.68) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 05 May 2016 16:58:32 -0500
+
 bikeshed (1.67-0ubuntu1) yakkety; urgency=medium
 
   * rebuild
