@@ -91,7 +91,9 @@ sed -i "s/trusty) trusty;/wily) wily;/" debian/changelog
 debuild -S
 sed -i "s/wily) wily;/xenial) xenial;/" debian/changelog
 debuild -S
-sed -i "s/~xenial) xenial;/) xenial;/" debian/changelog
+sed -i "s/xenial) xenial;/yakkety) yakkety;/" debian/changelog
+debuild -S
+sed -i "s/~yakkety) yakkety;/) yakkety;/" debian/changelog
 debuild
 debuild -S
 sed -i "s/-0ubuntu1.*) .*;/-1) unstable;/" debian/changelog
