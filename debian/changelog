@@ -1,6 +1,7 @@
 bikeshed (1.68) unreleased; urgency=medium
 
-  * UNRELEASED
+  * bch:
+    - use target window name in tmux
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 05 May 2016 16:58:32 -0500
 
