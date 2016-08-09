@@ -1,6 +1,7 @@
 bikeshed (1.69) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release-build:
+    - drop wily
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 09 May 2016 18:19:12 -0500
 
