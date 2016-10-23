@@ -91,11 +91,18 @@ sed -i "s/trusty) trusty;/xenial) xenial;/" debian/changelog
 debuild -S
 sed -i "s/xenial) xenial;/yakkety) yakkety;/" debian/changelog
 debuild -S
-sed -i "s/~yakkety) yakkety;/) yakkety;/" debian/changelog
+sed -i "s/yakkety) yakkety;/zesty) zesty;/" debian/changelog
+debuild -S
+sed -i "s/~zesty) zesty;/) zesty;/" debian/changelog
 debuild
 debuild -S
 sed -i "s/-0ubuntu1.*) .*;/-1) unstable;/" debian/changelog
 debuild -S
+if [ -e "snapcraft.yaml" ]; then
+	snapcraft
+	cp -af *.snap "$olddir/.."
+	snapcraft clean; rm -f *.snap
+fi
 cd ..
 cp -af * "$olddir/.."
 cd "$olddir"

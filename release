@@ -68,6 +68,9 @@ fi
 if [ -f */__init__.py ]; then
 	sed -i "s/__version__ = '$MAJOR.$MINOR'/__version__ = '$MAJOR.$nextminor'/" */__init__.py
 fi
+if [ -r snapcraft.yaml ]; then
+	sed -i "s/^version:.*$/version: \"$MAJOR.$nextminor\"/" snapcraft.yaml
+fi
 bzr commit -m "opening $MAJOR.$nextminor"
 
 echo
