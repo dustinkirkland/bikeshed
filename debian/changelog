@@ -1,10 +1,10 @@
-bikeshed (1.70) unreleased; urgency=medium
+bikeshed (1.70-0ubuntu1) unstable; urgency=medium
 
   * release, release-build:
     - initial support for snaps
     - add zesty
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 09 Aug 2016 14:10:46 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 23 Oct 2016 13:18:30 -0500
 
 bikeshed (1.69-0ubuntu1) yakkety; urgency=medium
 
