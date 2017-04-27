@@ -1,6 +1,7 @@
 bikeshed (1.71) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release-build:
+    - deprecate precise, add artful
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 23 Oct 2016 13:18:32 -0500
 
