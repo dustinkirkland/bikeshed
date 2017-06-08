@@ -1,6 +1,7 @@
 bikeshed (1.72) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release-build:
+    - exclude autom4te.cache from release tarballs
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 27 Apr 2017 16:10:47 -0500
 

@@ -44,7 +44,7 @@ get_orig_source() {
 		cd -
 	fi
 	rm -f ../${PKG}_${VER}.orig.tar.gz
-	tar -C $tmp --exclude .bzr --exclude debian --exclude "*~" -zcvf ../${PKG}_${VER}.orig.tar.gz ${PKG}-${VER}
+	tar -C $tmp --exclude ".bzr*" --exclude autom4te.cache --exclude debian --exclude "*~" -zcvf ../${PKG}_${VER}.orig.tar.gz ${PKG}-${VER}
 	rm -rf $tmp
 	# Sign the tarball
 	rm -f ../${PKG}_${VER}.orig.tar.gz.asc
