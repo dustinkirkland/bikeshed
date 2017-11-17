@@ -87,13 +87,13 @@ sed -i "s/) unreleased;/-0ubuntu1~trusty) trusty;/" debian/changelog
 debuild -S
 sed -i "s/trusty) trusty;/xenial) xenial;/" debian/changelog
 debuild -S
-sed -i "s/xenial) xenial;/yakkety) yakkety;/" debian/changelog
-debuild -S
-sed -i "s/yakkety) yakkety;/zesty) zesty;/" debian/changelog
+sed -i "s/xenial) xenial;/zesty) zesty;/" debian/changelog
 debuild -S
 sed -i "s/zesty) zesty;/artful) artful;/" debian/changelog
 debuild -S
-sed -i "s/~artful) artful;/) artful;/" debian/changelog
+sed -i "s/artful) artful;/bionic) bionic;/" debian/changelog
+debuild -S
+sed -i "s/~bionic) bionic;/) bionic;/" debian/changelog
 debuild
 debuild -S
 sed -i "s/-0ubuntu1.*) .*;/-1) unstable;/" debian/changelog

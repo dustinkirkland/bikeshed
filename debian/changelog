@@ -1,9 +1,10 @@
-bikeshed (1.72) unreleased; urgency=medium
+bikeshed (1.72-0ubuntu1) bionic; urgency=medium
 
   * release-build:
     - exclude autom4te.cache from release tarballs
+    - drop yakkety, add bionic
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 27 Apr 2017 16:10:47 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 17 Nov 2017 10:52:26 -0600
 
 bikeshed (1.71-0ubuntu1) artful; urgency=medium
 
