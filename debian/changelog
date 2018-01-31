@@ -1,6 +1,7 @@
 bikeshed (1.73) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release-build:
+    - exclude snap packaging when creating orig tarball
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 17 Nov 2017 10:52:46 -0600
 
