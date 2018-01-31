@@ -1,9 +1,9 @@
-bikeshed (1.73) unreleased; urgency=medium
+bikeshed (1.73-0ubuntu1) bionic; urgency=medium
 
   * release-build:
     - exclude snap packaging when creating orig tarball
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 17 Nov 2017 10:52:46 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:43:17 -0600
 
 bikeshed (1.72-0ubuntu1) bionic; urgency=medium
 
