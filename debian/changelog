@@ -1,9 +1,9 @@
-bikeshed (1.74) unreleased; urgency=medium
+bikeshed (1.74-0ubuntu1) cosmic; urgency=medium
 
   * release-build:
     - drop zesty and artful, add cosmic
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Jan 2018 14:43:19 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 27 May 2018 14:28:17 -0500
 
 bikeshed (1.73-0ubuntu1) bionic; urgency=medium
 
