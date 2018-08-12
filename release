@@ -21,7 +21,7 @@
 
 
 PKG=$(head -n1 debian/changelog | awk '{print $1}')
-LATEST=$(distro-info --devel || echo "unstable")
+LATEST=$(distro-info --devel || echo "experimental")
 VER=$(head -n 1 debian/changelog | sed 's/^.*(//' | sed 's/).*//' | sed 's/-.*//')
 MAJOR=$(echo "$VER" | awk -F. '{print $1}')
 MINOR=$(head -n1 debian/changelog | sed -e "s/^.*($MAJOR.//" -e "s/).*$//")
@@ -96,6 +96,7 @@ fi
 echo "# To upload packages:"
 echo "  dput ppa:$PKG/ppa ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1~*_source.changes"
 echo "  dput ../${PKG}_${MAJOR}.${MINOR}-0ubuntu1_source.changes"
+echo "  dupload --to anonymous-ftp-master ../${PKG}_${MAJOR}.${MINOR}-1_source.changes"
 echo
 if [ -n "$DEBIAN_STAGING" ]; then
 	echo "# To upload for Debian sponsoring:"

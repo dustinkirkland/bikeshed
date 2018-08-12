@@ -1,6 +1,7 @@
 bikeshed (1.75) unreleased; urgency=medium
 
-  * UNRELEASED
+  * release, release-build:
+    - send to debian experimental, by default
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 27 May 2018 14:28:19 -0500
 

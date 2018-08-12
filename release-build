@@ -94,7 +94,7 @@ debuild -S
 sed -i "s/~cosmic) cosmic;/) cosmic;/" debian/changelog
 debuild
 debuild -S
-sed -i "s/-0ubuntu1.*) .*;/-1) unstable;/" debian/changelog
+sed -i "s/-0ubuntu1.*) .*;/-1) experimental;/" debian/changelog
 debuild -S
 if [ -e "snapcraft.yaml" ]; then
 	snapcraft
