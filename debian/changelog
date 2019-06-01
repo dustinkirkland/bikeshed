@@ -1,8 +1,8 @@
-bikeshed (1.76) unreleased; urgency=medium
+bikeshed (1.76-0ubuntu1) eoan; urgency=medium
 
-  * UNRELEASED
+  * New release for disco, eoan
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 12 Aug 2018 12:08:49 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 01 Jun 2019 15:33:34 -0500
 
 bikeshed (1.75-0ubuntu1) cosmic; urgency=medium
 

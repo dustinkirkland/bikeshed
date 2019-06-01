@@ -83,15 +83,15 @@ cp -af "$olddir"/../${PKG}_${VER}.orig.tar.gz .
 tar zxvf ${PKG}_${VER}.orig.tar.gz
 cd "${PKG}-${VER}/"
 cp -af "$olddir"/debian .
-sed -i "s/) unreleased;/-0ubuntu1~trusty) trusty;/" debian/changelog
-debuild -S
-sed -i "s/trusty) trusty;/xenial) xenial;/" debian/changelog
+sed -i "s/) unreleased;/-0ubuntu1~xenial) xenial;/" debian/changelog
 debuild -S
 sed -i "s/xenial) xenial;/bionic) bionic;/" debian/changelog
 debuild -S
 sed -i "s/bionic) bionic;/cosmic) cosmic;/" debian/changelog
 debuild -S
-sed -i "s/~cosmic) cosmic;/) cosmic;/" debian/changelog
+sed -i "s/disco) disco;/eoan) eoan;/" debian/changelog
+debuild -S
+sed -i "s/~eoan) eoan;/) eoan;/" debian/changelog
 debuild
 debuild -S
 sed -i "s/-0ubuntu1.*) .*;/-1) experimental;/" debian/changelog
