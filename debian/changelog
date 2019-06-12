@@ -1,8 +1,10 @@
 bikeshed (1.78) unreleased; urgency=medium
 
-  * UNRELEASED
+  * bch, release-build:
+    - use dch -r in bch to update timestamp
+    - build for debian/unstable, rather than experimental
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Sat, 01 Jun 2019 15:36:40 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 12 Jun 2019 18:36:14 -0500
 
 bikeshed (1.77-0ubuntu1) eoan; urgency=medium
 

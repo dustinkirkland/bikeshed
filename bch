@@ -27,5 +27,5 @@ dch -a $@ "$msg: "
 if [ -z "$TMUX" ]; then
 	exec dch -e
 else
-        tmux new-window -n bch "bzrp cdiff; head -n1" \; split-window -t bch -h "dch -e && tmux kill-pane -t 0"
+        tmux new-window -n bch "bzrp cdiff; head -n1" \; split-window -t bch -h "dch -r && tmux kill-pane -t 0"
 fi
