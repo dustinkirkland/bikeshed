@@ -1,3 +1,9 @@
+bikeshed (1.79) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 12 Jun 2019 18:38:28 -0500
+
 bikeshed (1.78-0ubuntu1) eoan; urgency=medium
 
   * bch, release-build:
