@@ -1,4 +1,4 @@
-bikeshed (1.78) unreleased; urgency=medium
+bikeshed (1.78-0ubuntu1) eoan; urgency=medium
 
   * bch, release-build:
     - use dch -r in bch to update timestamp
@@ -7,7 +7,7 @@ bikeshed (1.78) unreleased; urgency=medium
     - depend on pinentry-curses, so that we can build and sign packages
       from the command line
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 12 Jun 2019 18:37:29 -0500
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 12 Jun 2019 18:38:24 -0500
 
 bikeshed (1.77-0ubuntu1) eoan; urgency=medium
 
