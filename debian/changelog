@@ -1,3 +1,9 @@
+bikeshed (1.80) unreleased; urgency=medium
+
+  * UNRELEASED
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Nov 2019 07:44:17 -0600
+
 bikeshed (1.79-0ubuntu1) focal; urgency=medium
 
   * release-build:
