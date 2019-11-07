@@ -87,11 +87,11 @@ sed -i "s/) unreleased;/-0ubuntu1~xenial) xenial;/" debian/changelog
 debuild -S
 sed -i "s/xenial) xenial;/bionic) bionic;/" debian/changelog
 debuild -S
-sed -i "s/bionic) bionic;/disco) disco;/" debian/changelog
+sed -i "s/bionic) bionic;/eoan) eoan;/" debian/changelog
 debuild -S
-sed -i "s/disco) disco;/eoan) eoan;/" debian/changelog
+sed -i "s/eoan) eoan;/focal) focal;/" debian/changelog
 debuild -S
-sed -i "s/~eoan) eoan;/) eoan;/" debian/changelog
+sed -i "s/~focal) focal;/) focal;/" debian/changelog
 debuild
 debuild -S
 sed -i "s/-0ubuntu1.*) .*;/-1) unstable;/" debian/changelog
