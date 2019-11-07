@@ -1,9 +1,9 @@
-bikeshed (1.79) unreleased; urgency=medium
+bikeshed (1.79-0ubuntu1) focal; urgency=medium
 
   * release-build:
     - drop disco, add focal
 
- -- Dustin Kirkland <kirkland@x250>  Thu, 07 Nov 2019 07:40:42 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Nov 2019 07:43:56 -0600
 
 bikeshed (1.78-0ubuntu1) eoan; urgency=medium
 
