@@ -1,8 +1,9 @@
 bikeshed (1.80) unreleased; urgency=medium
 
-  * UNRELEASED
+  * bch:
+    - drop cdiff, as this doesn't seem to work anymore
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 07 Nov 2019 07:44:17 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 11 May 2023 16:14:46 -0500
 
 bikeshed (1.79-0ubuntu1) focal; urgency=medium
 
